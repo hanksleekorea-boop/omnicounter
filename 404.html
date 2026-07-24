@@ -392,7 +392,7 @@
 <section class="screen" id="gallery">
   <div class="hdr">
     <button class="icon-btn" id="galBack" aria-label="뒤로"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
-    <h1 style="font-size:20px;">추천 카운터</h1>
+    <h1 style="font-size:20px;" data-i18n="set_gallery_title">추천 카운터</h1>
   </div>
   <div id="galleryScroll">
     <div class="gintro">가장 많이 쓰는 용도별 추천 카운터예요. 원하는 걸 골라 추가하면, 카드를 탭해 들어가 설정에서 이름·목표·색·주기를 자유롭게 바꿀 수 있어요.</div>
@@ -737,6 +737,11 @@
     <button class="toggle-sw" id="toggleGrowth" role="switch" aria-checked="false" aria-label="성장 테마"></button>
   </div>
   <div class="settings-item">
+    <div class="si-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg></div>
+    <div class="si-tx"><b data-i18n="lang_label">언어 (Language)</b><span id="langHint">한국어 / English</span></div>
+    <div class="seg" id="langSeg" style="flex:0 0 auto;"><button data-lang="ko">한국어</button><button data-lang="en">EN</button></div>
+  </div>
+  <div class="settings-item">
     <div class="si-ic"><svg viewBox="0 0 24 24"><path d="M8 3v3"/><path d="M16 3v3"/><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M9 16h6"/></svg></div>
     <div class="si-tx"><b>쉼표 (계획 휴식)</b><span id="commaInfo">선언한 날은 스트릭이 끊기지도, 달성으로 세지도 않아요</span></div>
     <button class="act" id="commaToday">오늘</button>
@@ -773,7 +778,7 @@
     <div class="si-tx"><b>전체 초기화</b><span>모든 카운터와 기록 삭제</span></div>
     <button class="act" id="btnWipe" style="color:var(--danger);border-color:var(--danger);">삭제</button>
   </div>
-  <div style="text-align:center;font-size:11.5px;opacity:.55;margin-top:10px;" id="verBadge">OmniCounter v21</div>
+  <div style="text-align:center;font-size:11.5px;opacity:.55;margin-top:10px;" id="verBadge">OmniCounter v22</div>
   <div class="sheet-actions" style="margin-top:10px;"><button class="dock-btn primary" id="setClose" style="width:100%;justify-content:center;">닫기</button></div>
 </div>
 
@@ -845,7 +850,7 @@
     <button id="obBack" style="display:none;background:none;border:none;color:var(--ink-dim);font-size:13px;padding:0 0 14px;text-align:left;">‹ 이전</button>
     <div id="obDots" style="display:flex;gap:7px;justify-content:center;margin-bottom:22px;"></div>
     <div style="display:flex;gap:10px;">
-      <button class="dock-btn" id="obSkip" style="flex:0 0 auto;">건너뛰기</button>
+      <button class="dock-btn" id="obSkip" data-i18n="ob_skip" style="flex:0 0 auto;">건너뛰기</button>
       <button class="dock-btn primary" id="obNext" style="flex:1;justify-content:center;height:52px;">다음</button>
     </div>
   </div>
@@ -867,6 +872,39 @@
 (function(){
   "use strict";
   const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
+  /* ================= i18n (v22 · 한국어 기본, 영어 병행 · 나머지 문구는 후속) ================= */
+  const I18N={
+    ko:{ ob_skip:"건너뛰기", ob_next:"다음", ob_start:"시작하기",
+      empty_title:"무엇을 세어 볼까요?", empty_sub:"추천 카운터로 빠르게 시작하거나, 아래 +로 직접 만들 수 있어요.", empty_gallery:"＋ 추천 카운터 갤러리 열기",
+      lang_label:"언어 (Language)", set_gallery_title:"추천 카운터", add_card:"카운터 추가",
+      brief_start:"오늘의 시작", brief_mid:"오늘", brief_end:"오늘의 마무리" },
+    en:{ ob_skip:"Skip", ob_next:"Next", ob_start:"Get started",
+      empty_title:"What will you count?", empty_sub:"Start fast with a preset, or tap + below to make your own.", empty_gallery:"＋ Browse preset counters",
+      lang_label:"언어 (Language)", set_gallery_title:"Preset counters", add_card:"Add counter",
+      brief_start:"Today's start", brief_mid:"Today", brief_end:"Today's wrap-up" }
+  };
+  const OB_I18N={
+    ko:[
+      {icon:"👋",title:"OmniCounter에 오신 걸 환영해요",body:"무엇이든 세는 하나의 앱. 운동 횟수, 물 마시기, 게임 점수까지 한 곳에서 기록하고 흐름을 봐요."},
+      {icon:"👆",title:"탭 한 번으로 세기",body:"카드를 눌러 전체화면 모드로 들어가면 화면 어디든 탭해서 +1, 아래로 스와이프해서 −1. 화면을 안 봐도 셀 수 있어요."},
+      {icon:"🧭",title:"세 가지 유형",body:"일반(운동·습관), 인지형(줄이고 싶은 행동을 판단 없이 관찰), 경과형(금연처럼 '며칠째'를 기록). 카운터마다 골라요."},
+      {icon:"🎲",title:"함께 점수 내기",body:"우측 아래 게임 버튼으로 여러 명 점수판을 열어요. 같은 기기로 돌려 쓰거나, 룸코드로 각자 폰에서 함께 플레이해요."},
+      {icon:"📲",title:"홈 화면에 추가하면 완성",body:"앱처럼 전체화면으로 쓰려면 홈 화면에 추가하세요. 모든 기록은 이 기기에 안전하게 저장돼요."}
+    ],
+    en:[
+      {icon:"👋",title:"Welcome to OmniCounter",body:"One app to count anything — reps, water, game scores — all in one place, with the trends."},
+      {icon:"👆",title:"Count with one tap",body:"Tap a card for full-screen mode: tap anywhere for +1, swipe down for −1. You can count without even looking."},
+      {icon:"🧭",title:"Three types",body:"Standard (reps, habits), Aware (observe what you want to cut down, without judgment), Days-since (track 'day N', like quitting). Pick per counter."},
+      {icon:"🎲",title:"Score together",body:"Use the game button (bottom-right) to open a scoreboard for several people. Pass one device around, or use a room code so everyone joins from their own phone."},
+      {icon:"📲",title:"Add to home screen",body:"For a full-screen, app-like experience, add it to your home screen. All your data stays safely on this device."}
+    ]
+  };
+  const CAT_I18N={ "운동·피트니스":"Fitness","건강·습관":"Health & Habits","공부·자기계발":"Study & Growth","마음챙김·절제":"Mindfulness","이어가기·경과":"Days Since","생활·업무":"Life & Work","게임·점수":"Games & Scores" };
+  let LANG=(function(){ try{const s=localStorage.getItem("omni.lang"); if(s==="ko"||s==="en")return s;}catch(e){} return (String(navigator.language||"ko").toLowerCase().indexOf("ko")===0)?"ko":"en"; })();
+  function t(k){ const d=I18N[LANG]||I18N.ko; return d[k]!==undefined? d[k] : (I18N.ko[k]!==undefined?I18N.ko[k]:k); }
+  function catLabel(cat){ return LANG==="en" && CAT_I18N[cat] ? CAT_I18N[cat] : cat; }
+  function setLang(l){ if(l!=="ko"&&l!=="en")return; LANG=l; try{localStorage.setItem("omni.lang",l);}catch(e){} document.documentElement.setAttribute("lang",l); applyStaticI18n(); if(typeof renderDash==="function") renderDash(); if(typeof renderGallery==="function" && document.querySelector("#gallery.on")) renderGallery(); }
+  function applyStaticI18n(){ document.querySelectorAll("[data-i18n]").forEach(el=>{ const k=el.getAttribute("data-i18n"); const v=t(k); if(v!==undefined) el.textContent=v; }); }
   const COLORS=["#4FD1C5","#E5688A","#F4A259","#9B8CFB","#5FB0F0","#B7D66B"];
 
   /* ================= 데이터 ================= */
@@ -1040,7 +1078,7 @@
       const emp=document.createElement("div");emp.className="empty";
       emp.innerHTML = searchQuery
         ? '<div class="big">검색 결과가 없어요</div><div class="sm">"'+esc(searchQuery)+'"와 일치하는 카운터가 없어요.</div>'
-        : '<div class="big">무엇을 세어 볼까요?</div><div class="sm">추천 카운터로 빠르게 시작하거나, 아래 +로 직접 만들 수 있어요.</div><button class="gstart-btn" id="galStartBtn">＋ 추천 카운터 갤러리 열기</button>';
+        : '<div class="big">'+esc(t("empty_title"))+'</div><div class="sm">'+esc(t("empty_sub"))+'</div><button class="gstart-btn" id="galStartBtn">'+esc(t("empty_gallery"))+'</button>';
       grid.appendChild(emp);
     }
     sorted.forEach(c=>{
@@ -1100,7 +1138,7 @@
       grid.appendChild(card);
     });
     const add=document.createElement("button"); add.className="add-card";
-    add.innerHTML='<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span>카운터 추가</span>';
+    add.innerHTML='<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span>'+esc(t("add_card"))+'</span>';
     add.addEventListener("click",()=>openEdit(null));
     grid.appendChild(add);
   }
@@ -2242,13 +2280,7 @@
 
   /* ================= 온보딩 (첫 실행) ================= */
   const OB_KEY="omni.onboarded.v1";
-  const OB_STEPS=[
-    {icon:"👋",title:"OmniCounter에 오신 걸 환영해요",body:"무엇이든 세는 하나의 앱. 운동 횟수, 물 마시기, 게임 점수까지 한 곳에서 기록하고 흐름을 봐요."},
-    {icon:"👆",title:"탭 한 번으로 세기",body:"카드를 눌러 전체화면 모드로 들어가면 화면 어디든 탭해서 +1, 아래로 스와이프해서 −1. 화면을 안 봐도 셀 수 있어요."},
-    {icon:"🧭",title:"세 가지 유형",body:"일반(운동·습관), 인지형(줄이고 싶은 행동을 판단 없이 관찰), 경과형(금연처럼 '며칠째'를 기록). 카운터마다 골라요."},
-    {icon:"🎲",title:"함께 점수 내기",body:"우측 아래 게임 버튼으로 여러 명 점수판을 열어요. 같은 기기로 돌려 쓰거나, 룸코드로 각자 폰에서 함께 플레이해요."},
-    {icon:"📲",title:"홈 화면에 추가하면 완성",body:"앱처럼 전체화면으로 쓰려면 홈 화면에 추가하세요. 모든 기록은 이 기기에 안전하게 저장돼요."},
-  ];
+  const OB_STEPS=(OB_I18N[LANG]||OB_I18N.ko);
   let obIdx=0;
   const obEl=$("#onboard"),obTrack=$("#obTrack"),obViewport=$("#obViewport");
   obTrack.innerHTML = OB_STEPS.map(s=>
@@ -2261,7 +2293,7 @@
   function renderOb(animate){
     obTrack.style.transition = animate===false ? "none" : "transform .32s cubic-bezier(.2,.8,.2,1)";
     obTrack.style.transform = "translateX(-"+(obIdx*100)+"%)";
-    $("#obNext").textContent = obIdx===OB_STEPS.length-1 ? "시작하기" : "다음";
+    $("#obNext").textContent = obIdx===OB_STEPS.length-1 ? t("ob_start") : t("ob_next");
     $("#obBack").style.display = obIdx>0 ? "block" : "none";
     const dots=$("#obDots"); dots.innerHTML="";
     OB_STEPS.forEach((_,i)=>{
@@ -2336,7 +2368,7 @@
   function openGallery(){ gCat=0; gSel=new Set(); renderGallery(); show("gallery"); }
   function renderGallery(){
     const chips=$("#galCats"); chips.innerHTML="";
-    GALLERY.forEach((c,i)=>{ const b=document.createElement("button"); b.className="gchip"+(i===gCat?" on":""); b.textContent=c.icon+" "+c.cat; b.addEventListener("click",()=>{ gCat=i; renderGallery(); }); chips.appendChild(b); });
+    GALLERY.forEach((c,i)=>{ const b=document.createElement("button"); b.className="gchip"+(i===gCat?" on":""); b.textContent=c.icon+" "+catLabel(c.cat); b.addEventListener("click",()=>{ gCat=i; renderGallery(); }); chips.appendChild(b); });
     const grid=$("#galGrid"); grid.innerHTML="";
     if(/게임/.test(GALLERY[gCat].cat)){
       const q=document.createElement("button"); q.className="gcard"; q.id="galQuickGame";
@@ -2665,7 +2697,7 @@
     items.sort((a,b)=> a.pr-b.pr || b.r-a.r);
     const top=items.slice(0,3);
     if(!top.length) return;
-    const prefix = h<12 ? "오늘의 시작" : (h>=18 ? "오늘의 마무리" : "오늘");
+    const prefix = h<12 ? t("brief_start") : (h>=18 ? t("brief_end") : t("brief_mid"));
     let doneTail="";
     if(h>=18){
       const doneN=db.counters.filter(c=>c.type==="count"&&c.goal>0&&cycleTotal(c)>=c.goal).length;
@@ -2704,6 +2736,11 @@
   /* ================= 초기화 ================= */
   applyLeftHanded();
   applyGrowthToggleUI();
+  // v22 언어 토글
+  function syncLangSeg(){ document.querySelectorAll("#langSeg button").forEach(b=>b.classList.toggle("on", b.dataset.lang===LANG)); }
+  document.querySelectorAll("#langSeg button").forEach(b=> b.addEventListener("click",()=>{ setLang(b.dataset.lang); syncLangSeg(); mq("lang_"+b.dataset.lang); }));
+  document.documentElement.setAttribute("lang",LANG);
+  applyStaticI18n(); syncLangSeg();
   updateCommaInfo();
   renderDash();
   const dlHandled=handleDeeplink();
