@@ -1,0 +1,1 @@
+{ "app": "OmniCounter", "version": "v21", "channel": "current", "sha256_prefix": "4c5ce3a4bd08c274", "note": "이 URL은 고정입니다. 새 버전 배포 시 index.html만 교체하면 같은 주소로 최신이 반영됩니다." }
