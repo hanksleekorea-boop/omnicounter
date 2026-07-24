@@ -1,1 +1,1 @@
-{ "app": "OmniCounter", "version": "v22", "channel": "current", "sha256_prefix": "4f154973d0f8128e", "note": "고정 URL. index.html 교체 push로 같은 주소 최신." }
+{ "app": "OmniCounter", "version": "v22.1", "channel": "current", "sha256_prefix": "1b3935bac6f94c5d", "note": "고정 URL. 심층 다국어(deep i18n) 반영. index.html 교체 push로 같은 주소 최신." }
