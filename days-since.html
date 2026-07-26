@@ -5,31 +5,90 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Days Since Counter — Quit Tracking & D-Day</title>
 <meta name="description" content="Track days since you quit smoking, drinking, or anything else — plus countdowns to a goal date. Private, offline, free.">
+<link rel="canonical" href="https://hanksleekorea-boop.github.io/omnicounter/days-since.html">
+<link rel="alternate" hreflang="en" href="https://hanksleekorea-boop.github.io/omnicounter/days-since.html">
+<link rel="alternate" hreflang="ko" href="https://hanksleekorea-boop.github.io/omnicounter/days-since.html?lang=ko">
+<link rel="alternate" hreflang="x-default" href="https://hanksleekorea-boop.github.io/omnicounter/days-since.html">
+<meta property="og:site_name" content="OmniCounter">
+<meta property="og:url" content="https://hanksleekorea-boop.github.io/omnicounter/days-since.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ko_KR">
 <meta property="og:title" content="Days Since Counter — Quit Tracking & D-Day">
 <meta property="og:description" content="Track days since you quit smoking, drinking, or anything else — plus countdowns to a goal date. Private, offline, free.">
-<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Days Since Counter — Quit Tracking & D-Day">
+<meta name="twitter:description" content="Track days since you quit smoking, drinking, or anything else — plus countdowns to a goal date. Private, offline, free.">
+<meta name="theme-color" content="#0f1420">
 <style>
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#0f1420;color:#e8edf5;line-height:1.65;}
-.wrap{max-width:640px;margin:0 auto;padding:48px 22px 80px;}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;background:#0f1420;color:#e8edf5;line-height:1.65;}
+.wrap{max-width:640px;margin:0 auto;padding:26px 22px 80px;}
 h1{font-size:30px;line-height:1.25;margin:0 0 10px;}
 .sub{color:#9aa7b8;font-size:16.5px;margin-bottom:28px;}
 .cta{display:block;background:#0B7A75;color:#fff;text-decoration:none;text-align:center;font-weight:700;font-size:17px;padding:16px;border-radius:14px;margin:10px 0;}
 .cta.alt{background:#16202f;border:1px solid #2a3242;color:#e8edf5;font-weight:600;}
 p{color:#c6cfdb;}
 .note{margin-top:34px;padding-top:18px;border-top:1px solid #2a3242;color:#8b95a8;font-size:13.5px;}
+.langbar{display:flex;gap:8px;justify-content:flex-end;margin-bottom:18px;}
+.langbar a{min-width:56px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;padding:0 14px;border-radius:12px;
+  border:1px solid #2a3242;background:#16202f;color:#9aa7b8;text-decoration:none;font-size:14px;font-weight:700;}
+.langbar a[aria-current="true"]{background:#0B7A75;border-color:#0B7A75;color:#fff;}
 </style>
 </head>
 <body>
 <div class="wrap">
-<h1>Days Since Counter — Quit Tracking & D-Day</h1>
-<div class="sub">Track days since you quit smoking, drinking, or anything else — plus countdowns to a goal date. Private, offline, free.</div>
-<a class="cta" href="./#add=v1.elapsed.0.total.0.Quit">Days since quitting →</a>
-<a class="cta alt" href="./#add=v1.elapsed.0.total.2.Incident-free">Days since last incident →</a>
-<a class="cta alt" href="./#add=v1.elapsed.0.total.1.Alcohol-free">Alcohol-free days →</a>
-<p>From D-day to day one and beyond. Set a goal date to see D-7, D-6… then watch it flip automatically into 'day 1, day 2, day 3' once you cross it — the whole journey in one counter.</p>
-<p><b>No install. No account. No ads.</b> OmniCounter is a free web app — open the link and it just works. Add it to your home screen for a full-screen, offline-ready experience. All data stays on your device.</p>
-<p>Also inside: awareness counters (observe urges without judgment), multiplayer game scoreboards with room codes, weekly rhythm insights, and shareable record cards.</p>
-<div class="note">OmniCounter · your data never leaves your device · <a href="./" style="color:#4FD1C5;">Open the app</a></div>
+<nav class="langbar" aria-label="Language">
+  <a href="?lang=en" id="lgEn" data-lang="en" aria-current="true">EN</a>
+  <a href="?lang=ko" id="lgKo" data-lang="ko" aria-current="false">한국어</a>
+</nav>
+<h1 id="h1">Days Since Counter — Quit Tracking & D-Day</h1>
+<div class="sub" id="sub">Track days since you quit smoking, drinking, or anything else — plus countdowns to a goal date. Private, offline, free.</div>
+<a class="cta" id="cta0" href="./#add=v1.elapsed.0.total.0.Quit">Days since quitting →</a>
+<a class="cta alt" id="cta1" href="./#add=v1.elapsed.0.total.2.Incident-free">Days since last incident →</a>
+<a class="cta alt" id="cta2" href="./#add=v1.elapsed.0.total.1.Alcohol-free">Alcohol-free days →</a>
+<p id="p1">From D-day to day one and beyond. Set a goal date to see D-7, D-6… then watch it flip automatically into 'day 1, day 2, day 3' once you cross it — the whole journey in one counter.</p>
+<p id="p2"><b>No install. No account. No ads.</b> OmniCounter is a free web app — open the link and it just works. Add it to your home screen for a full-screen, offline-ready experience. All data stays on your device.</p>
+<p id="p3">Also inside: awareness counters (observe urges without judgment), multiplayer game scoreboards with room codes, weekly rhythm insights, and shareable record cards.</p>
+<div class="note">OmniCounter · <span id="note">your data never leaves your device</span> · <a href="./" id="openApp" style="color:#4FD1C5;">Open the app</a></div>
 </div>
+<script>
+(function(){
+  var KO={"title": "며칠째 카운터 — 금연·금주 기록과 D-Day", "desc": "금연·금주를 비롯해 '마지막 이후 며칠째'를 기록하고, 목표일까지 D-n으로 세어 보세요. 비공개, 오프라인, 무료.", "ctas": ["끊은 지 며칠째 →", "무사고 며칠째 →", "술 없이 며칠째 →"], "p1": "D-day에서 1일째로, 그리고 그 너머로. 목표일을 정하면 D-7, D-6…으로 세다가, 그날을 넘기면 '1일째, 2일째, 3일째'로 자동 전환돼요 — 여정 전체가 카운터 하나에 담깁니다.", "p2": "<b>설치도, 계정도, 광고도 없어요.</b> OmniCounter는 무료 웹 앱이에요 — 링크를 열면 바로 씁니다. 홈 화면에 추가하면 전체화면·오프라인으로도 쓸 수 있고, 모든 기록은 이 기기에만 남아요.", "p3": "이 안에 더 있어요: 인지형 카운터(충동을 판단 없이 관찰), 룸코드로 여러 폰이 함께 쓰는 점수판, 주간 리듬 리포트, 공유용 기록 카드.", "note": "기록은 이 기기를 떠나지 않아요", "open": "앱 열기"};
+  var EN={"title": "Days Since Counter — Quit Tracking & D-Day", "desc": "Track days since you quit smoking, drinking, or anything else — plus countdowns to a goal date. Private, offline, free.", "ctas": ["Days since quitting →", "Days since last incident →", "Alcohol-free days →"], "p1": "From D-day to day one and beyond. Set a goal date to see D-7, D-6… then watch it flip automatically into 'day 1, day 2, day 3' once you cross it — the whole journey in one counter.", "p2": "<b>No install. No account. No ads.</b> OmniCounter is a free web app — open the link and it just works. Add it to your home screen for a full-screen, offline-ready experience. All data stays on your device.", "p3": "Also inside: awareness counters (observe urges without judgment), multiplayer game scoreboards with room codes, weekly rhythm insights, and shareable record cards.", "note": "your data never leaves your device", "open": "Open the app"};
+  function apply(l){
+    var d = l==="ko" ? KO : EN;
+    document.documentElement.setAttribute("lang", l);
+    document.title = d.title;
+    var m=document.querySelector('meta[name="description"]'); if(m) m.setAttribute("content", d.desc);
+    document.getElementById("h1").textContent = d.title;
+    document.getElementById("sub").textContent = d.desc;
+    for(var i=0;i<d.ctas.length;i++){
+      var a=document.getElementById("cta"+i); if(a) a.textContent=d.ctas[i];
+    }
+    document.getElementById("p1").textContent = d.p1;
+    document.getElementById("p2").innerHTML = d.p2;
+    document.getElementById("p3").textContent = d.p3;
+    document.getElementById("note").textContent = d.note;
+    document.getElementById("openApp").textContent = d.open;
+    document.getElementById("lgEn").setAttribute("aria-current", l==="en" ? "true":"false");
+    document.getElementById("lgKo").setAttribute("aria-current", l==="ko" ? "true":"false");
+  }
+  function pick(){
+    var q=(location.search.match(/[?&]lang=(ko|en)/)||[])[1];
+    if(q) return q;
+    try{ var s=localStorage.getItem("omni.lang"); if(s==="ko"||s==="en") return s; }catch(e){}
+    return String(navigator.language||"en").toLowerCase().indexOf("ko")===0 ? "ko" : "en";
+  }
+  var cur=pick(); apply(cur);
+  document.querySelector(".langbar").addEventListener("click", function(e){
+    var a=e.target.closest("a[data-lang]"); if(!a) return;
+    e.preventDefault();
+    cur=a.getAttribute("data-lang");
+    try{ localStorage.setItem("omni.lang", cur); }catch(err){}
+    try{ history.replaceState(null,"", location.pathname+"?lang="+cur); }catch(err){}
+    apply(cur);
+  });
+})();
+</script>
 </body>
 </html>

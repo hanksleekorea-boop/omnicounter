@@ -1,1 +1,18 @@
-{ "app": "OmniCounter", "version": "v22.1", "channel": "current", "sha256_prefix": "1b3935bac6f94c5d", "note": "고정 URL. 심층 다국어(deep i18n) 반영. index.html 교체 push로 같은 주소 최신." }
+{
+  "version": "v22.3",
+  "sha256": "8348840b4822a215bc20bc56787e7972a3b238b016e6e91e3ae7928e0c602fc8",
+  "bytes": 235191,
+  "released": "2026-07-26",
+  "markers": [
+    "#galModeSeg",
+    "#btnRv",
+    "#sIdeal",
+    "#quiz",
+    "#galQuizBtn",
+    "#sMove",
+    "#stMoveRow",
+    "#idealBanner"
+  ],
+  "schemaVersion": 3,
+  "notes": "A1 30초 진단 + A3 현재→이상 이동률 + PWA manifest 현지화 + 랜딩 3종 hreflang/OG/언어토글"
+}

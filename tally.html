@@ -5,31 +5,90 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Free Online Tally Counter — One Tap, No Install</title>
 <meta name="description" content="Count anything instantly: inventory, laps, reps, birds, guests. Works offline, saves automatically, nothing to install.">
+<link rel="canonical" href="https://hanksleekorea-boop.github.io/omnicounter/tally.html">
+<link rel="alternate" hreflang="en" href="https://hanksleekorea-boop.github.io/omnicounter/tally.html">
+<link rel="alternate" hreflang="ko" href="https://hanksleekorea-boop.github.io/omnicounter/tally.html?lang=ko">
+<link rel="alternate" hreflang="x-default" href="https://hanksleekorea-boop.github.io/omnicounter/tally.html">
+<meta property="og:site_name" content="OmniCounter">
+<meta property="og:url" content="https://hanksleekorea-boop.github.io/omnicounter/tally.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ko_KR">
 <meta property="og:title" content="Free Online Tally Counter — One Tap, No Install">
 <meta property="og:description" content="Count anything instantly: inventory, laps, reps, birds, guests. Works offline, saves automatically, nothing to install.">
-<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Free Online Tally Counter — One Tap, No Install">
+<meta name="twitter:description" content="Count anything instantly: inventory, laps, reps, birds, guests. Works offline, saves automatically, nothing to install.">
+<meta name="theme-color" content="#0f1420">
 <style>
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#0f1420;color:#e8edf5;line-height:1.65;}
-.wrap{max-width:640px;margin:0 auto;padding:48px 22px 80px;}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;background:#0f1420;color:#e8edf5;line-height:1.65;}
+.wrap{max-width:640px;margin:0 auto;padding:26px 22px 80px;}
 h1{font-size:30px;line-height:1.25;margin:0 0 10px;}
 .sub{color:#9aa7b8;font-size:16.5px;margin-bottom:28px;}
 .cta{display:block;background:#0B7A75;color:#fff;text-decoration:none;text-align:center;font-weight:700;font-size:17px;padding:16px;border-radius:14px;margin:10px 0;}
 .cta.alt{background:#16202f;border:1px solid #2a3242;color:#e8edf5;font-weight:600;}
 p{color:#c6cfdb;}
 .note{margin-top:34px;padding-top:18px;border-top:1px solid #2a3242;color:#8b95a8;font-size:13.5px;}
+.langbar{display:flex;gap:8px;justify-content:flex-end;margin-bottom:18px;}
+.langbar a{min-width:56px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;padding:0 14px;border-radius:12px;
+  border:1px solid #2a3242;background:#16202f;color:#9aa7b8;text-decoration:none;font-size:14px;font-weight:700;}
+.langbar a[aria-current="true"]{background:#0B7A75;border-color:#0B7A75;color:#fff;}
 </style>
 </head>
 <body>
 <div class="wrap">
-<h1>Free Online Tally Counter — One Tap, No Install</h1>
-<div class="sub">Count anything instantly: inventory, laps, reps, birds, guests. Works offline, saves automatically, nothing to install.</div>
-<a class="cta" href="./#add=v1.count.0.total.0.Tally">Start counting now →</a>
-<a class="cta alt" href="./#add=v1.count.30.day.1.Reps">Count reps (goal 30/day) →</a>
-<a class="cta alt" href="./#add=v1.count.0.day.4.Guests">Count guests →</a>
-<p>A tally counter that remembers. Unlike paper clickers, OmniCounter keeps your history, shows trends, and exports to CSV — while staying as fast as a physical clicker: the whole screen is the button.</p>
-<p><b>No install. No account. No ads.</b> OmniCounter is a free web app — open the link and it just works. Add it to your home screen for a full-screen, offline-ready experience. All data stays on your device.</p>
-<p>Also inside: awareness counters (observe urges without judgment), multiplayer game scoreboards with room codes, weekly rhythm insights, and shareable record cards.</p>
-<div class="note">OmniCounter · your data never leaves your device · <a href="./" style="color:#4FD1C5;">Open the app</a></div>
+<nav class="langbar" aria-label="Language">
+  <a href="?lang=en" id="lgEn" data-lang="en" aria-current="true">EN</a>
+  <a href="?lang=ko" id="lgKo" data-lang="ko" aria-current="false">한국어</a>
+</nav>
+<h1 id="h1">Free Online Tally Counter — One Tap, No Install</h1>
+<div class="sub" id="sub">Count anything instantly: inventory, laps, reps, birds, guests. Works offline, saves automatically, nothing to install.</div>
+<a class="cta" id="cta0" href="./#add=v1.count.0.total.0.Tally">Start counting now →</a>
+<a class="cta alt" id="cta1" href="./#add=v1.count.30.day.1.Reps">Count reps (goal 30/day) →</a>
+<a class="cta alt" id="cta2" href="./#add=v1.count.0.day.4.Guests">Count guests →</a>
+<p id="p1">A tally counter that remembers. Unlike paper clickers, OmniCounter keeps your history, shows trends, and exports to CSV — while staying as fast as a physical clicker: the whole screen is the button.</p>
+<p id="p2"><b>No install. No account. No ads.</b> OmniCounter is a free web app — open the link and it just works. Add it to your home screen for a full-screen, offline-ready experience. All data stays on your device.</p>
+<p id="p3">Also inside: awareness counters (observe urges without judgment), multiplayer game scoreboards with room codes, weekly rhythm insights, and shareable record cards.</p>
+<div class="note">OmniCounter · <span id="note">your data never leaves your device</span> · <a href="./" id="openApp" style="color:#4FD1C5;">Open the app</a></div>
 </div>
+<script>
+(function(){
+  var KO={"title": "무료 온라인 탤리 카운터 — 탭 한 번, 설치 없음", "desc": "무엇이든 바로 셉니다: 재고, 랩 수, 횟수, 개체 수, 입장객. 오프라인에서도 되고, 자동 저장되고, 설치할 게 없어요.", "ctas": ["지금 세기 시작 →", "횟수 세기 (하루 30개 목표) →", "입장객 세기 →"], "p1": "기억하는 탤리 카운터. 손에 쥐는 클리커와 달리 기록이 남고, 추세가 보이고, CSV로 내보낼 수 있어요 — 그러면서도 속도는 그대로입니다. 화면 전체가 버튼이거든요.", "p2": "<b>설치도, 계정도, 광고도 없어요.</b> OmniCounter는 무료 웹 앱이에요 — 링크를 열면 바로 씁니다. 홈 화면에 추가하면 전체화면·오프라인으로도 쓸 수 있고, 모든 기록은 이 기기에만 남아요.", "p3": "이 안에 더 있어요: 인지형 카운터(충동을 판단 없이 관찰), 룸코드로 여러 폰이 함께 쓰는 점수판, 주간 리듬 리포트, 공유용 기록 카드.", "note": "기록은 이 기기를 떠나지 않아요", "open": "앱 열기"};
+  var EN={"title": "Free Online Tally Counter — One Tap, No Install", "desc": "Count anything instantly: inventory, laps, reps, birds, guests. Works offline, saves automatically, nothing to install.", "ctas": ["Start counting now →", "Count reps (goal 30/day) →", "Count guests →"], "p1": "A tally counter that remembers. Unlike paper clickers, OmniCounter keeps your history, shows trends, and exports to CSV — while staying as fast as a physical clicker: the whole screen is the button.", "p2": "<b>No install. No account. No ads.</b> OmniCounter is a free web app — open the link and it just works. Add it to your home screen for a full-screen, offline-ready experience. All data stays on your device.", "p3": "Also inside: awareness counters (observe urges without judgment), multiplayer game scoreboards with room codes, weekly rhythm insights, and shareable record cards.", "note": "your data never leaves your device", "open": "Open the app"};
+  function apply(l){
+    var d = l==="ko" ? KO : EN;
+    document.documentElement.setAttribute("lang", l);
+    document.title = d.title;
+    var m=document.querySelector('meta[name="description"]'); if(m) m.setAttribute("content", d.desc);
+    document.getElementById("h1").textContent = d.title;
+    document.getElementById("sub").textContent = d.desc;
+    for(var i=0;i<d.ctas.length;i++){
+      var a=document.getElementById("cta"+i); if(a) a.textContent=d.ctas[i];
+    }
+    document.getElementById("p1").textContent = d.p1;
+    document.getElementById("p2").innerHTML = d.p2;
+    document.getElementById("p3").textContent = d.p3;
+    document.getElementById("note").textContent = d.note;
+    document.getElementById("openApp").textContent = d.open;
+    document.getElementById("lgEn").setAttribute("aria-current", l==="en" ? "true":"false");
+    document.getElementById("lgKo").setAttribute("aria-current", l==="ko" ? "true":"false");
+  }
+  function pick(){
+    var q=(location.search.match(/[?&]lang=(ko|en)/)||[])[1];
+    if(q) return q;
+    try{ var s=localStorage.getItem("omni.lang"); if(s==="ko"||s==="en") return s; }catch(e){}
+    return String(navigator.language||"en").toLowerCase().indexOf("ko")===0 ? "ko" : "en";
+  }
+  var cur=pick(); apply(cur);
+  document.querySelector(".langbar").addEventListener("click", function(e){
+    var a=e.target.closest("a[data-lang]"); if(!a) return;
+    e.preventDefault();
+    cur=a.getAttribute("data-lang");
+    try{ localStorage.setItem("omni.lang", cur); }catch(err){}
+    try{ history.replaceState(null,"", location.pathname+"?lang="+cur); }catch(err){}
+    apply(cur);
+  });
+})();
+</script>
 </body>
 </html>
