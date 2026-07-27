@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://hanksleekorea-boop.github.io/omnicounter/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://hanksleekorea-boop.github.io/omnicounter/tally.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hanksleekorea-boop.github.io/omnicounter/tally.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://hanksleekorea-boop.github.io/omnicounter/tally.html?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hanksleekorea-boop.github.io/omnicounter/tally.html"/>
+    <lastmod>2026-07-27</lastmod><priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hanksleekorea-boop.github.io/omnicounter/habit.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hanksleekorea-boop.github.io/omnicounter/habit.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://hanksleekorea-boop.github.io/omnicounter/habit.html?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hanksleekorea-boop.github.io/omnicounter/habit.html"/>
+    <lastmod>2026-07-27</lastmod><priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hanksleekorea-boop.github.io/omnicounter/days-since.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hanksleekorea-boop.github.io/omnicounter/days-since.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://hanksleekorea-boop.github.io/omnicounter/days-since.html?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hanksleekorea-boop.github.io/omnicounter/days-since.html"/>
+    <lastmod>2026-07-27</lastmod><priority>0.8</priority>
+  </url>
+</urlset>

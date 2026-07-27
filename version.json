@@ -1,18 +1,22 @@
 {
-  "version": "v22.3",
-  "sha256": "8348840b4822a215bc20bc56787e7972a3b238b016e6e91e3ae7928e0c602fc8",
-  "bytes": 235191,
-  "released": "2026-07-26",
+  "version": "v22.4",
+  "sha256": "c845f02470311ba31b462564946bce47a09c8567a680119c23b19f6175438c37",
+  "bytes": 247814,
+  "released": "2026-07-27",
   "markers": [
-    "#galModeSeg",
-    "#btnRv",
-    "#sIdeal",
+    "#verBadge",
     "#quiz",
     "#galQuizBtn",
     "#sMove",
     "#stMoveRow",
-    "#idealBanner"
+    "#idealBanner",
+    "#swStatus",
+    "#galModeSeg",
+    "#btnRv",
+    "#sIdeal",
+    "sStage[tabindex]"
   ],
-  "schemaVersion": 3,
-  "notes": "A1 30초 진단 + A3 현재→이상 이동률 + PWA manifest 현지화 + 랜딩 3종 hreflang/OG/언어토글"
+  "schemaVersion": 4,
+  "serviceWorker": "sw.js (navigation=network-first)",
+  "notes": "서비스워커 오프라인 + 대시보드 이동률 + 진단 재진단 이력 + 진단 6영역·템플릿 16종 + 키보드 관통(B-20/B-21 수정)"
 }

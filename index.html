@@ -14,7 +14,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="OmniCounter">
 <meta name="theme-color" content="#0B0E14">
-<!-- OmniCounter v22.3 · 2026-07-26 · A1 30초 진단(상황진단→지표식별→목표) + A3 현재→이상 이동률 + PWA manifest 현지화(schemaVersion 3·백업·개수 assert) · 이전 이력: v22.2 A2 목표 템플릿 팩 12종 · v19 스타터 갤러리 · 엔진 무변경(생성 경로 재사용) -->
+<!-- OmniCounter v22.4 · 2026-07-27 · 서비스워커 오프라인(navigation=network-first) + 대시보드 이동률 + 진단 재진단 이력 + 진단 6영역·템플릿 16종(schemaVersion 4·출발버전별 백업·개수 assert) · 이전 이력: v22.3 A1 진단·A3 이동률 · v22.2 A2 템플릿 12종 · 엔진 무변경 -->
 <link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjogIk9tbmlDb3VudGVyIiwgInNob3J0X25hbWUiOiAiT21uaUNvdW50ZXIiLCAic3RhcnRfdXJsIjogIi4vIiwgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwQjBFMTQiLCAidGhlbWVfY29sb3IiOiAiIzBCMEUxNCIsICJvcmllbnRhdGlvbiI6ICJwb3J0cmFpdCIsICJpY29ucyI6IFt7InNyYyI6ICJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQU1BQUFBREFDQUlBQUFEZHZ2dFFBQUFCWkVsRVFWUjQydTNTUVEwQUFBakVzSE9JYWdUZ0NBdUVkNU1xV0phYWhyZElnSUV3RUFiQ1FHQWdESVNCTUJBWUNBTmhJQXdFQnNKQUdBZ0RnWUV3RUFiQ1FCZ0lESVNCTUJBR0FnTmhJQXlFZ2NCQUdBZ0RZU0F3RUFiQ1FCZ0lBNEdCTUJBR3drQmdJQXlFZ1RBUUdBZ0RZU0FNQkFiQ1FCZ0lBNEdCTUJBR3drQVlDQXlFZ1RBUUJnSURZU0FNaElIQVFCZ0lBMkVnTUJBR3drQVlDQU9CZ1RBUUJzSkFZQ0FNaElFd0VCZ0lBMkVnREFRR3drQVlDQU5oSURBUUJzSkFHQWdNaElFd0VBWUNBMkVnRElTQndFQVlDQU5oSURBUUJzSkFHQWdEZ1lFd0VBYkNRR0FnRElTQk1CQVlDQU5oSUF3RUJzSkFHQWdEWVNBd0VBYkNRQmdJRElTQk1CQUdBZ05oSUF5RWdjQkFHQWdEWVNBTXBBSUd3a0FZQ0FPQmdUQVFCc0pBWUNBTWhJRXdFQmdJQTJFZ0RBUUd3a0FZQ0FOaElEQVFCc0pBR0FnTWhJRXdFQVlDQTJFZ0RJU0J3RUFZQ0FOaElBd0VCc0pBR0FnRHdkVUMzckRmOFI0T1JLRUFBQUFBU1VWT1JLNUNZSUk9IiwgInNpemVzIjogIjE5MngxOTIiLCAidHlwZSI6ICJpbWFnZS9wbmciLCAicHVycG9zZSI6ICJhbnkgbWFza2FibGUifSwgeyJzcmMiOiAiZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk9SdzBLR2dvQUFBQU5TVWhFVWdBQUFnQUFBQUlBQ0FJQUFBQjdHa090QUFBRm4wbEVRVlI0MnUzVk1RMEFBQWdFc1hlSWFnVGdDQStzTkttQ1d5NDFEY0JEa1FEQUFBQXdBQUFNQUFBREFNQUFBREFBQUF3QUFBTUF3QUFBTUFBQURBQUFBd0RBQUFBd0FBQU1BQUFEQU1BQUFEQUFBQXdBQUFNQXdBQUFNQUFBREFEQUFBQXdBQUFNQUFBREFNQUFBREFBQUF3QUFBTUF3QUFBTUFBQURBQUFBd0RBQUFBd0FBQU1BQUFEQU1BQUFEQUFBQXdBQUFNQXdBQUFNQUFBREFEQUFGUUFNQUFBREFBQUF3REFBQUF3QUFBTUFBQURBTUFBQURBQUFBd0FBQU1Bd0FBQU1BQUFEQUFBQXdEQUFBQXdBQUFNQUFBREFNQUFBREFBQUF3QUFBTUFNQUFBREFBQUF3REFBQUF3QUFBTUFBQURBTUFBQURBQUFBd0FBQU1Bd0FBQU1BQUFEQUFBQXdEQUFBQXdBQUFNQUFBREFNQUFBREFBQUF3QUFBTUFNQUFWQUF3QUFBTUF3QUFBTUFBQURBQUFBd0RBQUFBd0FBQU1BQUFEQU1BQUFEQUFBQXdBQUFNQXdBQUFNQUFBREFBQUF3REFBQUF3QUFBTUFBQURBTUFBQUF3QUFBTUF3QUFBTUFBQURBQUFBd0RBQUFBd0FBQU1BQUFEQU1BQUFEQUFBQXdBQUFNQXdBQUFNQUFBREFBQUF3REFBQUF3QUFBTUFBQURBTUFBQUF3QUFBTUF3QUFBTUFBQURBQUFBd0RBQUFBd0FBQU1BQUFEQU1BQUFEQUFBQXdBQUFNQXdBQUFNQUFBREFBQUF3REFBQUF3QUFBTUFBQURBTUFBQURBQUFBTUF3QUFBTUFBQURBQUFBd0RBQUFBd0FBQU1BQUFEQU1BQUFEQUFBQXdBQUFNQXdBQUFNQUFBREFBQUF3REFBQUF3QUFBTUFBQURBTUFBQURBQUFBTUF3QUFBTUFBQURBQUFBd0RBQUFBd0FBQU1BQUFEQU1BQUFEQUFBQXdBQUFNQXdBQUFNQUFBREFBQUF3REFBQUF3QUFBTUFBQURBTUFBQURBQUFBd0F3QUFBTUFBQURBQUFBd0RBQUFBd0FBQU1BQUFEQU1BQUFEQUFBQXdBQUFNQXdBQUFNQUFBREFBQUF3REFBQUF3QUFBTUFBQURBTUFBQURBQUFBd0F3QUFBTUFBQURBQUFBd0RBQUFBd0FBQU1BQUFEQU1BQUFEQUFBQXdBQUFNQXdBQUFNQUFBREFBQUF3REFBQUF3QUFBTUFBQURBTUFBQURBQUFBd0F3QUFrQURBQUFBd0FBQU1Bd0FBQU1BQUFEQUFBQXdEQUFBQXdBQUFNQUFBREFNQUFBREFBQUF3QUFBTUF3QUFBTUFBQURBQUFBd0RBQUFBd0FBQU1BQUFEQURBQUFBd0FBQU1Bd0FBQU1BQUFEQUFBQXdEQUFBQXdBQUFNQUFBREFNQUFBREFBQUF3QUFBTUF3QUFBTUFBQURBQUFBd0RBQUFBd0FBQU1BQUFEQURBQUZRQU1BQUFEQU1BQUFEQUFBQXdBQUFNQXdBQUFNQUFBREFBQUF3REFBQUF3QUFBTUFBQURBTUFBQURBQUFBd0FBQU1Bd0FBQU1BQUFEQUFBQXdEQUFBQU1BQUFEQU1BQUFEQUFBQXdBQUFNQXdBQUFNQUFBREFBQUF3REFBQUF3QUFBTUFBQURBTUFBQURBQUFBd0FBQU1Bd0FBQU1BQUFEQUFBQXdEQUFBQU1RQVVBQXdEQUFBQXdBQUFNQUFBREFNQUFBREFBQUF3QUFBTUF3QUFBTUFBQURBQUFBd0RBQUFBd0FBQU1BQUFEQU1BQUFEQUFBQXdBQUFNQXdBQUFNQUFBQXdEQUFBQXdBQUFNQUFBREFNQUFBREFBQUF3QUFBTUF3QUFBTUFBQURBQUFBd0RBQUFBd0FBQU1BQUFEQU1BQUFEQUFBQXdBQUFNQXdBQUFNQUFBQXdEQUFBQXdBQUFNQUFBREFNQUFBREFBQUF3QUFBTUF3QUFBTUFBQURBQUFBd0RBQUFBd0FBQU1BQUFEQU1BQUFEQUFBQXdBQUFNQXdBQUFNQUFBREFEQUFBQXdBQUFNQUFBREFNQUFBREFBQUF3QUFBTUF3QUFBTUFBQURBQUFBd0RBQUFBd0FBQU1BQUFEQU1BQUFEQUFBQXdBQUFNQXdBQUFNQUFBREFEQUFBQXdBQUFNQUFBREFNQUFBREFBQUF3QUFBTUF3QUFBTUFBQURBQUFBd0RBQUFBd0FBQU1BQUFEQU1BQUFEQUFBQXdBQUFNQXdBQUFNQUFBREFBQUF3QXdBQUFNQUFBREFNQUFBREFBQUF3QUFBTUF3QUFBTUFBQURBQUFBd0RBQUFBd0FBQU1BQUFEQU1BQUFEQUFBQXdBQUFNQXdBQUFNQUFBREFBQUF3QXdBQUFNQUFBREFNQUFBREFBQUF3QUFBTUF3QUFBTUFBQURBQUFBd0RBQUFBd0FBQU1BQUFEQU1BQUFEQUFBQXdBZ0pzRmtudHhyVVdQMFhVQUFBQUFTVVZPUks1Q1lJST0iLCAic2l6ZXMiOiAiNTEyeDUxMiIsICJ0eXBlIjogImltYWdlL3BuZyIsICJwdXJwb3NlIjogImFueSBtYXNrYWJsZSJ9XX0=">
 <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAABZElEQVR42u3SQQ0AAAjEsHOIagTgCAuEd5MqWJaahrdIgIEwEAbCQGAgDISBMBAYCANhIAwEBsJAGAgDgYEwEAbCQBgIDISBMBAGAgNhIAyEgcBAGAgDYSAwEAbCQBgIA4GBMBAGwkBgIAyEgTAQGAgDYSAMBAbCQBgIA4GBMBAGwkAYCAyEgTAQBgIDYSAMhIHAQBgIA2EgMBAGwkAYCAOBgTAQBsJAYCAMhIEwEBgIA2EgDAQGwkAYCANhIDAQBsJAGAgMhIEwEAYCA2EgDISBwEAYCANhIDAQBsJAGAgDgYEwEAbCQGAgDISBMBAYCANhIAwEBsJAGAgDYSAwEAbCQBgIDISBMBAGAgNhIAyEgcBAGAgDYSAMpAIGwkAYCAOBgTAQBsJAYCAMhIEwEBgIA2EgDAQGwkAYCANhIDAQBsJAGAgMhIEwEAYCA2EgDISBwEAYCANhIAwEBsJAGAgDwdUC3rDf8R4ORKEAAAAASUVORK5CYII=">
 <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAIAAAB7GkOtAAAFn0lEQVR42u3VMQ0AAAgEsXeIagTgCA+sNKmCWy41DcBDkQDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADADAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADADAAFQAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAMAAVAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAwAAkADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADADAAFQAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAMQAUAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADADAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADADAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAgJsFkntxrUWP0XUAAAAASUVORK5CYII=">
@@ -65,6 +65,9 @@
   .card .cgoal{font-size:11px;color:var(--ink-dim);margin-bottom:8px;height:14px;}
   .card .cgoal .gbar{display:inline-block;width:100%;height:3px;background:var(--line);border-radius:9px;overflow:hidden;vertical-align:middle;margin-top:3px;}
   .card .cgoal .gfill{display:block;height:100%;border-radius:9px;transition:width .35s;}
+  .card .cmove{font-size:10.5px;color:var(--accent);font-weight:700;margin:-4px 0 6px;line-height:1.35;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .card .cmove.ref{color:var(--ink-dim);font-weight:600;}
   .card .ops{display:flex;gap:8px;margin-top:auto;}
   .ops.ops-big{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
   .ops.ops-big .op{height:44px;font-size:13px;}
@@ -307,6 +310,9 @@
   .search-row input{flex:1;background:none;border:none;color:var(--ink);font-size:14px;height:100%;outline:none;}
   .search-row button{background:none;border:none;color:var(--ink-dim);font-size:16px;flex:0 0 auto;}
   @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.05ms!important;}}
+  /* M7(v22.4): 키보드 사용자에게만 보이는 포커스 링 — 포인터 사용자 화면은 그대로 둔다 */
+  :focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px;}
+  #sStage:focus-visible{outline:3px solid var(--accent);outline-offset:-6px;}
   /* ===== 스타터 갤러리 (v19) ===== */
   #galleryScroll{flex:1;overflow-y:auto;padding:6px 14px calc(20px + var(--safe-b));-webkit-overflow-scrolling:touch;}
   #galCats{display:flex;gap:8px;overflow-x:auto;padding:2px 0 12px;-webkit-overflow-scrolling:touch;}
@@ -377,6 +383,11 @@
   #idealBanner{display:none;margin:2px 2px 10px;padding:11px 13px;border:1px solid var(--line);border-radius:12px;font-size:13px;line-height:1.55;}
   #idealBanner b{color:var(--accent);}
   #idealBanner button{background:none;border:none;color:var(--ink-dim);font-size:12px;font-weight:700;padding:10px 8px;min-height:44px;}
+  #idealBanner .ibadge{display:inline-block;font-size:10.5px;font-weight:800;color:var(--ink-dim);
+    border:1px solid var(--line);border-radius:6px;padding:1px 6px;margin-left:7px;vertical-align:1px;}
+  .qdelta{background:rgba(244,162,89,.10);border:1px solid rgba(244,162,89,.4);border-radius:14px;
+    padding:12px 14px;margin-bottom:12px;font-size:12.5px;line-height:1.6;color:var(--ink-dim);}
+  .qdelta b{color:var(--ink);font-weight:700;}
   .qentry{width:100%;min-height:56px;border-radius:16px;border:1px solid var(--accent);background:rgba(79,209,197,.10);color:var(--accent);
     font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px;margin:0 0 12px;padding:10px 14px;line-height:1.4;text-align:center;}
   .qentry:active{transform:scale(.99);}
@@ -482,7 +493,7 @@
 </section>
 
 <section class="screen" id="single">
-  <div id="sStage">
+  <div id="sStage" tabindex="0" role="button" aria-describedby="sHint">
     <button class="icon-btn" id="sBack" aria-label="뒤로"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
     <div id="sName">카운터</div>
     <div id="sGoalRow"><div id="sGoalBar"><div id="sGoalFill"></div></div><span id="sGoalTxt"></span></div>
@@ -882,11 +893,15 @@
     <button class="act" id="btnWipe" style="color:var(--danger);border-color:var(--danger);">삭제</button>
   </div>
   <div class="settings-item">
+    <div class="si-ic"><svg viewBox="0 0 24 24"><path d="M5 12.5a7 7 0 0 1 14 0"/><path d="M8.5 15.5a3.5 3.5 0 0 1 7 0"/><path d="M12 19h.01"/></svg></div>
+    <div class="si-tx"><b>오프라인 사용</b><span id="swStatus">확인 중…</span></div>
+  </div>
+  <div class="settings-item">
     <div class="si-ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h8M8 13h5"/></svg></div>
     <div class="si-tx"><b>테스트 회신 코드</b><span id="rvPreview">체험 결과를 한 줄로 복사</span></div>
     <button class="act" id="btnRv">복사</button>
   </div>
-  <div style="text-align:center;font-size:11.5px;opacity:.55;margin-top:10px;" id="verBadge">OmniCounter v22.3</div>
+  <div style="text-align:center;font-size:11.5px;opacity:.55;margin-top:10px;" id="verBadge">OmniCounter v22.4</div>
   <div class="sheet-actions" style="margin-top:10px;"><button class="dock-btn primary" id="setClose" style="width:100%;justify-content:center;">닫기</button></div>
 </div>
 
@@ -1010,6 +1025,17 @@
   const CAT_I18N={ "운동·피트니스":"Fitness","건강·습관":"Health & Habits","공부·자기계발":"Study & Growth","마음챙김·절제":"Mindfulness","이어가기·경과":"Days Since","생활·업무":"Life & Work","게임·점수":"Games & Scores" };
   const TX_EN={
     "목표 템플릿":"Goal templates",
+    "관계":"Relationships","일":"Work",
+    "먼저 연락 주 3번":"Reach out 3× a week",
+    "고맙다고 말한 날 30일":"30 days of saying thanks",
+    "몰입 90분 하루 1블록":"One 90-min deep block a day",
+    "하루 마감 정리 21일":"Close the day · 21 days",
+    "번/주":"times/week","일/월":"days/month","블록/일":"blocks/day",
+    "안부를 먼저 묻는 사람":"someone who reaches out first",
+    "고마움을 말로 하는 사람":"someone who says thank you out loud",
+    "하루 한 번은 깊이 들어가는 사람":"someone who goes deep once a day",
+    "일을 두고 퇴근하는 사람":"someone who leaves work at work",
+    "오프라인 사용":"Offline use",
     "30초 진단":"30-second check",
     "무엇을 셀지 3문항으로 찾기":"Find what to count in 3 questions",
     "🧭 무엇을 세야 할지 모르겠다면 — 30초 진단":"🧭 Not sure what to count? — 30-second check",
@@ -1276,13 +1302,13 @@
   let LANG=(function(){ try{const s=localStorage.getItem("omni.lang"); if(s==="ko"||s==="en")return s;}catch(e){} return (String(navigator.language||"ko").toLowerCase().indexOf("ko")===0)?"ko":"en"; })();
   function t(k){ const d=I18N[LANG]||I18N.ko; return d[k]!==undefined? d[k] : (I18N.ko[k]!==undefined?I18N.ko[k]:k); }
   function catLabel(cat){ return LANG==="en" && CAT_I18N[cat] ? CAT_I18N[cat] : cat; }
-  function setLang(l){ if(l!=="ko"&&l!=="en")return; LANG=l; try{localStorage.setItem("omni.lang",l);}catch(e){} document.documentElement.setAttribute("lang",l); applyStaticI18n(); if(typeof rvRefresh==="function") rvRefresh(); if(typeof applyManifest==="function") applyManifest(); if(typeof updateQuizSummary==="function") updateQuizSummary(); if(typeof renderDash==="function") renderDash(); if(typeof renderQuiz==="function" && document.querySelector("#quiz.on")) renderQuiz(); if(typeof renderGallery==="function" && document.querySelector("#gallery.on")) renderGallery(); }
+  function setLang(l){ if(l!=="ko"&&l!=="en")return; LANG=l; try{localStorage.setItem("omni.lang",l);}catch(e){} document.documentElement.setAttribute("lang",l); applyStaticI18n(); if(typeof rvRefresh==="function") rvRefresh(); if(typeof applyManifest==="function") applyManifest(); if(typeof refreshSwStatus==="function") refreshSwStatus(); if(typeof updateQuizSummary==="function") updateQuizSummary(); if(typeof renderDash==="function") renderDash(); if(typeof renderQuiz==="function" && document.querySelector("#quiz.on")) renderQuiz(); if(typeof renderGallery==="function" && document.querySelector("#gallery.on")) renderGallery(); }
   function applyStaticI18n(){ document.querySelectorAll("[data-i18n]").forEach(el=>{ const k=el.getAttribute("data-i18n"); const v=t(k); if(v!==undefined) el.textContent=v; }); translateNodes(); }
   const COLORS=["#4FD1C5","#E5688A","#F4A259","#9B8CFB","#5FB0F0","#B7D66B"];
 
   /* ================= 데이터 ================= */
   const LS="omni.app.v3";
-  const SCHEMA_VERSION=3;        // v22.3: baseUnit 가산 (v22.2=baseline·idealText·templateId)
+  const SCHEMA_VERSION=4;        // v22.4: settings.quizHistory 가산 (v22.3=baseUnit · v22.2=baseline·idealText·templateId)
   const BACKUP_KEY=LS+".backup_v1";
   function backupKeyFor(from){ return from>=2 ? (BACKUP_KEY+"_s"+from) : BACKUP_KEY; }
   const AWARE_COLOR="#7B8794"; // v18: load()가 migrate에서 참조하므로 db=load() 이전에 선언(TDZ 데이터손실 버그 B-8 수정)
@@ -1296,7 +1322,17 @@
         return d;
       }
     }catch(e){}
-    return { counters:[], sessions:[], settings:{leftHanded:false,theme:"default"}, restDays:[] };
+    /* B-22(07-27·P2 수정): 신규 설치의 기본 객체가 현재 스키마를 담지 않아
+       ① 백업→복원 왕복이 바이트 안정적이지 않았고(복원 후 필드가 늘어남)
+       ② 신규 사용자가 첫 재로드마다 불필요한 마이그레이션 경로(백업 키 생성 포함)를 탔다.
+       결함 자체는 v22.4 이전부터 있었고, settings를 건드리는 첫 마이그레이션(s3→s4)이 이번에 드러냈다.
+       기본 객체를 처음부터 현재 스키마로 만든다. */
+    return blankDb();
+  }
+  function blankDb(){
+    return { counters:[], sessions:[],
+      settings:{leftHanded:false, theme:"default", quizHistory:[]},
+      restDays:[], schemaVersion:SCHEMA_VERSION };
   }
   function migrate(d){
     if(!d.sessions) d.sessions=[];
@@ -1330,6 +1366,9 @@
       }
       if(_from<3){                       // s2 → s3 : 시작점의 단위(정직한 이동률 판정용)
         d.counters.forEach(c=>{ if(c.baseUnit===undefined) c.baseUnit=""; });
+      }
+      if(_from<4){                       // s3 → s4 : 진단 이력(설정 측 가산 · 카운터 무변경)
+        if(!Array.isArray(d.settings.quizHistory)) d.settings.quizHistory=[];
       }
       if(d.counters.length!==before) throw new Error("migration counter count mismatch");
       d.schemaVersion=SCHEMA_VERSION;
@@ -1517,6 +1556,10 @@
           const pct=Math.min(100,Math.round(v/c.goal*100));
           goalHtml='<div class="cgoal">'+v+' / '+c.goal+(cyc!=="total"?" ("+cycLabel(cyc)+")":"")+'<span class="gbar"><span class="gfill" style="width:'+pct+'%;background:'+col+'"></span></span></div>';
         }
+        /* v22.4 W3-3: 현재→이상 이동률을 카드에도. 단위가 다르면 %를 지어내지 않는다(kind=ref). */
+        const mv=moveInfo(c);
+        if(mv) goalHtml+='<div class="cmove'+(mv.kind==="ref"?" ref":"")+'" title="'+esc(mv.note)+'">'+
+          (mv.kind==="pct"?("↗ "+mv.short):esc(mv.short))+'</div>';
         const dotHtml = (db.settings.theme==="growth")
           ? '<span style="margin-right:1px;">'+growthStage(c)+'</span>'
           : '<span class="dot" style="background:'+col+'"></span>';
@@ -1625,8 +1668,16 @@
     sCount.innerHTML=el.v+'<span style="font-size:.32em;"> '+el.u+'</span>';
     sGoalBar.style.display="none"; sGoalRow.classList.add("on"); sGoalRow.classList.remove("done");
     sGoalTxt.textContent=(LANG==="en"?"Best ":"최고 기록 ")+lg.v+lg.u;
+    updStageAria(c,el.v+el.u);
     updIdeal(c);
     sFreeze.innerHTML="";
+  }
+  function updStageAria(c,val){
+    if(!c||!sStage) return;
+    const nm=c.name||tx("카운터");
+    sStage.setAttribute("aria-label", LANG==="en"
+      ? (nm+", now "+val+". Press Enter to add one, Down arrow to subtract one.")
+      : (nm+", 현재 "+val+". Enter를 누르면 1 늘어나고, 아래 화살표를 누르면 1 줄어요."));
   }
   function renderSingle(){
     const c=byId(activeId); if(!c)return;
@@ -1638,6 +1689,7 @@
       sGoalFill.style.width=pct+"%"; sGoalFill.style.background=c.color;
       sGoalTxt.textContent=sVal+" / "+c.goal+(c.cycle&&c.cycle!=="total"?" ("+cycLabel(c.cycle)+")":"");
       sGoalRow.classList.toggle("done",sVal>=c.goal); } else sGoalRow.classList.remove("on","done");
+    updStageAria(c,sVal);
     if(c.type==="aware"){ sFreeze.innerHTML=""; }
     else{
       const daySet=new Set(c.events.filter(e=>e.d>0).map(e=>dayKey(e.t)));
@@ -1688,6 +1740,15 @@
     if(!moved&&dt<TAPMS)sInc(t.clientX,t.clientY);
   },{passive:true});
   sStage.addEventListener("click",e=>{if('ontouchstart'in window)return;if(e.target.closest("#sBack"))return;if(inTagRow(e.target))return;if(inDead(e.clientY))return;sInc(e.clientX,e.clientY);});
+  /* B-20(07-27·차단 P1 수정): 전체화면은 이 앱의 주 카운팅 화면인데 탭/클릭으로만 셀 수 있었다.
+     키보드 사용자는 여기서 아무것도 셀 수 없었다(대시보드 카드 버튼이라는 우회로만 존재).
+     Enter/Space=+1 · ArrowDown=−1. 하위 버튼에 포커스가 있을 땐 개입하지 않는다. */
+  sStage.addEventListener("keydown",e=>{
+    if(e.target!==sStage) return;
+    if(e.key==="Enter"||e.key===" "||e.key==="Spacebar"){ e.preventDefault(); sInc(null,null); return; }
+    if(e.key==="ArrowDown"){ e.preventDefault(); sDec(); return; }
+    if(e.key==="ArrowUp"){ e.preventDefault(); sInc(null,null); return; }
+  });
   $("#sBack").addEventListener("click",e=>{e.stopPropagation();clearInterval(sTimer);sTimer=null;renderDash();show("dash");});
 
   let lastUndo=null,snackTimer=null;const snack=$("#snack"),snackTxt=$("#snackTxt");
@@ -1908,7 +1969,7 @@
 
   /* ================= 설정 시트 (백업/복원) ================= */
   const setScrim=$("#setScrim"),setSheet=$("#setSheet");
-  $("#btnSettings").addEventListener("click",()=>{ updateAchSummary(); if(typeof updateQuizSummary==="function") updateQuizSummary(); if(typeof rvRefresh==="function") rvRefresh(); setScrim.classList.add("on"); setSheet.classList.add("on"); });
+  $("#btnSettings").addEventListener("click",()=>{ updateAchSummary(); if(typeof refreshSwStatus==="function") refreshSwStatus(); if(typeof updateQuizSummary==="function") updateQuizSummary(); if(typeof rvRefresh==="function") rvRefresh(); setScrim.classList.add("on"); setSheet.classList.add("on"); });
   $("#setClose").addEventListener("click",()=>{ setScrim.classList.remove("on"); setSheet.classList.remove("on"); });
   setScrim.addEventListener("click",()=>{ setScrim.classList.remove("on"); setSheet.classList.remove("on"); });
   $("#btnExport").addEventListener("click",()=>{
@@ -1938,7 +1999,10 @@
   $("#btnWipe").addEventListener("click",()=>{
     if(confirm("정말 모든 카운터와 기록을 삭제할까요? 삭제 후 잠시 동안 되돌릴 수 있어요.")){
       lastUndo={type:"wipe",db:JSON.parse(JSON.stringify(db))};
-      db={counters:[],sessions:[],settings:{leftHanded:db.settings.leftHanded,theme:db.settings.theme}}; save(); renderDash(); show("dash");
+      /* B-22: 전체 초기화도 현재 스키마로 재시작한다(restDays·schemaVersion 누락 방지). 사용자 선택인 왼손·테마만 승계. */
+      const keepL=db.settings.leftHanded, keepT=db.settings.theme;
+      db=blankDb(); db.settings.leftHanded=keepL; db.settings.theme=keepT;
+      save(); renderDash(); show("dash");
       setScrim.classList.remove("on"); setSheet.classList.remove("on");
       showSnack("전체 초기화됨",10000);
     }
@@ -2720,6 +2784,14 @@
   $("#obNext").addEventListener("click",()=>{ if(obIdx<OB_STEPS.length-1){ obGoto(obIdx+1); buzz(6); } else finishOb(); });
   $("#obBack").addEventListener("click",()=>{ if(obIdx>0){ obGoto(obIdx-1); buzz(6); } });
   $("#obSkip").addEventListener("click",finishOb);
+  obEl.addEventListener("keydown",e=>{
+    if(e.key!=="Tab") return;
+    const f=[...obEl.querySelectorAll("button")].filter(b=>b.offsetParent!==null);
+    if(!f.length) return;
+    const first=f[0], last=f[f.length-1];
+    if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+  });
   let obStX=0,obStY=0;
   obViewport.addEventListener("touchstart",e=>{ const t=e.touches[0]; obStX=t.clientX; obStY=t.clientY; },{passive:true});
   obViewport.addEventListener("touchend",e=>{
@@ -2731,7 +2803,13 @@
   },{passive:true});
   function maybeShowOnboarding(){
     let seen=false; try{ seen=!!localStorage.getItem(OB_KEY); }catch(e){}
-    if(!seen){ obIdx=0; renderOb(false); obEl.style.display="flex"; }
+    if(!seen){
+      obIdx=0; renderOb(false); obEl.style.display="flex";
+      /* B-21(07-27·P2 수정): 오버레이가 떠도 포커스가 뒤쪽 화면 요소들에 먼저 걸려,
+         키보드 사용자는 보이지 않는 버튼들을 한참 지나야 '건너뛰기'에 닿았다.
+         열 때 오버레이 안으로 포커스를 옮기고, Tab을 오버레이 안에서 순환시킨다. */
+      setTimeout(()=>{ try{ $("#obSkip").focus(); }catch(e){} },30);
+    }
   }
 
   /* ================= 스타터 갤러리 (v19) ================= */
@@ -2851,9 +2929,18 @@
     {id:"t_meditate10", e:"🧘", n:"명상 하루 10분", cat:"생활", type:"count", goal:10, cycle:"day", days:null,
       base:0, unit:"분/일", ideal:"하루 10분 멈출 줄 아는 사람", col:"#B7D66B"},
     {id:"t_morning21", e:"🌅", n:"미라클모닝 21일", cat:"생활", type:"count", goal:21, cycle:"total", days:21,
-      base:0, unit:"일/3주", ideal:"아침 6시 기상이 자연스러운 사람", col:"#5FB0F0"}
+      base:0, unit:"일/3주", ideal:"아침 6시 기상이 자연스러운 사람", col:"#5FB0F0"},
+    /* v22.4 W3-5: 진단 6영역 확장에 맞춘 관계·일 템플릿 4종 */
+    {id:"t_reachout3", e:"📞", n:"먼저 연락 주 3번", cat:"관계", type:"count", goal:3, cycle:"week", days:null,
+      base:1, unit:"번/주", ideal:"안부를 먼저 묻는 사람", col:"#E5688A"},
+    {id:"t_thanks30", e:"🙏", n:"고맙다고 말한 날 30일", cat:"관계", type:"count", goal:30, cycle:"total", days:30,
+      base:5, unit:"일/월", ideal:"고마움을 말로 하는 사람", col:"#F4A259"},
+    {id:"t_deepwork1", e:"🎯", n:"몰입 90분 하루 1블록", cat:"일", type:"count", goal:1, cycle:"day", days:null,
+      base:0, unit:"블록/일", ideal:"하루 한 번은 깊이 들어가는 사람", col:"#9B8CFB"},
+    {id:"t_shutdown21", e:"🌙", n:"하루 마감 정리 21일", cat:"일", type:"count", goal:21, cycle:"total", days:21,
+      base:3, unit:"일/3주", ideal:"일을 두고 퇴근하는 사람", col:"#4FD1C5"}
   ];
-  const TCATS=["전체","절제","건강","운동","공부","생활"];
+  const TCATS=["전체","절제","건강","운동","공부","생활","관계","일"];
   let gMode="tpl", tCat=0;
 
   function tplGoalLabel(p){
@@ -2990,6 +3077,16 @@
      ideals:[
        {id:"n1",ko:"쓰기 전에 한 번 멈추는 사람",en:"Someone who pauses before spending",tpl:["t_nospend30","t_sns14"]},
        {id:"n2",ko:"불필요한 소비가 줄어든 달",en:"A month with less unnecessary spending",tpl:["t_nospend30"]}
+     ]},
+    {id:"rel",e:"🤝",ko:"사람들과 멀어진 것 같아요",en:"I feel distant from people",koS:"가족 · 친구 · 표현",enS:"Family, friends, expression",
+     ideals:[
+       {id:"r1",ko:"안부를 먼저 묻는 사람",en:"Someone who reaches out first",tpl:["t_reachout3","t_thanks30"]},
+       {id:"r2",ko:"고마움이 표현되는 하루",en:"A day where gratitude gets said out loud",tpl:["t_thanks30","t_reachout3"]}
+     ]},
+    {id:"work",e:"💼",ko:"일에 끌려다녀요",en:"Work is dragging me around",koS:"집중 · 마감 · 경계",enS:"Focus, closure, boundaries",
+     ideals:[
+       {id:"w1",ko:"하루 한 번은 깊이 들어가는 사람",en:"Someone who goes deep once a day",tpl:["t_deepwork1","t_morning21"]},
+       {id:"w2",ko:"일을 두고 퇴근하는 사람",en:"Someone who leaves work at work",tpl:["t_shutdown21","t_meditate10"]}
      ]}
   ];
   const QUIZ_LEVELS=[
@@ -3010,7 +3107,11 @@
     t_books20:{ko:"1년 단위라 한 주 밀려도 회복되고, 완독의 리듬이 보여요.",en:"A yearly frame recovers from a slow week and reveals your finishing rhythm."},
     t_read20:{ko:"분 단위로 세면 '오늘은 읽었다'가 명확해져서 스트릭이 살아나요.",en:"Counting minutes makes 'I read today' unambiguous, so the streak survives."},
     t_meditate10:{ko:"길이보다 매일 여부가 중요해서, 10분이 유지하기 좋은 크기예요.",en:"Consistency matters more than length — 10 minutes is a size you can keep."},
-    t_morning21:{ko:"아침 기상 하나만 잡아도 하루 전체의 다른 지표가 따라와요.",en:"Fixing your wake-up alone pulls the rest of the day's metrics with it."}
+    t_morning21:{ko:"아침 기상 하나만 잡아도 하루 전체의 다른 지표가 따라와요.",en:"Fixing your wake-up alone pulls the rest of the day's metrics with it."},
+    t_reachout3:{ko:"관계는 마음이 아니라 횟수로 쌓여요. 주 3번이면 한 달에 12번이 됩니다.",en:"Relationships accrue in counts, not intentions — 3 a week is 12 a month."},
+    t_thanks30:{ko:"'말했는가'는 스스로도 헷갈리는데, 센 날은 헷갈리지 않아요.",en:"Whether you actually said it is fuzzy; the days you counted are not."},
+    t_deepwork1:{ko:"시간을 재면 죄책감이 남지만, 블록을 세면 하루가 끝나요.",en:"Timing yourself breeds guilt; counting blocks ends the day."},
+    t_shutdown21:{ko:"끝내는 의식이 있어야 일이 저녁까지 따라오지 않아요.",en:"A closing ritual is what stops work from following you into the evening."}
   };
   let qStep=0, qArea=null, qIdeal=null, qLevel=null;
   function qT(o){ return (LANG==="en"&&o.en!==undefined)?o.en:o.ko; }
@@ -3095,18 +3196,53 @@
       ? "The starting number comes from your answer, not from measurement. Open the counter and edit it in settings whenever it is off."
       : "시작 숫자는 답변에서 계산한 값이지 측정값이 아니에요. 카운터를 열어 설정에서 언제든 바꿀 수 있어요.";
     res.appendChild(note);
-    try{ db.settings.quiz={area:QUIZ_AREAS[qArea].id, ideal:d.id, idealKo:d.ko, idealEn:d.en, level:QUIZ_LEVELS[qLevel].id, at:Date.now()}; save(); }catch(e){}
+    try{
+      const prev=db.settings.quiz||null;
+      const cur={area:QUIZ_AREAS[qArea].id, ideal:d.id, idealKo:d.ko, idealEn:d.en, level:QUIZ_LEVELS[qLevel].id, at:Date.now()};
+      if(!Array.isArray(db.settings.quizHistory)) db.settings.quizHistory=[];
+      /* 같은 결과를 반복 저장하지 않는다 — 이력은 '바뀐 순간'만 담는다 */
+      const changed = !prev || prev.ideal!==cur.ideal || prev.level!==cur.level || prev.area!==cur.area;
+      if(prev && changed) db.settings.quizHistory.push(prev);
+      while(db.settings.quizHistory.length>20) db.settings.quizHistory.shift();
+      db.settings.quiz=cur; save();
+      if(prev && changed) mq("quiz_changed");
+    }catch(e){}
     mq("quiz_result");
+    renderQuizDelta();
   }
   function quizIdealText(){
     const q=db.settings&&db.settings.quiz; if(!q) return "";
     return (LANG==="en"&&q.idealEn)?q.idealEn:(q.idealKo||"");
   }
+  function quizPrev(){
+    const h=(db.settings&&db.settings.quizHistory)||[];
+    return h.length? h[h.length-1] : null;
+  }
+  function quizPrevText(){
+    const p=quizPrev(); if(!p) return "";
+    return (LANG==="en"&&p.idealEn)?p.idealEn:(p.idealKo||"");
+  }
+  /* 재진단으로 이상 상태가 바뀌었으면 결과 화면에 '무엇에서 무엇으로' 를 남긴다 */
+  function renderQuizDelta(){
+    const res=$("#quizResult"); if(!res) return;
+    const prevTxt=quizPrevText(); if(!prevTxt) return;
+    const curTxt=quizIdealText(); if(!curTxt||curTxt===prevTxt) return;
+    const box=document.createElement("div");
+    box.className="qdelta"; box.id="quizDelta";
+    const p=quizPrev();
+    const when=p&&p.at? new Date(p.at) : null;
+    const dstr=when? ((when.getMonth()+1)+"/"+when.getDate()) : "";
+    box.innerHTML=(LANG==="en"?"Changed from your last check":"지난 진단에서 바뀌었어요")+
+      (dstr?(" ("+dstr+")"):"")+"<br><b>"+esc(prevTxt)+"</b> → <b>"+esc(curTxt)+"</b>";
+    res.insertBefore(box,res.firstChild);
+  }
   function renderIdealBanner(){
     const el=$("#idealBanner"); if(!el) return;
     const txt=quizIdealText();
     if(!txt){ el.style.display="none"; el.innerHTML=""; return; }
-    el.innerHTML='🧭 '+(LANG==="en"?"My ideal: ":"내 이상 상태: ")+'<b>'+esc(txt)+'</b>'+
+    const hist=(db.settings&&db.settings.quizHistory)||[];
+    const histTag = hist.length ? ('<span class="ibadge">'+(LANG==="en"?("checked "+(hist.length+1)+"×"):("진단 "+(hist.length+1)+"회"))+'</span>') : "";
+    el.innerHTML='🧭 '+(LANG==="en"?"My ideal: ":"내 이상 상태: ")+'<b>'+esc(txt)+'</b>'+histTag+
       '<button id="idealRedo">'+(LANG==="en"?"Check again":"다시 진단")+'</button>';
     el.style.display="block";
     const b=$("#idealRedo"); if(b) b.addEventListener("click",()=>{ mq("quiz_redo"); openQuiz(); });
@@ -3139,6 +3275,51 @@
       mq("quiz_create");
       createFromTemplate(p,{baseline:quizBaselineFor(p)});
     });
+  }
+
+  /* ================= 서비스워커 오프라인 (v22.4 · W3-2) =================
+     정합성 규율: sw.js의 navigation 처리는 network-first다 — 새 배포가 즉시 도달한다.
+     캐시는 오프라인일 때만 쓰인다. 등록에 실패해도 앱은 그대로 동작한다(기능 저하만).
+     사용자에게는 '오프라인으로 열 수 있는 상태인지'를 사실대로만 알린다 — 되는 척하지 않는다. */
+  let SW_STATE={supported:false, registered:false, version:null, reason:""};
+  function swStatusText(){
+    if(!SW_STATE.supported) return LANG==="en"
+      ? "Not available in this browser — needs a network connection"
+      : "이 브라우저에선 쓸 수 없어요 — 인터넷 연결이 필요해요";
+    if(SW_STATE.registered) return LANG==="en"
+      ? ("Ready — opens without a network" + (SW_STATE.version?(" ("+SW_STATE.version+")"):""))
+      : ("준비됨 — 인터넷 없이도 열려요" + (SW_STATE.version?(" ("+SW_STATE.version+")"):""));
+    return LANG==="en"
+      ? ("Not set up yet — needs a network" + (SW_STATE.reason?(" · "+SW_STATE.reason):""))
+      : ("아직 준비 안 됨 — 인터넷이 필요해요" + (SW_STATE.reason?(" · "+SW_STATE.reason):""));
+  }
+  function refreshSwStatus(){ const el=$("#swStatus"); if(el) el.textContent=swStatusText(); }
+  function initServiceWorker(){
+    const okOrigin = location.protocol==="https:" ||
+      location.hostname==="localhost" || location.hostname==="127.0.0.1";
+    if(!("serviceWorker" in navigator)){ refreshSwStatus(); return; }
+    SW_STATE.supported=true;
+    if(!okOrigin){ SW_STATE.reason=(LANG==="en"?"insecure origin":"보안 연결 아님"); refreshSwStatus(); return; }
+    refreshSwStatus();
+    try{
+      navigator.serviceWorker.register("./sw.js").then(function(reg){
+        SW_STATE.registered=true; refreshSwStatus();
+        try{
+          navigator.serviceWorker.addEventListener("message",function(e){
+            if(e.data&&e.data.type==="OMNI_SW_VERSION"){ SW_STATE.version=e.data.version; refreshSwStatus(); }
+          });
+          const ask=function(){ if(navigator.serviceWorker.controller) navigator.serviceWorker.controller.postMessage("OMNI_SW_VERSION"); };
+          ask(); navigator.serviceWorker.addEventListener("controllerchange",ask); setTimeout(ask,900);
+        }catch(e){}
+        mq("sw_ready");
+      }).catch(function(){
+        SW_STATE.registered=false;
+        SW_STATE.reason=(LANG==="en"?"registration blocked":"등록이 막혔어요");
+        refreshSwStatus();
+      });
+    }catch(e){
+      SW_STATE.reason=(LANG==="en"?"registration blocked":"등록이 막혔어요"); refreshSwStatus();
+    }
   }
 
   /* ================= PWA manifest 현지화 (v22.3) =================
@@ -3534,6 +3715,7 @@
   document.documentElement.setAttribute("lang",LANG);
   applyStaticI18n(); syncLangSeg();
   applyManifest();
+  initServiceWorker();
   wireQuiz();
   updateQuizSummary();
   updateCommaInfo();
