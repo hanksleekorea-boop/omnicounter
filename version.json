@@ -1,7 +1,7 @@
 {
-  "version": "v22.4",
-  "sha256": "c845f02470311ba31b462564946bce47a09c8567a680119c23b19f6175438c37",
-  "bytes": 247814,
+  "version": "v22.5",
+  "sha256": "f5fe0bf224417865f25bd7fcccde801946de0743b15ac829a20725927e5ad941",
+  "bytes": 267180,
   "released": "2026-07-27",
   "markers": [
     "#verBadge",
@@ -14,9 +14,14 @@
     "#galModeSeg",
     "#btnRv",
     "#sIdeal",
-    "sStage[tabindex]"
+    "sStage[tabindex]",
+    "#portfolio",
+    "#btnPortfolio",
+    "#pfHonesty",
+    "#pfHeat"
   ],
   "schemaVersion": 4,
   "serviceWorker": "sw.js (navigation=network-first)",
-  "notes": "서비스워커 오프라인 + 대시보드 이동률 + 진단 재진단 이력 + 진단 6영역·템플릿 16종 + 키보드 관통(B-20/B-21 수정)"
+  "templates": 24,
+  "notes": "인생 지표 포트폴리오 화면 + 템플릿 24종 + 성능 2차(전송크기·저사양CPU) + SW 킬스위치 리허설 + B-23/B-24 수정"
 }

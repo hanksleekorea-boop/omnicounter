@@ -18,7 +18,7 @@
  */
 "use strict";
 
-const VERSION = "v22.4";
+const VERSION = "v22.5";
 const CACHE = "omni-" + VERSION;
 const PRECACHE = ["./", "./index.html"];
 

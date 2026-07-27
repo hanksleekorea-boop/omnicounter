@@ -391,6 +391,34 @@
   .qentry{width:100%;min-height:56px;border-radius:16px;border:1px solid var(--accent);background:rgba(79,209,197,.10);color:var(--accent);
     font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px;margin:0 0 12px;padding:10px 14px;line-height:1.4;text-align:center;}
   .qentry:active{transform:scale(.99);}
+  /* ===== 인생 지표 포트폴리오 (v22.5 · W4-1) ===== */
+  #portfolioScroll{flex:1;overflow-y:auto;padding:6px 14px calc(20px + var(--safe-b));-webkit-overflow-scrolling:touch;}
+  .pfcard{background:var(--bg-card);border:1px solid var(--line);border-radius:16px;padding:14px;margin:0 0 12px;}
+  .pfh{font-size:13px;font-weight:700;color:var(--ink);margin:0 0 8px;display:flex;align-items:center;gap:6px;}
+  .pfsub{font-size:12px;color:var(--ink-dim);line-height:1.6;}
+  .pfstats{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 12px;}
+  .pfstat{flex:1 1 90px;background:var(--bg-card);border:1px solid var(--line);border-radius:14px;padding:12px 10px;text-align:center;}
+  .pfstat b{display:block;font-size:22px;font-weight:800;line-height:1.15;color:var(--ink);font-variant-numeric:tabular-nums;}
+  .pfstat span{display:block;font-size:11px;color:var(--ink-dim);margin-top:3px;}
+  .pfarea{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--line);}
+  .pfarea:first-of-type{border-top:0;}
+  .pfae{font-size:20px;width:26px;text-align:center;flex:0 0 auto;}
+  .pfan{flex:1;min-width:0;}
+  .pfan i{display:block;font-style:normal;font-size:13.5px;font-weight:600;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .pfan u{display:block;text-decoration:none;font-size:11.5px;color:var(--ink-dim);margin-top:2px;}
+  .pfbarwrap{flex:0 0 84px;}
+  .pfbar{height:7px;border-radius:4px;background:var(--line);overflow:hidden;}
+  .pfbar i{display:block;height:100%;border-radius:4px;background:var(--accent);}
+  .pfpct{font-size:11px;color:var(--ink-dim);text-align:right;margin-top:3px;font-variant-numeric:tabular-nums;}
+  .pfempty{opacity:.5;}
+  .pfheat{display:grid;grid-template-columns:repeat(14,1fr);gap:4px;}
+  .pfheat i{display:block;aspect-ratio:1;border-radius:3px;background:var(--line);}
+  .pfheat i[data-lv="1"]{background:rgba(79,209,197,.35);}
+  .pfheat i[data-lv="2"]{background:rgba(79,209,197,.65);}
+  .pfheat i[data-lv="3"]{background:var(--accent);}
+  #pfFoot{padding:12px 14px calc(14px + var(--safe-b));background:linear-gradient(to top,var(--bg) 55%,transparent);}
+  #pfQuizBtn{width:100%;min-height:52px;border-radius:16px;border:1px solid var(--accent);background:rgba(79,209,197,.10);color:var(--accent);font-size:14px;font-weight:700;}
+  .pfnote{font-size:11.5px;color:var(--ink-dim);line-height:1.65;}
 </style>
 </head>
 <body>
@@ -410,6 +438,12 @@
     </div>
     <div id="retroSlot"></div>
     <div id="idealBanner"></div>
+    <!-- B-24(v22.5): 헤더에 44px 아이콘을 4개 두면 320~360px 폭에서 설정 버튼이 화면 밖으로 밀려
+         **탭 자체가 불가능**해졌다(모바일 QA MA-5·MA-7에서 검출). 터치 목표를 줄이는 대신
+         진입점을 본문으로 옮긴다 — 커버리지 요약이 함께 보여 발견성도 더 낫다. -->
+    <button class="qentry" id="btnPortfolio" data-testid="btn-portfolio" style="margin:2px 2px 10px;min-height:52px;font-size:13.5px;">
+      <span id="pfMiniLabel">📊 인생 지표 포트폴리오</span><span id="pfMini" style="opacity:.8;font-weight:600;"></span>
+    </button>
     <div id="backupNudge" style="display:none;margin:2px 2px 10px;padding:10px 12px;border:1px solid var(--line,#2a3242);border-radius:12px;font-size:13px;line-height:1.6;"></div>
     <div id="brief" style="display:none;margin:2px 2px 10px;padding:10px 12px;border:1px solid var(--line,#2a3242);border-radius:12px;font-size:13.5px;line-height:1.5;"></div>
     <div class="grid" id="grid"></div>
@@ -471,6 +505,23 @@
     <div id="galGrid"></div>
   </div>
   <div id="galFoot"><button id="galAdd" disabled>카운터를 선택하세요</button></div>
+</section>
+
+<section class="screen" id="portfolio">
+  <div class="hdr">
+    <button class="icon-btn" id="pfBack" aria-label="뒤로"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <h1 style="font-size:20px;">인생 지표 포트폴리오</h1>
+  </div>
+  <div id="portfolioScroll">
+    <div class="gintro" id="pfIntro">지금 세고 있는 지표들이 내 삶의 어느 영역에 몰려 있고, 어디가 비어 있는지 보여줘요. 계산할 수 없는 값은 지어내지 않고 아래에 그대로 적어요.</div>
+    <div id="pfEmpty" style="display:none;"></div>
+    <div class="pfstats" id="pfSummary"></div>
+    <div class="pfcard" id="pfCoverage"></div>
+    <div class="pfcard" id="pfAreas"></div>
+    <div class="pfcard" id="pfHeat"></div>
+    <div class="pfcard" id="pfHonesty"></div>
+  </div>
+  <div id="pfFoot"><button id="pfQuizBtn" data-testid="pf-quiz">🧭 비어 있는 영역 진단하기</button></div>
 </section>
 
 <section class="screen" id="quiz">
@@ -901,7 +952,7 @@
     <div class="si-tx"><b>테스트 회신 코드</b><span id="rvPreview">체험 결과를 한 줄로 복사</span></div>
     <button class="act" id="btnRv">복사</button>
   </div>
-  <div style="text-align:center;font-size:11.5px;opacity:.55;margin-top:10px;" id="verBadge">OmniCounter v22.4</div>
+  <div style="text-align:center;font-size:11.5px;opacity:.55;margin-top:10px;" id="verBadge">OmniCounter v22.5</div>
   <div class="sheet-actions" style="margin-top:10px;"><button class="dock-btn primary" id="setClose" style="width:100%;justify-content:center;">닫기</button></div>
 </div>
 
@@ -1025,6 +1076,36 @@
   const CAT_I18N={ "운동·피트니스":"Fitness","건강·습관":"Health & Habits","공부·자기계발":"Study & Growth","마음챙김·절제":"Mindfulness","이어가기·경과":"Days Since","생활·업무":"Life & Work","게임·점수":"Games & Scores" };
   const TX_EN={
     "목표 템플릿":"Goal templates",
+    /* v22.5 W4-2 템플릿 8종 */
+    "스트레칭 하루 10분":"Stretch 10 min a day",
+    "정해진 시간에 잔 날 21일":"21 days of a fixed bedtime",
+    "배달 안 시킨 날 30일":"30 no-delivery days",
+    "카페 안 간 날 20일":"20 no-cafe days",
+    "외국어 하루 20분":"20 min of a language a day",
+    "감사일기 21일":"Gratitude journal · 21 days",
+    "가족 식사 주 3번":"Family meals 3× a week",
+    "메일함 비운 날 21일":"21 days of an empty inbox",
+    "굳지 않은 몸으로 잠드는 밤":"nights you fall asleep unstiff",
+    "같은 시간에 잠드는 사람":"someone who falls asleep at the same hour",
+    "차려 먹는 게 기본인 사람":"someone for whom cooking is the default",
+    "커피값이 새지 않는 달":"a month where coffee money stops leaking",
+    "매일 조금씩 말이 트이는 사람":"someone who speaks a little more each day",
+    "좋았던 걸 기억하는 하루":"a day you remember what was good",
+    "같이 밥 먹는 저녁이 있는 주":"a week with dinners eaten together",
+    "받은편지함이 비어 있는 퇴근":"leaving work with an empty inbox",
+    /* v22.5 W4-1 포트폴리오 */
+    "인생 지표 포트폴리오":"Life metric portfolio",
+    "포트폴리오":"Portfolio",
+    "아직 세고 있는 지표가 없어요":"You are not counting anything yet",
+    "카운터를 하나 만들면 여기에 내 삶의 지도가 그려져요.":"Create one counter and your life map starts drawing itself here.",
+    "영역 커버리지":"Area coverage",
+    "비어 있는 영역":"Empty areas",
+    "직접 만든 카운터":"Counters you made yourself",
+    "최근 28일 기록":"Last 28 days",
+    "집계하지 않은 것":"What was not computed",
+    "🧭 비어 있는 영역 진단하기":"🧭 Diagnose an empty area",
+    "카운터":"counters","기록":"records","최근 7일":"last 7 days",
+    "이동률 산출 불가":"movement % not computable",
     "관계":"Relationships","일":"Work",
     "먼저 연락 주 3번":"Reach out 3× a week",
     "고맙다고 말한 날 30일":"30 days of saying thanks",
@@ -1481,6 +1562,7 @@
     if(LANG==="en") translateNodes();
     const scroller=el.querySelector('[id$="Scroll"], #dashScroll, #statScroll');
     if(scroller) scroller.scrollTop=0;
+    if(name==="dash" && typeof updatePfMini==="function") updatePfMini();
   }
 
   /* ================= 회고 카드 (RT-02) ================= */
@@ -2938,7 +3020,24 @@
     {id:"t_deepwork1", e:"🎯", n:"몰입 90분 하루 1블록", cat:"일", type:"count", goal:1, cycle:"day", days:null,
       base:0, unit:"블록/일", ideal:"하루 한 번은 깊이 들어가는 사람", col:"#9B8CFB"},
     {id:"t_shutdown21", e:"🌙", n:"하루 마감 정리 21일", cat:"일", type:"count", goal:21, cycle:"total", days:21,
-      base:3, unit:"일/3주", ideal:"일을 두고 퇴근하는 사람", col:"#4FD1C5"}
+      base:3, unit:"일/3주", ideal:"일을 두고 퇴근하는 사람", col:"#4FD1C5"},
+    /* v22.5 W4-2: 진단 6영역 중 추천 후보가 2개뿐이던 경로를 3개로 채우는 8종 */
+    {id:"t_stretch10", e:"🤸", n:"스트레칭 하루 10분", cat:"운동", type:"count", goal:10, cycle:"day", days:null,
+      base:0, unit:"분/일", ideal:"굳지 않은 몸으로 잠드는 밤", col:"#B7D66B"},
+    {id:"t_sleep21", e:"😴", n:"정해진 시간에 잔 날 21일", cat:"생활", type:"count", goal:21, cycle:"total", days:21,
+      base:4, unit:"일/3주", ideal:"같은 시간에 잠드는 사람", col:"#5FB0F0"},
+    {id:"t_nodelivery", e:"🥡", n:"배달 안 시킨 날 30일", cat:"절제", type:"count", goal:30, cycle:"total", days:30,
+      base:12, unit:"일/월", ideal:"차려 먹는 게 기본인 사람", col:"#E5688A"},
+    {id:"t_nocafe20", e:"☕", n:"카페 안 간 날 20일", cat:"절제", type:"count", goal:20, cycle:"total", days:20,
+      base:6, unit:"일/월", ideal:"커피값이 새지 않는 달", col:"#F4A259"},
+    {id:"t_english20", e:"🗣", n:"외국어 하루 20분", cat:"공부", type:"count", goal:20, cycle:"day", days:null,
+      base:3, unit:"분/일", ideal:"매일 조금씩 말이 트이는 사람", col:"#9B8CFB"},
+    {id:"t_gratitude21", e:"✍", n:"감사일기 21일", cat:"생활", type:"count", goal:21, cycle:"total", days:21,
+      base:2, unit:"일/3주", ideal:"좋았던 걸 기억하는 하루", col:"#4FD1C5"},
+    {id:"t_familymeal3", e:"🍚", n:"가족 식사 주 3번", cat:"관계", type:"count", goal:3, cycle:"week", days:null,
+      base:1, unit:"번/주", ideal:"같이 밥 먹는 저녁이 있는 주", col:"#E5688A"},
+    {id:"t_inbox21", e:"📥", n:"메일함 비운 날 21일", cat:"일", type:"count", goal:21, cycle:"total", days:21,
+      base:5, unit:"일/3주", ideal:"받은편지함이 비어 있는 퇴근", col:"#9B8CFB"}
   ];
   const TCATS=["전체","절제","건강","운동","공부","생활","관계","일"];
   let gMode="tpl", tCat=0;
@@ -3060,33 +3159,33 @@
   const QUIZ_AREAS=[
     {id:"body",e:"💪",ko:"몸이 무거워요",en:"My body feels heavy",koS:"체력 · 활동량 · 컨디션",enS:"Stamina, activity, condition",
      ideals:[
-       {id:"b1",ko:"계단이 가볍고 매일 움직이는 몸",en:"A body that moves daily and takes stairs easily",tpl:["t_walk8000","t_squat50","t_run5k"]},
-       {id:"b2",ko:"물과 아침이 규칙적인 하루",en:"A day with regular water and mornings",tpl:["t_water8","t_morning21"]}
+       {id:"b1",ko:"계단이 가볍고 매일 움직이는 몸",en:"A body that moves daily and takes stairs easily",tpl:["t_walk8000","t_squat50","t_stretch10","t_run5k"]},
+       {id:"b2",ko:"물과 아침이 규칙적인 하루",en:"A day with regular water and mornings",tpl:["t_water8","t_morning21","t_sleep21"]}
      ]},
     {id:"mind",e:"🧘",ko:"끊고 싶은 게 있어요",en:"There is something I want to quit",koS:"담배 · 술 · SNS",enS:"Smoking, alcohol, social media",
      ideals:[
        {id:"m1",ko:"담배·술 없이도 편안한 저녁",en:"Evenings that feel fine without smoking or drinking",tpl:["t_smoke30","t_sober21"]},
-       {id:"m2",ko:"화면보다 눈앞이 먼저인 하루",en:"A day where what is in front of me comes first",tpl:["t_sns14","t_meditate10"]}
+       {id:"m2",ko:"화면보다 눈앞이 먼저인 하루",en:"A day where what is in front of me comes first",tpl:["t_sns14","t_meditate10","t_gratitude21"]}
      ]},
     {id:"grow",e:"📚",ko:"성장이 멈춘 것 같아요",en:"I feel like I stopped growing",koS:"공부 · 독서 · 아침 루틴",enS:"Study, reading, morning routine",
      ideals:[
-       {id:"g1",ko:"매일 책과 함께하는 사람",en:"Someone who reads every day",tpl:["t_read20","t_books20"]},
-       {id:"g2",ko:"아침이 내 것인 하루",en:"Mornings that belong to me",tpl:["t_morning21","t_meditate10"]}
+       {id:"g1",ko:"매일 책과 함께하는 사람",en:"Someone who reads every day",tpl:["t_read20","t_books20","t_english20"]},
+       {id:"g2",ko:"아침이 내 것인 하루",en:"Mornings that belong to me",tpl:["t_morning21","t_meditate10","t_sleep21"]}
      ]},
     {id:"money",e:"💰",ko:"돈이 새는 것 같아요",en:"Money keeps slipping away",koS:"지출 · 소비 습관",enS:"Spending habits",
      ideals:[
-       {id:"n1",ko:"쓰기 전에 한 번 멈추는 사람",en:"Someone who pauses before spending",tpl:["t_nospend30","t_sns14"]},
-       {id:"n2",ko:"불필요한 소비가 줄어든 달",en:"A month with less unnecessary spending",tpl:["t_nospend30"]}
+       {id:"n1",ko:"쓰기 전에 한 번 멈추는 사람",en:"Someone who pauses before spending",tpl:["t_nospend30","t_sns14","t_nocafe20"]},
+       {id:"n2",ko:"불필요한 소비가 줄어든 달",en:"A month with less unnecessary spending",tpl:["t_nospend30","t_nodelivery","t_nocafe20"]}
      ]},
     {id:"rel",e:"🤝",ko:"사람들과 멀어진 것 같아요",en:"I feel distant from people",koS:"가족 · 친구 · 표현",enS:"Family, friends, expression",
      ideals:[
-       {id:"r1",ko:"안부를 먼저 묻는 사람",en:"Someone who reaches out first",tpl:["t_reachout3","t_thanks30"]},
-       {id:"r2",ko:"고마움이 표현되는 하루",en:"A day where gratitude gets said out loud",tpl:["t_thanks30","t_reachout3"]}
+       {id:"r1",ko:"안부를 먼저 묻는 사람",en:"Someone who reaches out first",tpl:["t_reachout3","t_thanks30","t_familymeal3"]},
+       {id:"r2",ko:"고마움이 표현되는 하루",en:"A day where gratitude gets said out loud",tpl:["t_thanks30","t_reachout3","t_gratitude21"]}
      ]},
     {id:"work",e:"💼",ko:"일에 끌려다녀요",en:"Work is dragging me around",koS:"집중 · 마감 · 경계",enS:"Focus, closure, boundaries",
      ideals:[
        {id:"w1",ko:"하루 한 번은 깊이 들어가는 사람",en:"Someone who goes deep once a day",tpl:["t_deepwork1","t_morning21"]},
-       {id:"w2",ko:"일을 두고 퇴근하는 사람",en:"Someone who leaves work at work",tpl:["t_shutdown21","t_meditate10"]}
+       {id:"w2",ko:"일을 두고 퇴근하는 사람",en:"Someone who leaves work at work",tpl:["t_shutdown21","t_meditate10","t_inbox21"]}
      ]}
   ];
   const QUIZ_LEVELS=[
@@ -3111,7 +3210,15 @@
     t_reachout3:{ko:"관계는 마음이 아니라 횟수로 쌓여요. 주 3번이면 한 달에 12번이 됩니다.",en:"Relationships accrue in counts, not intentions — 3 a week is 12 a month."},
     t_thanks30:{ko:"'말했는가'는 스스로도 헷갈리는데, 센 날은 헷갈리지 않아요.",en:"Whether you actually said it is fuzzy; the days you counted are not."},
     t_deepwork1:{ko:"시간을 재면 죄책감이 남지만, 블록을 세면 하루가 끝나요.",en:"Timing yourself breeds guilt; counting blocks ends the day."},
-    t_shutdown21:{ko:"끝내는 의식이 있어야 일이 저녁까지 따라오지 않아요.",en:"A closing ritual is what stops work from following you into the evening."}
+    t_shutdown21:{ko:"끝내는 의식이 있어야 일이 저녁까지 따라오지 않아요.",en:"A closing ritual is what stops work from following you into the evening."},
+    t_stretch10:{ko:"장비도 갈아입을 옷도 필요 없어서, 가장 바쁜 날에도 채울 수 있는 크기예요.",en:"No gear, no changing clothes — a size you can still fill on your busiest day."},
+    t_sleep21:{ko:"잠든 시각은 하루의 마지막 선택이라, 이것 하나로 앞의 지표들이 같이 정리돼요.",en:"Bedtime is the last choice of the day — fixing it tidies the metrics before it."},
+    t_nodelivery:{ko:"금액을 세면 죄책감이 남지만, '안 시킨 날'을 세면 성과가 남아요.",en:"Counting the amount breeds guilt; counting the days you skipped leaves a win."},
+    t_nocafe20:{ko:"하루 한 번의 작은 지출이라 수치로 보기 전까지는 새는 줄 모르는 돈이에요.",en:"A once-a-day small spend — invisible money until you see it as a number."},
+    t_english20:{ko:"실력은 재기 어렵지만 분은 재기 쉬워서, 느린 날에도 이어질 수 있어요.",en:"Skill is hard to measure, minutes are not — so it survives the slow weeks."},
+    t_gratitude21:{ko:"기분은 흐릿하게 남지만 적은 날은 정확해서, 나중에 다시 읽힐 수 있어요.",en:"Moods blur, written days do not — and you can read them back later."},
+    t_familymeal3:{ko:"마음이 아니라 약속으로 생기는 일이라, 숫자로 잡아두면 지켜져요.",en:"It happens by appointment, not by intention — a number is what keeps it."},
+    t_inbox21:{ko:"'오늘 일을 끝냈다'는 느낌을 확인 가능한 상태 하나로 바꿔 줘요.",en:"It converts 'I think I am done' into one state you can actually check."}
   };
   let qStep=0, qArea=null, qIdeal=null, qLevel=null;
   function qT(o){ return (LANG==="en"&&o.en!==undefined)?o.en:o.ko; }
@@ -3158,6 +3265,146 @@
       opts.appendChild(b);
     });
   }
+  /* ================= v22.5 W4-1: 인생 지표 포트폴리오 =================
+     정직 규율(G3): 계산할 수 없는 값은 0이나 평균으로 채우지 않는다.
+     - 이동률은 moveInfo(c).kind==="pct" 인 카운터만 평균에 넣는다.
+     - 산출 불가 건수는 화면에 그대로 적는다.
+     - 영역 매핑의 정의처는 QUIZ_AREAS 하나뿐이다(계약 단일 정의처). 여기서 하드코딩하지 않는다. */
+  const TPL_AREA=(function(){ const m={};
+    QUIZ_AREAS.forEach(a=>a.ideals.forEach(d=>d.tpl.forEach(t=>{ if(!m[t]) m[t]=a.id; })));
+    return m; })();
+  function areaOf(c){
+    if(!c.templateId) return null;                 // 직접 만든 카운터 = 영역 미상. 추측하지 않는다.
+    return TPL_AREA[c.templateId] || null;
+  }
+  function pfDayKey(t){ const d=new Date(t); d.setHours(0,0,0,0); return d.getTime(); }
+  function pfCollect(){
+    const now=Date.now(), d7=now-7*864e5;
+    const byArea={}; QUIZ_AREAS.forEach(a=>{ byArea[a.id]={a:a,cs:[],ev:0,ev7:0,pcts:[],noPct:0}; });
+    let custom={cs:[],ev:0,ev7:0}, totalEv=0, ev7=0, noPctTotal=0;
+    db.counters.forEach(c=>{
+      const evs=(c.events||[]).filter(e=>e.d>0);
+      const n=evs.reduce((s,e)=>s+e.d,0);
+      const n7=evs.filter(e=>e.t>=d7).reduce((s,e)=>s+e.d,0);
+      totalEv+=n; ev7+=n7;
+      const ar=areaOf(c);
+      if(ar&&byArea[ar]){
+        const b=byArea[ar]; b.cs.push(c); b.ev+=n; b.ev7+=n7;
+        const mv=moveInfo(c);
+        if(mv&&mv.kind==="pct"&&typeof mv.pct==="number") b.pcts.push(mv.pct);
+        else { b.noPct++; noPctTotal++; }
+      }else{
+        custom.cs.push(c); custom.ev+=n; custom.ev7+=n7;
+        const mv=moveInfo(c);
+        if(!(mv&&mv.kind==="pct")) noPctTotal++;
+      }
+    });
+    const days=[]; const t0=pfDayKey(now);
+    for(let i=27;i>=0;i--) days.push({k:t0-i*864e5,n:0});
+    const dmap={}; days.forEach(d=>dmap[d.k]=d);
+    db.counters.forEach(c=>(c.events||[]).forEach(e=>{ if(e.d>0){ const k=pfDayKey(e.t); if(dmap[k]) dmap[k].n+=e.d; } }));
+    const covered=QUIZ_AREAS.filter(a=>byArea[a.id].cs.length>0).length;
+    return {byArea:byArea,custom:custom,totalEv:totalEv,ev7:ev7,days:days,
+            covered:covered,total:QUIZ_AREAS.length,noPctTotal:noPctTotal,
+            counters:db.counters.length,activeDays:days.filter(d=>d.n>0).length};
+  }
+  function pfAvg(arr){ return arr.length? Math.round(arr.reduce((s,v)=>s+v,0)/arr.length) : null; }
+  function renderPortfolio(){
+    const P=pfCollect(), EN=(LANG==="en");
+    const hEl=document.querySelector("#portfolio .hdr h1");
+    if(hEl) hEl.textContent = EN ? "Life metric portfolio" : "인생 지표 포트폴리오";
+    const inEl=$("#pfIntro");
+    if(inEl) inEl.textContent = EN
+      ? "This shows which areas of your life your metrics cluster in, and which are empty. Anything that cannot be computed is written out below instead of invented."
+      : "지금 세고 있는 지표들이 내 삶의 어느 영역에 몰려 있고, 어디가 비어 있는지 보여줘요. 계산할 수 없는 값은 지어내지 않고 아래에 그대로 적어요.";
+    const qEl=$("#pfQuizBtn");
+    if(qEl) qEl.textContent = EN ? "\uD83E\uDDED Diagnose an empty area" : "\uD83E\uDDED 비어 있는 영역 진단하기";
+    const bkEl=$("#pfBack");
+    if(bkEl) bkEl.setAttribute("aria-label", EN?"Back":"뒤로");
+    const emp=$("#pfEmpty");
+    const hasAny=P.counters>0;
+    ["#pfSummary","#pfCoverage","#pfAreas","#pfHeat","#pfHonesty"].forEach(s=>{ const el=$(s); if(el) el.style.display=hasAny?"":"none"; });
+    if(!hasAny){
+      emp.style.display="block";
+      emp.className="pfcard"; emp.setAttribute("data-testid","pf-empty");
+      emp.innerHTML='<div class="pfh">'+esc(EN?"You are not counting anything yet":"아직 세고 있는 지표가 없어요")+'</div>'+
+        '<div class="pfsub">'+esc(EN?"Create one counter and your life map starts drawing itself here.":"카운터를 하나 만들면 여기에 내 삶의 지도가 그려져요.")+'</div>';
+      return;
+    }
+    emp.style.display="none";
+    /* B-23(v22.5): 이 화면의 정적 문구는 translateNodes 사전에 기대지 않고 여기서 직접 세팅한다.
+       사전 누락이 곧 미번역 잔존으로 새는 경로를 없앤다(골든 8). */
+    /* 요약 4칸 */
+    $("#pfSummary").innerHTML=
+      '<div class="pfstat" data-testid="pf-s-counters"><b>'+P.counters+'</b><span>'+esc(EN?"counters":"카운터")+'</span></div>'+
+      '<div class="pfstat" data-testid="pf-s-records"><b>'+P.totalEv+'</b><span>'+esc(EN?"records":"기록")+'</span></div>'+
+      '<div class="pfstat" data-testid="pf-s-week"><b>'+P.ev7+'</b><span>'+esc(EN?"last 7 days":"최근 7일")+'</span></div>'+
+      '<div class="pfstat" data-testid="pf-s-cover"><b>'+P.covered+'/'+P.total+'</b><span>'+esc(EN?"areas":"영역")+'</span></div>';
+    /* 커버리지 */
+    const emptyAreas=QUIZ_AREAS.filter(a=>P.byArea[a.id].cs.length===0);
+    $("#pfCoverage").innerHTML=
+      '<div class="pfh">'+esc(EN?"Area coverage":"영역 커버리지")+'</div>'+
+      '<div class="pfsub" data-testid="pf-coverage">'+
+        (emptyAreas.length===0
+          ? esc(EN?"All six areas have at least one metric. From here, depth matters more than breadth.":"여섯 영역 모두 지표가 하나 이상 있어요. 이제는 넓이보다 깊이예요.")
+          : esc(EN?("Empty areas: "):("비어 있는 영역: "))+emptyAreas.map(a=>esc(a.e+" "+(EN?a.en:a.ko))).join(" · ")+
+            '<br>'+esc(EN?"An empty area is not a failure — it only means nothing is measured there yet.":"비어 있다고 나쁜 게 아니에요. 그 영역은 아직 재고 있지 않다는 뜻일 뿐이에요."))+
+      '</div>';
+    /* 영역별 */
+    let ah='<div class="pfh">'+esc(EN?"By area":"영역별")+'</div>';
+    QUIZ_AREAS.forEach(a=>{
+      const b=P.byArea[a.id], avg=pfAvg(b.pcts), on=b.cs.length>0;
+      const sub = !on ? esc(EN?"nothing counted yet":"아직 세는 것 없음")
+        : (b.cs.length+esc(EN?" counters":"개")+" · "+b.ev+esc(EN?" records":"회")+
+           (b.noPct? (" · "+b.noPct+esc(EN?" without %":"건 %산출 불가")) : ""));
+      ah+='<div class="pfarea'+(on?"":" pfempty")+'" data-area="'+a.id+'" data-testid="pf-area-'+a.id+'">'+
+          '<span class="pfae">'+a.e+'</span>'+
+          '<span class="pfan"><i>'+esc(EN?a.en:a.ko)+'</i><u>'+sub+'</u></span>'+
+          '<span class="pfbarwrap"><span class="pfbar"><i style="width:'+(avg==null?0:avg)+'%"></i></span>'+
+          '<span class="pfpct" data-testid="pf-pct-'+a.id+'">'+(avg==null?esc(EN?"—":"—"):(avg+"%"))+'</span></span>'+
+        '</div>';
+    });
+    if(P.custom.cs.length){
+      ah+='<div class="pfarea" data-testid="pf-area-custom"><span class="pfae">\u270E</span>'+
+          '<span class="pfan"><i>'+esc(EN?"Counters you made yourself":"직접 만든 카운터")+'</i>'+
+          '<u>'+P.custom.cs.length+esc(EN?" counters":"개")+" · "+P.custom.ev+esc(EN?" records":"회")+'</u></span>'+
+          '<span class="pfbarwrap"><span class="pfpct">'+esc(EN?"no area":"영역 미상")+'</span></span></div>';
+    }
+    $("#pfAreas").innerHTML=ah;
+    /* 히트맵 */
+    const mx=Math.max.apply(null,P.days.map(d=>d.n).concat([1]));
+    $("#pfHeat").innerHTML='<div class="pfh">'+esc(EN?"Last 28 days":"최근 28일 기록")+'</div>'+
+      '<div class="pfheat" data-testid="pf-heat" aria-hidden="true">'+
+      P.days.map(d=>{ const lv=d.n===0?0:(d.n>=mx*.66?3:(d.n>=mx*.33?2:1)); return '<i data-lv="'+lv+'"></i>'; }).join("")+
+      '</div><div class="pfsub" style="margin-top:8px;">'+
+      esc(EN?("Recorded on "+P.activeDays+" of the last 28 days."):("최근 28일 중 "+P.activeDays+"일에 기록이 있어요."))+'</div>';
+    /* 정직 고지 */
+    $("#pfHonesty").innerHTML='<div class="pfh">'+esc(EN?"What was not computed":"집계하지 않은 것")+'</div>'+
+      '<div class="pfnote" data-testid="pf-honesty">'+
+      "\u2022 "+esc(EN?("Movement % is only averaged over counters whose start and goal share a unit. Right now "+P.noPctTotal+" counter(s) are excluded.")
+                       :("이동률(%)은 시작점과 목표의 단위가 같은 카운터만 평균에 넣어요. 지금 "+P.noPctTotal+"건이 제외됐어요."))+"<br>"+
+      "\u2022 "+esc(EN?"Counters you made yourself have no area, so they are listed separately instead of being guessed into one."
+                       :"직접 만든 카운터는 영역을 추측하지 않고 따로 적어요.")+"<br>"+
+      "\u2022 "+esc(EN?"Area bars show the average movement of that area, not a score of you."
+                       :"영역 막대는 그 영역의 평균 이동률이지, 나를 매기는 점수가 아니에요.")+
+      '</div>';
+    if(EN) translateNodes();
+  }
+  /* 대시보드 진입 행의 한 줄 요약. 계산할 수 없으면 아무 문구도 쓰지 않는다(빈 문자열). */
+  function updatePfMini(){
+    const el=$("#pfMini"), lab=$("#pfMiniLabel"); if(!el) return;
+    const EN=(LANG==="en");
+    if(lab) lab.textContent = EN ? "\uD83D\uDCCA Life metric portfolio" : "\uD83D\uDCCA 인생 지표 포트폴리오";
+    if(!db.counters.length){ el.textContent=""; return; }
+    const P=pfCollect();
+    el.textContent = EN ? ("  ·  "+P.covered+"/"+P.total+" areas · "+P.counters+" counters")
+                        : ("  ·  "+P.covered+"/"+P.total+" 영역 · 카운터 "+P.counters+"개");
+  }
+  function openPortfolio(){ mq("pf_open"); renderPortfolio(); show("portfolio"); }
+  $("#btnPortfolio").addEventListener("click",openPortfolio);
+  $("#pfBack").addEventListener("click",()=>{ show("dash"); renderDash(); });
+  $("#pfQuizBtn").addEventListener("click",()=>{ mq("pf_quiz"); openQuiz(); });
+
   function quizRecommendations(){
     const a=QUIZ_AREAS[qArea]; if(!a) return [];
     const d=a.ideals[qIdeal]; if(!d) return [];
