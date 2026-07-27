@@ -419,6 +419,21 @@
   #pfFoot{padding:12px 14px calc(14px + var(--safe-b));background:linear-gradient(to top,var(--bg) 55%,transparent);}
   #pfQuizBtn{width:100%;min-height:52px;border-radius:16px;border:1px solid var(--accent);background:rgba(79,209,197,.10);color:var(--accent);font-size:14px;font-weight:700;}
   .pfnote{font-size:11.5px;color:var(--ink-dim);line-height:1.65;}
+  /* ===== v22.6: 주간 체크인(B1) · 인사이트(B3) ===== */
+  .wkrow{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--line);}
+  .wkrow:first-of-type{border-top:0;}
+  .wkname{flex:1;min-width:0;font-size:13px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .wkdelta{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .wkup{color:var(--accent);} .wkdown{color:var(--ink-dim);} .wkflat{color:var(--ink-dim);}
+  .wkbig{display:flex;gap:10px;margin:0 0 10px;}
+  .wkbig div{flex:1;text-align:center;border:1px solid var(--line);border-radius:12px;padding:10px 6px;}
+  .wkbig b{display:block;font-size:20px;font-weight:800;font-variant-numeric:tabular-nums;}
+  .wkbig span{display:block;font-size:11px;color:var(--ink-dim);margin-top:2px;}
+  .insight{border:1px solid var(--line);border-radius:12px;padding:11px 12px;margin:0 0 8px;font-size:13px;line-height:1.6;color:var(--ink);}
+  .insight:last-child{margin-bottom:0;}
+  .insight u{display:block;text-decoration:none;font-size:11.5px;color:var(--ink-dim);margin-top:4px;}
+  #stBaseSuggest{margin:8px 0 0;padding:10px 12px;border:1px dashed var(--accent);border-radius:12px;font-size:12.5px;line-height:1.6;color:var(--ink);}
+  #stBaseSuggest button{margin-top:8px;min-height:40px;padding:0 14px;border-radius:10px;border:1px solid var(--accent);background:rgba(79,209,197,.12);color:var(--accent);font-size:13px;font-weight:700;}
 </style>
 </head>
 <body>
@@ -518,6 +533,8 @@
     <div class="pfstats" id="pfSummary"></div>
     <div class="pfcard" id="pfCoverage"></div>
     <div class="pfcard" id="pfAreas"></div>
+    <div class="pfcard" id="pfWeek"></div>
+    <div class="pfcard" id="pfInsight"></div>
     <div class="pfcard" id="pfHeat"></div>
     <div class="pfcard" id="pfHonesty"></div>
   </div>
@@ -600,6 +617,9 @@
         <div class="mvbar"><i id="stMoveFill"></i></div>
         <div class="type-note" id="stMoveNote" style="padding:6px 0 0;"></div>
       </div>
+    </div>
+    <div class="stat-row" id="stBaseRow" style="display:none;">
+      <div class="stat-cell wide"><div id="stBaseSuggest"></div></div>
     </div>
     <div class="stat-row">
       <div class="stat-cell wide">
@@ -952,7 +972,7 @@
     <div class="si-tx"><b>테스트 회신 코드</b><span id="rvPreview">체험 결과를 한 줄로 복사</span></div>
     <button class="act" id="btnRv">복사</button>
   </div>
-  <div style="text-align:center;font-size:11.5px;opacity:.55;margin-top:10px;" id="verBadge">OmniCounter v22.5</div>
+  <div style="text-align:center;font-size:11.5px;opacity:.55;margin-top:10px;" id="verBadge">OmniCounter v22.6</div>
   <div class="sheet-actions" style="margin-top:10px;"><button class="dock-btn primary" id="setClose" style="width:100%;justify-content:center;">닫기</button></div>
 </div>
 
@@ -1866,7 +1886,7 @@
       $("#statTotal").textContent=totalOf(c);
       $("#statSubtitle").textContent = tx(c.type==="aware" ? "총 알아차린 횟수" : "누적 기록");
     }
-    renderStat(); renderMoveStat(c); show("stat");
+    renderStat(); renderMoveStat(c); renderBaseSuggest(c); show("stat");
   }
   $("#statSeg").addEventListener("click",e=>{ const b=e.target.closest("button");if(!b)return; statRange=b.dataset.range;
     $$("#statSeg button").forEach(x=>x.classList.toggle("on",x===b)); renderStat(); });
@@ -3152,6 +3172,7 @@
     $("#stMoveFill").style.width = (mv.kind==="pct"? mv.pct : 0)+"%";
     $("#stMoveNote").textContent = mv.note;
   }
+  /* renderMoveStat은 mv가 없으면 조기 반환하므로, 제안 렌더는 별도로 건다(v22.6). */
 
   /* ================= A1 30초 진단 (v22.3) — 상황진단 → 지표식별 → 목표 =================
      원칙: 진단은 '무엇을 셀지'만 정해 준다. 사용자의 숫자를 지어내지 않고,
@@ -3323,7 +3344,7 @@
     if(bkEl) bkEl.setAttribute("aria-label", EN?"Back":"뒤로");
     const emp=$("#pfEmpty");
     const hasAny=P.counters>0;
-    ["#pfSummary","#pfCoverage","#pfAreas","#pfHeat","#pfHonesty"].forEach(s=>{ const el=$(s); if(el) el.style.display=hasAny?"":"none"; });
+    ["#pfSummary","#pfCoverage","#pfAreas","#pfWeek","#pfInsight","#pfHeat","#pfHonesty"].forEach(s=>{ const el=$(s); if(el) el.style.display=hasAny?"":"none"; });
     if(!hasAny){
       emp.style.display="block";
       emp.className="pfcard"; emp.setAttribute("data-testid","pf-empty");
@@ -3388,6 +3409,8 @@
       "\u2022 "+esc(EN?"Area bars show the average movement of that area, not a score of you."
                        :"영역 막대는 그 영역의 평균 이동률이지, 나를 매기는 점수가 아니에요.")+
       '</div>';
+    renderWeekCheckin(EN);
+    renderInsights(EN);
     if(EN) translateNodes();
   }
   /* 대시보드 진입 행의 한 줄 요약. 계산할 수 없으면 아무 문구도 쓰지 않는다(빈 문자열). */
@@ -3400,6 +3423,162 @@
     el.textContent = EN ? ("  ·  "+P.covered+"/"+P.total+" areas · "+P.counters+" counters")
                         : ("  ·  "+P.covered+"/"+P.total+" 영역 · 카운터 "+P.counters+"개");
   }
+  /* ================= v22.6 B1: 주간 체크인 =================
+     이번 주(최근 7일)와 지난 주(그 앞 7일)를 같은 방식으로 세어 비교한다.
+     정직 규율: 지난 주 구간이 카운터 생성 이전이면 "비교할 지난주가 없다"고 말한다.
+     없는 구간을 0으로 두고 "100% 증가"라고 쓰지 않는다 — 그것이 가장 흔한 거짓 성장 지표다. */
+  function weekWindow(){
+    const now=Date.now(), d0=new Date(); d0.setHours(0,0,0,0);
+    const todayEnd=d0.getTime()+864e5;
+    return { curStart:todayEnd-7*864e5, curEnd:todayEnd,
+             prevStart:todayEnd-14*864e5, prevEnd:todayEnd-7*864e5, now:now };
+  }
+  function sumIn(c,a,b){ let s=0; (c.events||[]).forEach(e=>{ if(e.d>0&&e.t>=a&&e.t<b) s+=e.d; }); return s; }
+  function daysIn(c,a,b){ const s=new Set(); (c.events||[]).forEach(e=>{ if(e.d>0&&e.t>=a&&e.t<b){ const x=new Date(e.t); x.setHours(0,0,0,0); s.add(x.getTime()); } }); return s.size; }
+  function weekData(){
+    const W=weekWindow();
+    let cur=0, prev=0; const rows=[]; let noPrev=0;
+    const dayset=new Set();
+    db.counters.forEach(c=>{
+      const a=sumIn(c,W.curStart,W.curEnd), b=sumIn(c,W.prevStart,W.prevEnd);
+      cur+=a; prev+=b;
+      /* 지난주 구간이 생성 이전이면 비교 대상에서 뺀다 */
+      const bornBeforePrev = (c.createdAt||0) <= W.prevStart;
+      if(!bornBeforePrev) noPrev++;
+      if(a>0||b>0) rows.push({c:c, cur:a, prev:b, cmp:bornBeforePrev});
+      (c.events||[]).forEach(e=>{ if(e.d>0&&e.t>=W.curStart&&e.t<W.curEnd){ const x=new Date(e.t); x.setHours(0,0,0,0); dayset.add(x.getTime()); } });
+    });
+    rows.sort((x,y)=>(y.cur-y.prev)-(x.cur-x.prev));
+    return { cur:cur, prev:prev, rows:rows, activeDays:dayset.size, noPrev:noPrev, W:W };
+  }
+  function renderWeekCheckin(EN){
+    const el=$("#pfWeek"); if(!el) return;
+    const D=weekData();
+    const anyPrev=D.rows.some(r=>r.cmp);
+    let h='<div class="pfh">'+esc(EN?"This week vs last week":"이번 주 vs 지난 주")+'</div>';
+    h+='<div class="wkbig">'+
+       '<div data-testid="wk-cur"><b>'+D.cur+'</b><span>'+esc(EN?"this week":"이번 주")+'</span></div>'+
+       '<div data-testid="wk-prev"><b>'+(anyPrev?D.prev:"—")+'</b><span>'+esc(EN?"last week":"지난 주")+'</span></div>'+
+       '<div data-testid="wk-days"><b>'+D.activeDays+'/7</b><span>'+esc(EN?"days logged":"기록한 날")+'</span></div>'+
+       '</div>';
+    if(!anyPrev){
+      h+='<div class="pfsub" data-testid="wk-noprev">'+esc(EN
+        ? "No comparable week yet — every counter here is younger than two weeks. A comparison will appear once one full week has passed."
+        : "아직 비교할 지난주가 없어요. 여기 카운터들이 2주가 되지 않았거든요. 한 주가 온전히 지나면 비교가 나타나요.")+'</div>';
+    }else{
+      const top=D.rows.filter(r=>r.cmp).slice(0,4);
+      top.forEach(r=>{
+        const d=r.cur-r.prev;
+        const cls=d>0?"wkup":(d<0?"wkdown":"wkflat");
+        const sign=d>0?"+":"";
+        h+='<div class="wkrow" data-testid="wk-row"><span class="wkname">'+esc(r.c.name)+'</span>'+
+           '<span class="wkdelta '+cls+'">'+r.cur+' <span style="opacity:.6">('+sign+d+')</span></span></div>';
+      });
+      if(D.noPrev>0){
+        h+='<div class="pfsub" style="margin-top:8px;" data-testid="wk-partial">'+esc(EN
+          ? (D.noPrev+" counter(s) are newer than two weeks and are left out of the comparison.")
+          : ("2주가 되지 않은 카운터 "+D.noPrev+"건은 비교에서 빼 두었어요."))+'</div>';
+      }
+    }
+    el.innerHTML=h;
+  }
+
+  /* ================= v22.6 B3: 인사이트 카드 =================
+     규칙: 카드는 **관찰된 사실만** 말한다. 예측·칭찬·훈계·낙인은 만들지 않는다.
+     근거가 되는 숫자를 카드 안에 그대로 적고, 근거가 없으면 카드 자체를 만들지 않는다.
+     "아직 말할 게 없다"고 적는 것이 없는 통찰을 지어내는 것보다 낫다. */
+  function buildInsights(EN){
+    const out=[], W=weekWindow();
+    const withEv=db.counters.filter(c=>(c.events||[]).some(e=>e.d>0));
+    if(!withEv.length) return out;
+    /* 1) 가장 꾸준한 지표 — 최근 7일 중 기록한 날 수 */
+    let best=null;
+    withEv.forEach(c=>{ const d=daysIn(c,W.curStart,W.curEnd); if(!best||d>best.d) best={c:c,d:d}; });
+    if(best && best.d>=3){
+      out.push({ pre: EN?"“":"‘", name: best.c.name,
+                 post: EN ? ("” was logged on "+best.d+" of the last 7 days — your steadiest metric this week.")
+                          : ("’을(를) 최근 7일 중 "+best.d+"일 기록했어요 — 이번 주 가장 꾸준한 지표예요."),
+                 w: EN?"Counted from your own records; nothing is estimated.":"직접 남긴 기록만 세었어요. 추정한 값은 없어요."});
+    }
+    /* 2) 한 주 이상 비어 있는 지표 — 판단 없이 사실만 */
+    const idle=withEv.filter(c=>{
+      const last=Math.max.apply(null,(c.events||[]).filter(e=>e.d>0).map(e=>e.t));
+      return (Date.now()-last) >= 7*864e5;
+    });
+    if(idle.length){
+      const names=idle.slice(0,2).map(c=>c.name).join(", ");
+      out.push({ pre:"", name: names,
+                 post: EN ? ((idle.length>2?(" and "+(idle.length-2)+" more"):"")+" ha"+(idle.length>1?"ve":"s")+" no record in the last 7 days.")
+                          : ((idle.length>2?(" 외 "+(idle.length-2)+"개"):"")+"는 최근 7일간 기록이 없어요."),
+                 w: EN?"This is an observation, not a judgment — you may simply not be counting it right now.":"판단이 아니라 관찰이에요. 지금은 그냥 안 세고 있는 것일 수도 있어요."});
+    }
+    /* 3) 이동률이 계산되는 카운터 중 가장 앞선 것 */
+    const moved=withEv.map(c=>({c:c,m:moveInfo(c)})).filter(x=>x.m&&x.m.kind==="pct"&&typeof x.m.pct==="number");
+    if(moved.length){
+      moved.sort((a,b)=>b.m.pct-a.m.pct);
+      const top=moved[0];
+      out.push({ pre: EN?"“":"‘", name: top.c.name,
+                 post: EN ? ("” is "+top.m.pct+"% of the way from your starting point to your goal.")
+                          : ("’은(는) 시작점에서 목표까지 "+top.m.pct+"% 왔어요."),
+                 w: EN?("Based on your recorded starting point and goal. "+(withEv.length-moved.length)+" counter(s) have no comparable unit and are excluded.")
+                      :("직접 적은 시작점과 목표로 계산했어요. 단위가 맞지 않는 "+(withEv.length-moved.length)+"건은 뺐어요.")});
+    }
+    return out.slice(0,3);
+  }
+  function renderInsights(EN){
+    const el=$("#pfInsight"); if(!el) return;
+    const list=buildInsights(EN);
+    let h='<div class="pfh">'+esc(EN?"What the records say":"기록이 말하는 것")+'</div>';
+    if(!list.length){
+      h+='<div class="pfsub" data-testid="ins-empty">'+esc(EN
+        ? "Not enough records yet to say anything true. Rather than guess, this stays empty until there is something real to report."
+        : "아직 사실로 말할 수 있는 게 없어요. 추측으로 채우는 대신, 진짜 말할 게 생길 때까지 비워 둡니다.")+'</div>';
+    }else{
+      /* 카운터 이름은 **별도 텍스트 노드**로 둔다 — 그래야 언어 전환기가 이름만 따로 번역할 수 있다.
+         문장에 이어 붙이면 영어 모드에서 이름 부분만 한글로 남는다(v22.6에서 실제로 발생). */
+      list.forEach(x=>{ h+='<div class="insight" data-testid="ins-card">'+esc(x.pre)+
+        '<span class="inm">'+esc(x.name)+'</span>'+esc(x.post)+'<u>'+esc(x.w)+'</u></div>'; });
+    }
+    el.innerHTML=h;
+  }
+
+  /* ================= v22.6: 시작점 자동 추정 제안 =================
+     정직 규율: **자동으로 쓰지 않는다.** 시작점은 사용자의 사실이지 앱의 추정이 아니다.
+     충분한 데이터가 있을 때만 값을 계산해 보여 주고, 적용 여부는 사용자가 누른다. */
+  function baselineSuggestion(c){
+    if(!c || c.type!=="count") return null;
+    if(c.baseline!=null) return null;                 // 이미 있으면 제안하지 않는다
+    if((c.cycle||"total")!=="day") return null;       // 일간형만 일평균이 의미를 가진다
+    const evs=(c.events||[]).filter(e=>e.d>0);
+    if(evs.length<3) return null;
+    const ageDays=Math.floor((Date.now()-(c.createdAt||Date.now()))/864e5);
+    if(ageDays<7) return null;                        // 7일 미만이면 일평균이 대표성이 없다
+    const days=new Set(); evs.forEach(e=>{ const x=new Date(e.t); x.setHours(0,0,0,0); days.add(x.getTime()); });
+    if(days.size<3) return null;
+    const v=Math.round(recentDailyAvg(c,7)*10)/10;
+    if(!(v>0)) return null;
+    return { value:v, days:days.size, ageDays:ageDays };
+  }
+  function renderBaseSuggest(c){
+    const row=$("#stBaseRow"), box=$("#stBaseSuggest");
+    if(!row||!box) return;
+    const s=baselineSuggestion(c);
+    if(!s){ row.style.display="none"; box.innerHTML=""; return; }
+    const EN=(LANG==="en");
+    row.style.display="";
+    box.innerHTML=(EN
+      ? ("Your last 7 days average <b>"+s.value+"</b> per day (logged on "+s.days+" days). Use that as your starting point? Nothing is saved until you tap.")
+      : ("최근 7일 하루 평균이 <b>"+s.value+"</b>예요("+s.days+"일 기록). 이 값을 시작점으로 쓸까요? 누르기 전까지는 저장되지 않아요."))+
+      '<br><button id="stBaseApply" data-testid="base-apply">'+esc(EN?("Set starting point to "+s.value):("시작점을 "+s.value+"(으)로 설정"))+'</button>';
+    const btn=$("#stBaseApply");
+    if(btn) btn.addEventListener("click",()=>{
+      const t=byId(c.id); if(!t) return;
+      t.baseline=s.value; save(); mq("base_auto");
+      showSnack(EN?("Starting point set to "+s.value):("시작점을 "+s.value+"(으)로 설정했어요"));
+      renderBaseSuggest(t); renderMoveStat(t); renderDash();
+    });
+  }
+
   function openPortfolio(){ mq("pf_open"); renderPortfolio(); show("portfolio"); }
   $("#btnPortfolio").addEventListener("click",openPortfolio);
   $("#pfBack").addEventListener("click",()=>{ show("dash"); renderDash(); });
@@ -3967,6 +4146,9 @@
   updateQuizSummary();
   updateCommaInfo();
   renderDash();
+  /* B-25(v22.5): 첫 로드는 show("dash")를 거치지 않아 포트폴리오 진입 행의 한 줄 요약이 비어 있었다.
+     "요약이 없는 것"과 "요약이 0인 것"은 다르므로, 부팅에서도 한 번 계산한다. */
+  updatePfMini();
   const dlHandled=handleDeeplink();
   if(!dlHandled){
     maybeShowOnboarding();

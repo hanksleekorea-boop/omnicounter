@@ -1,7 +1,7 @@
 {
-  "version": "v22.5",
-  "sha256": "f5fe0bf224417865f25bd7fcccde801946de0743b15ac829a20725927e5ad941",
-  "bytes": 267180,
+  "version": "v22.6",
+  "sha256": "de114139983e806dce32158d5b3e4f3e087932fd0527214f41a8acfbbf60ae67",
+  "bytes": 279360,
   "released": "2026-07-27",
   "markers": [
     "#verBadge",
@@ -18,10 +18,13 @@
     "#portfolio",
     "#btnPortfolio",
     "#pfHonesty",
-    "#pfHeat"
+    "#pfHeat",
+    "#pfWeek",
+    "#pfInsight",
+    "#stBaseRow"
   ],
   "schemaVersion": 4,
-  "serviceWorker": "sw.js (navigation=network-first)",
   "templates": 24,
-  "notes": "인생 지표 포트폴리오 화면 + 템플릿 24종 + 성능 2차(전송크기·저사양CPU) + SW 킬스위치 리허설 + B-23/B-24 수정"
+  "serviceWorker": "sw.js (navigation=network-first)",
+  "notes": "주간 체크인(B1) + 인사이트 카드(B3) + 시작점 자동 추정 제안 + B-25 수정"
 }
