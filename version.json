@@ -1,8 +1,8 @@
 {
-  "version": "v22.6",
-  "sha256": "de114139983e806dce32158d5b3e4f3e087932fd0527214f41a8acfbbf60ae67",
-  "bytes": 279360,
-  "released": "2026-07-27",
+  "version": "v22.7",
+  "sha256": "9b3176d8608a185020492eb6ca430168e41d304038fea9ebe0e377e7f8d79ba0",
+  "bytes": 280265,
+  "released": "2026-07-28",
   "markers": [
     "#verBadge",
     "#quiz",
@@ -25,6 +25,7 @@
   ],
   "schemaVersion": 4,
   "templates": 24,
+  "rvRequiredSteps": 4,
   "serviceWorker": "sw.js (navigation=network-first)",
-  "notes": "주간 체크인(B1) + 인사이트 카드(B3) + 시작점 자동 추정 제안 + B-25 수정"
+  "notes": "RV 스텝 계약을 2분 스모크 스크립트와 1:1 정렬(포트폴리오 비트 신설·필수4/선택4 분리)"
 }

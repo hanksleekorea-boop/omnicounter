@@ -972,7 +972,7 @@
     <div class="si-tx"><b>테스트 회신 코드</b><span id="rvPreview">체험 결과를 한 줄로 복사</span></div>
     <button class="act" id="btnRv">복사</button>
   </div>
-  <div style="text-align:center;font-size:11.5px;opacity:.55;margin-top:10px;" id="verBadge">OmniCounter v22.6</div>
+  <div style="text-align:center;font-size:11.5px;opacity:.55;margin-top:10px;" id="verBadge">OmniCounter v22.7</div>
   <div class="sheet-actions" style="margin-top:10px;"><button class="dock-btn primary" id="setClose" style="width:100%;justify-content:center;">닫기</button></div>
 </div>
 
@@ -3968,12 +3968,21 @@
   /* ================= v22.2: RV 회신 코드 (테스터 1줄 회신 → 기계 판정) =================
      형식: RV|<버전>|<스텝 비트맵 8자리>|<이벤트 수>|<언어>|<체크섬>
      · 개인정보·입력값 무참조 — 행동 앵커 발생 여부(0/1)만 담는다. */
+  /* v22.7: 스텝 계약을 **실제로 요청하는 스크립트와 1:1로** 맞춘다.
+     v22.6까지 비트맵은 v22.2 시절 여정이었고, 그 뒤 추가된 진단(A1)과 포트폴리오(W4-1)에는 비트가 없었다.
+     그 결과 2분 스모크 스크립트가 "포트폴리오 열기"를 요청하는데도 회신 코드는 그 도달 여부를 담지 못했고,
+     반대로 요청한 적 없는 링크 공유·기록 카드·백업·설치가 "막힌 스텝"으로 보고됐다.
+     **요청하지 않은 것을 실패로 세는 것은 사용자에게 없는 잘못을 만드는 것이다.**
+     앞 4개 = 2분 스모크 필수, 뒤 4개 = 선택. 판정기는 이 경계를 그대로 읽는다. */
+  const RV_REQUIRED=4;
   const RV_STEPS=[
-    ["c_make", a=>a==="tpl_create"||a==="dl_done"||a==="gal_quickgame"||a==="quiz_create"], // 1 카운터/게임 만들기(진단 경유 포함)
+    /* ── 필수 4: 2분 스모크 스크립트와 정확히 같은 순서 ── */
+    ["c_make", a=>a==="tpl_create"||a==="dl_done"||a==="gal_quickgame"||a==="quiz_create"], // 1 카운터 만들기(진단 경유 포함)
     ["c_count",()=>db.counters.some(c=>c.events.some(e=>e.d>0))],               // 2 실제 기록
-    ["c_stat", a=>a==="rhythm_view"],                                           // 3 통계 열기
-    ["c_link", a=>a==="dl_create"],                                             // 4 링크 공유
-    ["c_card", a=>a==="card_save"||a==="card_open"],                            // 5 기록 카드
+    ["c_pf",   a=>a==="pf_open"],                                               // 3 포트폴리오 열기
+    ["c_stat", a=>a==="rhythm_view"],                                           // 4 통계 열기
+    /* ── 선택 4: 안 해도 스모크는 통과다 ── */
+    ["c_quiz", a=>a==="quiz_open"||a==="quiz_create"||a==="pf_quiz"],           // 5 30초 진단
     ["c_lang", a=>a==="lang_en"||a==="lang_ko"],                                // 6 언어 전환
     ["c_backup",a=>a==="bk_export"||a==="bk_csv"],                              // 7 백업
     ["c_install",a=>a==="ios_sheet"||a==="pwa_install"]                         // 8 설치 시도
