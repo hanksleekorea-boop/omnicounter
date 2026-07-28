@@ -972,7 +972,7 @@
     <div class="si-tx"><b>테스트 회신 코드</b><span id="rvPreview">체험 결과를 한 줄로 복사</span></div>
     <button class="act" id="btnRv">복사</button>
   </div>
-  <div style="text-align:center;font-size:11.5px;opacity:.55;margin-top:10px;" id="verBadge">OmniCounter v22.7</div>
+  <div style="text-align:center;font-size:11.5px;opacity:.55;margin-top:10px;" id="verBadge">OmniCounter v22.8</div>
   <div class="sheet-actions" style="margin-top:10px;"><button class="dock-btn primary" id="setClose" style="width:100%;justify-content:center;">닫기</button></div>
 </div>
 
@@ -1877,6 +1877,12 @@
   let statRange="day";
   function openStat(id){
     activeId=id; const c=byId(id); if(!c)return;
+    /* B-27(v22.8): 필수 스텝 4 '통계 열기'가 rhythm_view에 묶여 있었는데, 그 앵커는
+       최근 4주 패턴이 계산될 만큼 데이터가 쌓였을 때만 발화한다. 즉 **처음 써 보는 테스터는
+       통계를 열어도 비트가 켜지지 않아** 회신 코드가 항상 "통계 미도달"로 왔다.
+       요청한 행동을 했는데 안 했다고 보고하는 것은 사용자에게 없는 잘못을 만드는 것이다.
+       화면 진입 자체를 뜻하는 앵커를 따로 둔다. */
+    mq("stat_open");
     $("#statName").textContent=c.name;
     if(c.type==="elapsed"){
       const {longestMs}=elapsedInfo(c); const lg=formatDuration(longestMs);
@@ -3980,7 +3986,7 @@
     ["c_make", a=>a==="tpl_create"||a==="dl_done"||a==="gal_quickgame"||a==="quiz_create"], // 1 카운터 만들기(진단 경유 포함)
     ["c_count",()=>db.counters.some(c=>c.events.some(e=>e.d>0))],               // 2 실제 기록
     ["c_pf",   a=>a==="pf_open"],                                               // 3 포트폴리오 열기
-    ["c_stat", a=>a==="rhythm_view"],                                           // 4 통계 열기
+    ["c_stat", a=>a==="stat_open"||a==="rhythm_view"],                          // 4 통계 열기(진입 자체 · 구버전 앵커도 인정)
     /* ── 선택 4: 안 해도 스모크는 통과다 ── */
     ["c_quiz", a=>a==="quiz_open"||a==="quiz_create"||a==="pf_quiz"],           // 5 30초 진단
     ["c_lang", a=>a==="lang_en"||a==="lang_ko"],                                // 6 언어 전환

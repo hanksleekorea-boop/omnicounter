@@ -1,7 +1,7 @@
 {
-  "version": "v22.7",
-  "sha256": "9b3176d8608a185020492eb6ca430168e41d304038fea9ebe0e377e7f8d79ba0",
-  "bytes": 280265,
+  "version": "v22.8",
+  "sha256": "97a784f3b79df7ead4d6e6ced6bad6301b587c5c6c4db1a24776d9ac4643af53",
+  "bytes": 280867,
   "released": "2026-07-28",
   "markers": [
     "#verBadge",
@@ -27,5 +27,5 @@
   "templates": 24,
   "rvRequiredSteps": 4,
   "serviceWorker": "sw.js (navigation=network-first)",
-  "notes": "RV 스텝 계약을 2분 스모크 스크립트와 1:1 정렬(포트폴리오 비트 신설·필수4/선택4 분리)"
+  "notes": "B-27 수정 — 통계 진입 앵커(stat_open) 신설로 필수 비트 4/4 점등. 패킷↔회신코드 계약 스위트 신설."
 }
