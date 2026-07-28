@@ -1,7 +1,7 @@
 {
-  "version": "v22.8",
-  "sha256": "97a784f3b79df7ead4d6e6ced6bad6301b587c5c6c4db1a24776d9ac4643af53",
-  "bytes": 280867,
+  "version": "v22.9",
+  "sha256": "1c87e692b9ef8d210581ec8641343a48c8e5340210869f2bd44ca2760c7d2d86",
+  "bytes": 286817,
   "released": "2026-07-28",
   "markers": [
     "#verBadge",
@@ -21,11 +21,17 @@
     "#pfHeat",
     "#pfWeek",
     "#pfInsight",
-    "#stBaseRow"
+    "#stBaseRow",
+    "#btnQr",
+    "#qrPanel"
   ],
   "schemaVersion": 4,
   "templates": 24,
   "rvRequiredSteps": 4,
-  "serviceWorker": "sw.js (navigation=network-first)",
-  "notes": "B-27 수정 — 통계 진입 앵커(stat_open) 신설로 필수 비트 4/4 점등. 패킷↔회신코드 계약 스위트 신설."
+  "assets": [
+    "qr.png",
+    "qr.svg"
+  ],
+  "serviceWorker": "sw.js (navigation=network-first · qr.png precached)",
+  "notes": "폰 핸드오프 QR(설정) + qr.png/svg 배포. 스캔카드는 배포 제외(메신저 전달용 로컬 산출물). 정본 아닌 오리진에서는 QR 미표시."
 }

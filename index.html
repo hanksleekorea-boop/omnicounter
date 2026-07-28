@@ -419,6 +419,16 @@
   #pfFoot{padding:12px 14px calc(14px + var(--safe-b));background:linear-gradient(to top,var(--bg) 55%,transparent);}
   #pfQuizBtn{width:100%;min-height:52px;border-radius:16px;border:1px solid var(--accent);background:rgba(79,209,197,.10);color:var(--accent);font-size:14px;font-weight:700;}
   .pfnote{font-size:11.5px;color:var(--ink-dim);line-height:1.65;}
+  /* ===== v22.9: 폰으로 이어서 보기(QR 핸드오프) ===== */
+  #qrPanel{display:none;margin:2px 0 10px;padding:16px;border:1px solid var(--line);border-radius:16px;
+    background:var(--bg-card);text-align:center;}
+  #qrPanel.on{display:block;}
+  #qrPanel img{width:200px;height:200px;background:#fff;border-radius:12px;padding:8px;display:block;margin:0 auto 10px;}
+  #qrPanel .qrurl{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;
+    color:var(--ink-dim);word-break:break-all;line-height:1.5;margin-bottom:10px;}
+  #qrPanel .qrhint{font-size:12px;color:var(--ink-dim);line-height:1.6;}
+  #qrCopy{min-height:40px;padding:0 16px;border-radius:10px;border:1px solid var(--line);
+    background:var(--bg-lift);color:var(--ink);font-size:13px;font-weight:600;}
   /* ===== v22.6: 주간 체크인(B1) · 인사이트(B3) ===== */
   .wkrow{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--line);}
   .wkrow:first-of-type{border-top:0;}
@@ -968,11 +978,25 @@
     <div class="si-tx"><b>오프라인 사용</b><span id="swStatus">확인 중…</span></div>
   </div>
   <div class="settings-item">
+    <div class="si-ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3z"/><path d="M20 14v3M14 20h3M20 20h.01"/></svg></div>
+    <div class="si-tx"><b>폰으로 이어서 보기</b><span>QR을 카메라로 스캔하면 폰에서 열려요</span></div>
+    <button class="act" id="btnQr" data-testid="btn-qr">QR</button>
+  </div>
+  <!-- v22.9: PC에서 열어 본 사람이 폰으로 넘어갈 때 주소를 타이핑하지 않게 한다.
+       QR 이미지는 배포 산출물(qr.png)을 그대로 쓴다 — 앱에 인코더를 넣지 않으므로 전송 크기 부담이 0이다.
+       이미지가 없거나 오프라인이면 주소 텍스트와 복사 버튼으로 조용히 대체한다(무기능정지 금지). -->
+  <div id="qrPanel" data-testid="qr-panel">
+    <img id="qrImg" src="./qr.png" alt="앱 주소 QR 코드">
+    <div class="qrurl" id="qrUrl"></div>
+    <button id="qrCopy" data-testid="qr-copy">주소 복사</button>
+    <div class="qrhint" id="qrHint" style="margin-top:10px;"></div>
+  </div>
+  <div class="settings-item">
     <div class="si-ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h8M8 13h5"/></svg></div>
     <div class="si-tx"><b>테스트 회신 코드</b><span id="rvPreview">체험 결과를 한 줄로 복사</span></div>
     <button class="act" id="btnRv">복사</button>
   </div>
-  <div style="text-align:center;font-size:11.5px;opacity:.55;margin-top:10px;" id="verBadge">OmniCounter v22.8</div>
+  <div style="text-align:center;font-size:11.5px;opacity:.55;margin-top:10px;" id="verBadge">OmniCounter v22.9</div>
   <div class="sheet-actions" style="margin-top:10px;"><button class="dock-btn primary" id="setClose" style="width:100%;justify-content:center;">닫기</button></div>
 </div>
 
@@ -1142,6 +1166,9 @@
     "🧭 무엇을 세야 할지 모르겠다면 — 30초 진단":"🧭 Not sure what to count? — 30-second check",
     "다시 진단":"Check again",
     "현재 → 이상 이동":"Current → ideal movement",
+    "폰으로 이어서 보기":"Continue on your phone",
+    "QR을 카메라로 스캔하면 폰에서 열려요":"Scan the code with your camera to open it on your phone",
+    "주소 복사":"Copy address",
     "테스트 회신 코드":"Test reply code","체험 결과를 한 줄로 복사":"Copy your session result as one line","복사":"Copy",
     "개비/일":"cigarettes/day","회/주":"times/week","무지출일/월":"no-spend days/month","절제일/2주":"clean days/2 weeks",
     "잔/일":"cups/day","보/일":"steps/day","개/일":"reps/day","세션/8주":"sessions/8 weeks","권/년":"books/year",
@@ -4005,6 +4032,65 @@
     return body+"|"+sum.toString(36).slice(-4).toUpperCase();
   }
   function rvRefresh(){ const el=$("#rvPreview"); if(el) el.textContent=rvBuild(); }
+
+  /* ================= v22.9: 폰으로 이어서 보기 =================
+     PC에서 앱을 연 사람이 폰으로 넘어가려면 주소를 옮겨야 한다. 타이핑은 오타가 나고,
+     원격 주소 입력은 권한 장벽에 걸린다. QR은 둘 다 우회한다.
+     정직 규율: QR은 **주소 전달 수단이지 증거가 아니다.** 이것을 켰다고 실기기 검증이 되지 않는다. */
+  (function wireQr(){
+    const btn=$("#btnQr"), panel=$("#qrPanel"), img=$("#qrImg"),
+          urlEl=$("#qrUrl"), copyBtn=$("#qrCopy"), hint=$("#qrHint");
+    if(!btn||!panel) return;
+    /* ★ QR 이미지는 **정본 주소로 미리 구운 정적 파일**이다(앱에 인코더를 넣지 않아 전송 크기 부담이 0).
+       그래서 지금 열려 있는 곳이 정본이 아니면(포크·미리보기·로컬 서버) QR과 주소 텍스트가 갈라진다.
+       한 화면에서 서로 다른 두 주소를 보여 주는 것은 조용한 거짓말이므로,
+       **정본이 아닐 때는 QR을 숨기고 주소만 보여 준다.** 확실하지 않으면 보여 주지 않는다. */
+    const CANONICAL_URL="https://hanksleekorea-boop.github.io/omnicounter/";
+    /* 배포 루트 = 지금 열려 있는 페이지의 디렉터리. 쿼리·해시는 뺀다(테스터에게 내 상태를 넘기지 않는다). */
+    const shareUrl=(function(){
+      try{ const u=new URL(location.href); u.search=""; u.hash="";
+           if(!/\/$/.test(u.pathname)) u.pathname=u.pathname.replace(/[^/]*$/,"");
+           return u.toString(); }catch(e){ return location.origin+location.pathname; }
+    })();
+    if(urlEl) urlEl.textContent=shareUrl;
+    /* QR 이미지가 없거나(오프라인·미배포) 로드 실패하면 조용히 숨기고 주소만 남긴다.
+       깨진 이미지 아이콘을 보여 주는 것은 "기능이 고장났다"는 잘못된 신호다. */
+    if(img) img.addEventListener("error",()=>{ img.style.display="none";
+      if(hint) hint.textContent=(LANG==="en")
+        ? "QR image unavailable offline — copy the address instead."
+        : "오프라인에서는 QR 이미지를 불러올 수 없어요. 주소를 복사해 주세요."; });
+    btn.addEventListener("click",()=>{
+      const on=panel.classList.toggle("on");
+      if(on){
+        mq("qr_open");
+        if(urlEl) urlEl.textContent=shareUrl;
+        const isCanonical = shareUrl===CANONICAL_URL;
+        if(!isCanonical){
+          if(img){ img.style.display="none"; }
+          if(hint) hint.textContent=(LANG==="en")
+            ? "This copy is not served from the canonical address, so the QR is hidden to avoid pointing somewhere else. Copy the address instead."
+            : "지금 열려 있는 곳이 정본 주소가 아니라서, 엉뚱한 곳을 가리키지 않도록 QR을 감췄어요. 주소를 복사해 주세요.";
+        }else{
+          if(img){
+            img.style.display="";
+            img.src="./qr.png?v="+encodeURIComponent(((($("#verBadge")||{}).textContent)||"").trim());
+          }
+          if(hint) hint.textContent=(LANG==="en")
+            ? "Point your phone camera at the code."
+            : "폰 카메라를 코드에 대면 바로 열려요.";
+        }
+      }
+      btn.setAttribute("aria-expanded", on?"true":"false");
+    });
+    btn.setAttribute("aria-expanded","false");
+    if(copyBtn) copyBtn.addEventListener("click",()=>{
+      const done=()=>showSnack((LANG==="en"?"Address copied: ":"주소 복사됨: ")+shareUrl,6000);
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(shareUrl).then(done,()=>{ fallbackCopy(shareUrl); done(); });
+      } else { fallbackCopy(shareUrl); done(); }
+      mq("qr_copy");
+    });
+  })();
   $("#btnRv").addEventListener("click",()=>{
     const code=rvBuild(); mq("rv_copy");
     const done=()=>showSnack(LANG==="en"?("Copied: "+code):("복사됨: "+code),8000);
