@@ -996,7 +996,7 @@
     <div class="si-tx"><b>테스트 회신 코드</b><span id="rvPreview">체험 결과를 한 줄로 복사</span></div>
     <button class="act" id="btnRv">복사</button>
   </div>
-  <div style="text-align:center;font-size:11.5px;opacity:.55;margin-top:10px;" id="verBadge">OmniCounter v22.9</div>
+  <div style="text-align:center;font-size:11.5px;opacity:.55;margin-top:10px;" id="verBadge">OmniCounter v23.0</div>
   <div class="sheet-actions" style="margin-top:10px;"><button class="dock-btn primary" id="setClose" style="width:100%;justify-content:center;">닫기</button></div>
 </div>
 
@@ -1119,6 +1119,19 @@
   };
   const CAT_I18N={ "운동·피트니스":"Fitness","건강·습관":"Health & Habits","공부·자기계발":"Study & Growth","마음챙김·절제":"Mindfulness","이어가기·경과":"Days Since","생활·업무":"Life & Work","게임·점수":"Games & Scores" };
   const TX_EN={
+    /* v23.0 인지형 템플릿 6종 — 이름·이상문구 */
+    "흡연 충동 알아차리기":"Notice the urge to smoke",
+    "술 생각 알아차리기":"Notice the thought of a drink",
+    "폰 집는 순간 알아차리기":"Notice reaching for your phone",
+    "군것질 생각 알아차리기":"Notice the snack craving",
+    "불안이 올라올 때":"When anxiety rises",
+    "비교하는 순간":"Moments of comparing",
+    "충동이 지나가는 걸 지켜보는 사람":"someone who watches the urge pass",
+    "마시기 전에 한 번 알아차리는 저녁":"evenings where you notice before you pour",
+    "손이 먼저 가기 전에 알아차리는 하루":"a day where you notice before your hand moves",
+    "배고픔과 습관을 구분하는 사람":"someone who can tell hunger from habit",
+    "불안을 밀어내지 않고 알아차리는 하루":"a day of noticing anxiety instead of pushing it away",
+    "남과 견주는 순간을 알아차리는 사람":"someone who notices the moment they compare",
     "목표 템플릿":"Goal templates",
     /* v22.5 W4-2 템플릿 8종 */
     "스트레칭 하루 10분":"Stretch 10 min a day",
@@ -1436,9 +1449,28 @@
 
   /* ================= 데이터 ================= */
   const LS="omni.app.v3";
-  const SCHEMA_VERSION=4;        // v22.4: settings.quizHistory 가산 (v22.3=baseUnit · v22.2=baseline·idealText·templateId)
+  const SCHEMA_VERSION=5;        // v23.0: 유형 격자 가산(kind·target·polarity·input·step·display·purpose) — type 필드는 보존
+                                 // (v22.4=quizHistory · v22.3=baseUnit · v22.2=baseline·idealText·templateId)
   const BACKUP_KEY=LS+".backup_v1";
   function backupKeyFor(from){ return from>=2 ? (BACKUP_KEY+"_s"+from) : BACKUP_KEY; }
+  /* ── v23.0 유형 격자 ──
+     설계(전유형설계 v1.0)는 유형을 두 축의 곱으로 정의한다:
+       성공의 정의(도달/억제/유지/관찰) × 시간의 취급(개수/간격/지속) → 6종.
+     v23.0은 그 **자리만** 만든다. 화면 동작은 아직 기존 3종 그대로다.
+     지금 자리를 만드는 이유는 하나뿐이다 — **실사용자 0명인 지금이 마이그레이션
+     위험이 0인 유일한 시점**이기 때문이다. 발송 이후에는 같은 변경의 비용이 급증한다.
+     규율: 가산만 한다. `type`을 지우지 않는다(구버전 캐시가 살아 있는 기기와 공존). */
+  const KIND_OF={count:"accumulate",aware:"notice",elapsed:"since"};
+  function fillKind(c){
+    c.kind=KIND_OF[c.type]||"accumulate";
+    if(!c.target) c.target={mode:(c.kind==="accumulate"&&c.goal>0)?"goal":"none", value:c.goal||0, unit:c.baseUnit||""};
+    if(c.polarity==null) c.polarity=(c.kind==="notice")?"0":"+";
+    if(!c.input) c.input=(c.kind==="since")?"reset":"tap";
+    if(c.step==null) c.step=1;
+    if(!c.display) c.display="gained";
+    if(c.purpose===undefined) c.purpose=null;
+    return c;
+  }
   const AWARE_COLOR="#7B8794"; // v18: load()가 migrate에서 참조하므로 db=load() 이전에 선언(TDZ 데이터손실 버그 B-8 수정)
   let db=load();
   function load(){
@@ -1476,6 +1508,7 @@
       if(!c.createdAt) c.createdAt = c.events&&c.events.length? Math.min(...c.events.map(e=>e.t)) : Date.now();
       if(c.type==="aware") c.color=AWARE_COLOR;
       if(c.targetAt===undefined) c.targetAt=null; // v20: 경과형 목표일(D-Day)
+      if(!c.kind) fillKind(c);                    // v23.0: 유형 격자 — 멱등, events 무변경
     });
     if(!d.restDays) d.restDays=[]; // v20: 쉼표(계획 휴식)
     // v22.2~v22.3 순차 마이그레이션 — 출발 버전별 백업 1회 저장 + 가산 필드만 + 개수 불변 assert
@@ -1498,13 +1531,16 @@
       if(_from<4){                       // s3 → s4 : 진단 이력(설정 측 가산 · 카운터 무변경)
         if(!Array.isArray(d.settings.quizHistory)) d.settings.quizHistory=[];
       }
+      if(_from<5){                       // s4 → s5 : 유형 격자(6종)를 받을 자리 — 전부 가산, events 무변경
+        d.counters.forEach(c=>fillKind(c));
+      }
       if(d.counters.length!==before) throw new Error("migration counter count mismatch");
       d.schemaVersion=SCHEMA_VERSION;
       d.__migrated=true;
     }
     return d;
   }
-  function seed(name,goal,ord){ return {id:uid(),name,goal,order:ord,color:COLORS[ord%COLORS.length],type:"count",cycle:"total",voice:false,createdAt:Date.now(),events:[]}; }
+  function seed(name,goal,ord){ return fillKind({id:uid(),name,goal,order:ord,color:COLORS[ord%COLORS.length],type:"count",cycle:"total",voice:false,createdAt:Date.now(),events:[]}); }
   function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
   let saveWarned=false;
   function save(){
@@ -2080,11 +2116,11 @@
       const nc={id:newId,name,goal:(editType==="elapsed"?0:goal),order:db.counters.length,color:editColor,
         type:editType,cycle:(editType==="elapsed"?"total":editCycle),voice:editVoice,createdAt:Date.now(),events:[],
         targetAt:(editType==="elapsed"?targetAt:null),baseline:baseVal,idealText:idealVal,templateId:null};
-      db.counters.push(nc);
+      db.counters.push(fillKind(nc));
       if(editType==="aware"&&editPair){
         const pairId=uid();
-        db.counters.push({id:pairId,name:name+" · 참아냄",goal:0,order:db.counters.length,color:AWARE_COLOR,
-          type:"aware",cycle:"total",voice:editVoice,createdAt:Date.now(),pairId:newId,events:[]});
+        db.counters.push(fillKind({id:pairId,name:name+" · 참아냄",goal:0,order:db.counters.length,color:AWARE_COLOR,
+          type:"aware",cycle:"total",voice:editVoice,createdAt:Date.now(),pairId:newId,events:[]}));
         nc.pairId=pairId;
       }
     }
@@ -3049,6 +3085,18 @@
       base:8, unit:"무지출일/월", ideal:"쓰기 전에 한 번 멈추는 사람", col:"#E5688A"},
     {id:"t_sns14", e:"📵", n:"SNS 절제 14일", cat:"절제", type:"count", goal:14, cycle:"total", days:14,
       base:2, unit:"절제일/2주", ideal:"화면보다 눈앞이 먼저인 하루", col:"#9B8CFB"},
+    {id:"t_urge_smoke", e:"🚬", n:"흡연 충동 알아차리기", cat:"마음챙김", type:"aware", goal:0, cycle:"total", days:null,
+      base:null, unit:"", ideal:"충동이 지나가는 걸 지켜보는 사람", col:"#7B8794"},
+    {id:"t_urge_drink", e:"🍺", n:"술 생각 알아차리기", cat:"마음챙김", type:"aware", goal:0, cycle:"total", days:null,
+      base:null, unit:"", ideal:"마시기 전에 한 번 알아차리는 저녁", col:"#7B8794"},
+    {id:"t_urge_phone", e:"📱", n:"폰 집는 순간 알아차리기", cat:"마음챙김", type:"aware", goal:0, cycle:"total", days:null,
+      base:null, unit:"", ideal:"손이 먼저 가기 전에 알아차리는 하루", col:"#7B8794"},
+    {id:"t_urge_snack", e:"🍫", n:"군것질 생각 알아차리기", cat:"마음챙김", type:"aware", goal:0, cycle:"total", days:null,
+      base:null, unit:"", ideal:"배고픔과 습관을 구분하는 사람", col:"#7B8794"},
+    {id:"t_anxious", e:"🌊", n:"불안이 올라올 때", cat:"마음챙김", type:"aware", goal:0, cycle:"total", days:null,
+      base:null, unit:"", ideal:"불안을 밀어내지 않고 알아차리는 하루", col:"#7B8794"},
+    {id:"t_compare", e:"👀", n:"비교하는 순간", cat:"마음챙김", type:"aware", goal:0, cycle:"total", days:null,
+      base:null, unit:"", ideal:"남과 견주는 순간을 알아차리는 사람", col:"#7B8794"},
     {id:"t_water8", e:"💧", n:"물 하루 8잔(2L)", cat:"건강", type:"count", goal:8, cycle:"day", days:null,
       base:3, unit:"잔/일", ideal:"하루 2L가 당연한 사람", col:"#5FB0F0"},
     {id:"t_walk8000", e:"👣", n:"걷기 하루 8천 보", cat:"건강", type:"count", goal:8000, cycle:"day", days:null,
@@ -3095,12 +3143,19 @@
   const TCATS=["전체","절제","건강","운동","공부","생활","관계","일"];
   let gMode="tpl", tCat=0;
 
+  /* B-32(v23.0): 인지형(aware)은 목표도 한도도 없는 유형인데, 카드가 "목표 0 · 0에서 시작"을
+     찍고 있었다. 0을 목표로 제시하는 순간 사용자는 "0으로 만들어야 하는 것"으로 읽는다 —
+     그건 절제형(R2)의 의미이지 인지형의 의미가 아니다.
+     설계(전유형설계 v1.0 §3-③): 인지형은 증가·감소에 어떤 평가어도 붙이지 않는다.
+     따라서 목표 자리에는 **유형의 뜻**을, 이동 자리에는 **이상 문구만** 놓는다. */
   function tplGoalLabel(p){
+    if(p.type==="aware") return (LANG==="en"?"No goal":"목표 없음");
     if(p.type==="elapsed") return (LANG==="en"?("D-"+p.days):(p.days+"일 목표"));
     const cyc = p.cycle==="day" ? (LANG==="en"?"/day":"/일") : (p.days?(LANG==="en"?(" in "+p.days+"d"):(" · "+p.days+"일 안에")):"");
     return (LANG==="en"?"Goal ":"목표 ")+p.goal+cyc;
   }
   function tplMoveLabel(p){
+    if(p.type==="aware") return (LANG==="en"?"just noticing":"판단 없이 알아차리기")+" → "+tx(p.ideal);
     const from=(p.base>0? (LANG==="en"?("now "+p.base+" "+tx(p.unit)):("지금 "+p.base+p.unit)) : (LANG==="en"?"from zero":"0에서 시작"));
     return from+" → "+tx(p.ideal);
   }
@@ -3135,7 +3190,7 @@
     const nc={id:uid(), name:tx(p.n), goal:(p.type==="elapsed"?0:p.goal), order:db.counters.length, color:p.col,
       type:p.type, cycle:(p.type==="elapsed"?"total":p.cycle), voice:false, createdAt:Date.now(), events:[],
       targetAt:targetAt, baseline:baseVal, idealText:p.ideal, templateId:p.id, baseUnit:(p.unit||"")};
-    db.counters.push(nc); save(); mq("tpl_create"); buzz(12);
+    db.counters.push(fillKind(nc)); save(); mq("tpl_create"); buzz(12);
     renderDash(); openSingle(nc.id);
     showSnack(LANG==="en" ? ("Added — tap the screen to log your first one") : ("추가됐어요 — 화면을 탭해 첫 기록을 남겨 보세요"),6000);
   }
@@ -3213,33 +3268,33 @@
   const QUIZ_AREAS=[
     {id:"body",e:"💪",ko:"몸이 무거워요",en:"My body feels heavy",koS:"체력 · 활동량 · 컨디션",enS:"Stamina, activity, condition",
      ideals:[
-       {id:"b1",ko:"계단이 가볍고 매일 움직이는 몸",en:"A body that moves daily and takes stairs easily",tpl:["t_walk8000","t_squat50","t_stretch10","t_run5k"]},
-       {id:"b2",ko:"물과 아침이 규칙적인 하루",en:"A day with regular water and mornings",tpl:["t_water8","t_morning21","t_sleep21"]}
+       {id:"b1",intent:"increase",ko:"계단이 가볍고 매일 움직이는 몸",en:"A body that moves daily and takes stairs easily",tpl:["t_walk8000","t_squat50","t_stretch10","t_run5k"]},
+       {id:"b2",intent:"increase",ko:"물과 아침이 규칙적인 하루",en:"A day with regular water and mornings",tpl:["t_water8","t_morning21","t_sleep21"]}
      ]},
     {id:"mind",e:"🧘",ko:"끊고 싶은 게 있어요",en:"There is something I want to quit",koS:"담배 · 술 · SNS",enS:"Smoking, alcohol, social media",
      ideals:[
-       {id:"m1",ko:"담배·술 없이도 편안한 저녁",en:"Evenings that feel fine without smoking or drinking",tpl:["t_smoke30","t_sober21"]},
-       {id:"m2",ko:"화면보다 눈앞이 먼저인 하루",en:"A day where what is in front of me comes first",tpl:["t_sns14","t_meditate10","t_gratitude21"]}
+       {id:"m1",ko:"담배·술 없이도 편안한 저녁",en:"Evenings that feel fine without smoking or drinking",intent:"reduce",tpl:["t_smoke30","t_sober21","t_urge_smoke","t_urge_drink"]},
+       {id:"m2",ko:"화면보다 눈앞이 먼저인 하루",en:"A day where what is in front of me comes first",intent:"notice",tpl:["t_urge_phone","t_sns14","t_meditate10"]}
      ]},
     {id:"grow",e:"📚",ko:"성장이 멈춘 것 같아요",en:"I feel like I stopped growing",koS:"공부 · 독서 · 아침 루틴",enS:"Study, reading, morning routine",
      ideals:[
-       {id:"g1",ko:"매일 책과 함께하는 사람",en:"Someone who reads every day",tpl:["t_read20","t_books20","t_english20"]},
-       {id:"g2",ko:"아침이 내 것인 하루",en:"Mornings that belong to me",tpl:["t_morning21","t_meditate10","t_sleep21"]}
+       {id:"g1",intent:"increase",ko:"매일 책과 함께하는 사람",en:"Someone who reads every day",tpl:["t_read20","t_books20","t_english20"]},
+       {id:"g2",intent:"increase",ko:"아침이 내 것인 하루",en:"Mornings that belong to me",tpl:["t_morning21","t_meditate10","t_sleep21"]}
      ]},
     {id:"money",e:"💰",ko:"돈이 새는 것 같아요",en:"Money keeps slipping away",koS:"지출 · 소비 습관",enS:"Spending habits",
      ideals:[
-       {id:"n1",ko:"쓰기 전에 한 번 멈추는 사람",en:"Someone who pauses before spending",tpl:["t_nospend30","t_sns14","t_nocafe20"]},
-       {id:"n2",ko:"불필요한 소비가 줄어든 달",en:"A month with less unnecessary spending",tpl:["t_nospend30","t_nodelivery","t_nocafe20"]}
+       {id:"n1",ko:"쓰기 전에 한 번 멈추는 사람",en:"Someone who pauses before spending",intent:"notice",tpl:["t_urge_snack","t_nospend30","t_nocafe20"]},
+       {id:"n2",intent:"reduce",ko:"불필요한 소비가 줄어든 달",en:"A month with less unnecessary spending",tpl:["t_urge_snack","t_nospend30","t_nodelivery"]}
      ]},
     {id:"rel",e:"🤝",ko:"사람들과 멀어진 것 같아요",en:"I feel distant from people",koS:"가족 · 친구 · 표현",enS:"Family, friends, expression",
      ideals:[
-       {id:"r1",ko:"안부를 먼저 묻는 사람",en:"Someone who reaches out first",tpl:["t_reachout3","t_thanks30","t_familymeal3"]},
-       {id:"r2",ko:"고마움이 표현되는 하루",en:"A day where gratitude gets said out loud",tpl:["t_thanks30","t_reachout3","t_gratitude21"]}
+       {id:"r1",intent:"increase",ko:"안부를 먼저 묻는 사람",en:"Someone who reaches out first",tpl:["t_reachout3","t_thanks30","t_familymeal3"]},
+       {id:"r2",intent:"increase",ko:"고마움이 표현되는 하루",en:"A day where gratitude gets said out loud",tpl:["t_thanks30","t_reachout3","t_gratitude21"]}
      ]},
     {id:"work",e:"💼",ko:"일에 끌려다녀요",en:"Work is dragging me around",koS:"집중 · 마감 · 경계",enS:"Focus, closure, boundaries",
      ideals:[
-       {id:"w1",ko:"하루 한 번은 깊이 들어가는 사람",en:"Someone who goes deep once a day",tpl:["t_deepwork1","t_morning21"]},
-       {id:"w2",ko:"일을 두고 퇴근하는 사람",en:"Someone who leaves work at work",tpl:["t_shutdown21","t_meditate10","t_inbox21"]}
+       {id:"w1",intent:"increase",ko:"하루 한 번은 깊이 들어가는 사람",en:"Someone who goes deep once a day",tpl:["t_deepwork1","t_morning21"]},
+       {id:"w2",intent:"reduce",ko:"일을 두고 퇴근하는 사람",en:"Someone who leaves work at work",tpl:["t_urge_phone","t_shutdown21","t_inbox21"]}
      ]}
   ];
   const QUIZ_LEVELS=[
@@ -3249,6 +3304,12 @@
     {id:"L3",e:"🌳",ko:"꽤 하는 편이에요",en:"Pretty consistently",f:.75}
   ];
   const TPL_WHY={
+    t_urge_smoke:{ko:"참으라고 하지 않아요. 충동이 왔다는 사실만 남기면, 언제·얼마나 오는지가 보여요.",en:"It does not ask you to resist. Just mark that the urge came, and its pattern shows."},
+    t_urge_drink:{ko:"마셨는지 안 마셨는지를 묻지 않아요. 생각이 난 순간만 세면 됩니다.",en:"It never asks whether you drank. Just tap when the thought shows up."},
+    t_urge_phone:{ko:"스크린타임과 달리 '손이 간 순간'을 세요. 습관의 방아쇠가 드러나요.",en:"Unlike screen time, it counts the reach. The trigger becomes visible."},
+    t_urge_snack:{ko:"먹었는지는 세지 않아요. 생각난 순간만 세면 배고픔과 습관이 갈라져요.",en:"It does not count what you ate — only the thought, which separates hunger from habit."},
+    t_anxious:{ko:"불안을 줄이려 하지 않고 알아차리기만 해요. 좋고 나쁨을 매기지 않습니다.",en:"No goal to lower it — just noticing. Nothing here is scored good or bad."},
+    t_compare:{ko:"비교를 나쁘다고 하지 않아요. 언제 그런지가 보이면 그다음이 생깁니다.",en:"Comparing is not called bad here. Seeing when it happens is what opens the next step."},
     t_smoke30:{ko:"하루 한 번만 확인하면 되고, 쌓인 날수 자체가 성과라 되돌리기 아까워져요.",en:"One check a day, and the days you have stacked become the reward."},
     t_sober21:{ko:"저녁마다 오는 선택을 숫자 하나로 바꿔 주어서, 결정이 단순해져요.",en:"It turns a nightly decision into a single number, so choosing gets simpler."},
     t_nospend30:{ko:"'안 쓴 날'을 세면 절약이 참기가 아니라 모으기가 돼요.",en:"Counting no-spend days turns saving into collecting instead of resisting."},
@@ -4140,7 +4201,7 @@
     if(!dlSpec){ hideDl(); return; }
     const nc={id:uid(),name:dlSpec.name,goal:dlSpec.goal,order:db.counters.length,color:dlSpec.color,
       type:dlSpec.type,cycle:dlSpec.cycle,voice:false,createdAt:Date.now(),events:[],targetAt:null};
-    db.counters.push(nc); save(); mq("dl_done"); buzz(12);
+    db.counters.push(fillKind(nc)); save(); mq("dl_done"); buzz(12);
     hideDl(); renderDash(); openSingle(nc.id);
   });
   function handleDeeplink(){

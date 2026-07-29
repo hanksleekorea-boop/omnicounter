@@ -1,4 +1,4 @@
-/* OmniCounter 서비스워커 · v22.9 · 2026-07-28
+/* OmniCounter 서비스워커 · v23.0 · 2026-07-29
  *
  * 설계 원칙 — 이 파일이 릴리스 정합성을 깨지 않게 하는 것이 최우선이다(v16 ■13.3 / G1).
  *   1) navigation(문서) 요청은 **network-first**. 새 배포가 즉시 사용자에게 도달해야 한다.
@@ -18,7 +18,7 @@
  */
 "use strict";
 
-const VERSION = "v22.9";
+const VERSION = "v23.0";
 const CACHE = "omni-" + VERSION;
 const PRECACHE = ["./", "./index.html", "./qr.png"];
 
