@@ -1,4 +1,4 @@
-/* OmniCounter 서비스워커 · v24.1-alpha.2 · 2026-08-01
+/* OmniCounter 서비스워커 · v24.1-alpha.3 · 2026-08-01
  *
  * 설계 원칙 — 이 파일이 릴리스 정합성을 깨지 않게 하는 것이 최우선이다(v16 ■13.3 / G1).
  *   1) navigation(문서) 요청은 **network-first**. 새 배포가 즉시 사용자에게 도달해야 한다.
@@ -18,9 +18,9 @@
  */
 "use strict";
 
-const VERSION = "v24.1-alpha.2";
+const VERSION = "v24.1-alpha.3";
 const CACHE = "omni-" + VERSION;
-const PRECACHE = ["./", "./index.html", "./ux-v241a2.js", "./alpha-v241a2.js", "./qr.png"];
+const PRECACHE = ["./", "./index.html", "./ux-v241a3.js", "./alpha-v241a3.js", "./qr.png"];
 
 self.addEventListener("install", event => {
   self.skipWaiting();
