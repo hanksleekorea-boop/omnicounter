@@ -1,8 +1,9 @@
 {
-  "version": "v23.0",
-  "sha256": "1e78232eb027daf966f4efdbfb4d5d7aa6da0cd3fadd1bd8b348d001c6383ecc",
-  "bytes": 293135,
-  "released": "2026-07-29",
+  "version": "v23.3",
+  "sha256": "452142f0b475f0d0e06dd8f3e05a792c3204b91befd1463eb662c418135f3edd",
+  "bytes": 304002,
+  "gzipNodeL9": 91578,
+  "released": "2026-08-01",
   "markers": [
     "#verBadge",
     "#quiz",
@@ -25,13 +26,19 @@
     "#btnQr",
     "#qrPanel"
   ],
-  "schemaVersion": 4,
-  "templates": 24,
+  "schemaVersion": 5,
+  "templates": 35,
+  "types": 6,
+  "cycles": 4,
+  "quizAreas": 6,
+  "quizLevels": 4,
+  "rvSteps": 8,
   "rvRequiredSteps": 4,
   "assets": [
     "qr.png",
     "qr.svg"
   ],
   "serviceWorker": "sw.js (navigation=network-first · qr.png precached)",
-  "notes": "폰 핸드오프 QR(설정) + qr.png/svg 배포. 스캔카드는 배포 제외(메신저 전달용 로컬 산출물). 정본 아닌 오리진에서는 QR 미표시."
+  "generatedBy": "version_contract_test.js --emit (산출물에서 자동 생성 — 손으로 수정하지 않는다)",
+  "notes": "v23.3 목적-영역 24셀 진입, 6가지 기록 방식, A-34 검색, 습관 잔디, 복귀 보정 시간 타이머, 단위/증분, 24시간 유형 복원"
 }
