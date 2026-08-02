@@ -1,9 +1,9 @@
 {
   "version": "v26.0-alpha.1",
-  "status": "local-candidate",
-  "released": null,
+  "status": "public-alpha",
+  "released": "2026-08-02",
   "schemaVersion": 6,
-  "generatedAt": "2026-08-02T12:14:52.944Z",
+  "generatedAt": "2026-08-02T12:51:34.451Z",
   "generatedBy": "build_v26_0_alpha_1.js",
   "firstLoadAssets": [
     "index.html",
@@ -14,13 +14,13 @@
     "dashboard-v260a1.js"
   ],
   "standalonePreview": "preview.html",
-  "totalFirstLoadGzip": 12746,
+  "totalFirstLoadGzip": 12747,
   "firstLoadBudget": 110000,
   "files": {
     "index.html": {
       "bytes": 23630,
-      "gzipNodeL9": 7092,
-      "sha256": "7c3fa0d4e0cb3861c25033befe73d1e82033d4bdf035c61dcf189c652f1c2cd8"
+      "gzipNodeL9": 7093,
+      "sha256": "0ac63d2e51dd8058cc72b1bc7f63a806167206c331d68c2e0290f0fda20ba663"
     },
     "app-shell-v260a1.js": {
       "bytes": 1978,
@@ -44,8 +44,8 @@
     },
     "preview.html": {
       "bytes": 55747,
-      "gzipNodeL9": 17822,
-      "sha256": "d5b5bcc2c1b599d92d25c349fe9b3bbcffd651221c9d99a77f61d061ffce51c3"
+      "gzipNodeL9": 17823,
+      "sha256": "a0a57fd5da31304d63fe8d00f9840db5641b0086d4f7381d89a468db9bd71253"
     }
   },
   "rollback": {
@@ -54,9 +54,9 @@
   },
   "evidence": {
     "I": true,
-    "L": "pending",
+    "L": true,
     "B": true,
-    "P": false,
+    "P": true,
     "D": "UNKNOWN",
     "U": 0
   }
