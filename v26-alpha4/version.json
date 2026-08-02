@@ -1,7 +1,7 @@
 {
   "version": "v26.0-alpha.4",
-  "status": "release-candidate",
-  "released": null,
+  "status": "public-alpha",
+  "released": "2026-08-03",
   "schemaVersion": 6,
   "generatedAt": "2026-08-02T19:44:30.932Z",
   "generatedBy": "build_v26_0_alpha_4.js",
@@ -80,9 +80,9 @@
   },
   "evidence": {
     "I": true,
-    "L": "pending",
+    "L": true,
     "B": true,
-    "P": false,
+    "P": true,
     "D": "UNKNOWN",
     "U": 0
   }
