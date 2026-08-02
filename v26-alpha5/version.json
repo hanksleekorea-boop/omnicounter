@@ -1,7 +1,7 @@
 {
   "version": "v26.0-alpha.5",
-  "status": "release-candidate",
-  "released": null,
+  "status": "public-alpha",
+  "released": "2026-08-03",
   "schemaVersion": 6,
   "generatedAt": "2026-08-02T20:23:53.571Z",
   "generatedBy": "build_v26_0_alpha_5.js",
@@ -88,7 +88,7 @@
     "I": true,
     "L": true,
     "B": true,
-    "P": false,
+    "P": true,
     "D": "UNKNOWN",
     "U": 0
   }
