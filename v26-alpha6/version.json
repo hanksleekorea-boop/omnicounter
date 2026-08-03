@@ -1,0 +1,101 @@
+{
+  "version": "v26.0-alpha.6",
+  "status": "release-candidate",
+  "released": null,
+  "schemaVersion": 6,
+  "generatedAt": "2026-08-03T03:17:00.049Z",
+  "generatedBy": "build_v26_0_alpha_6.js",
+  "firstLoadAssets": [
+    "index.html",
+    "app-shell-v260a1.js",
+    "core-v260a1.js"
+  ],
+  "lazyAssets": [
+    "dashboard-v260a1.js",
+    "social-v260a2.js",
+    "identity-v260a3.js",
+    "rls-policy-v260a4.js",
+    "backend-emulator-v260a5.js",
+    "authenticated-sync-v260a6.js"
+  ],
+  "contractAssets": [
+    "backend-schema-v260a4.sql"
+  ],
+  "standalonePreview": "preview.html",
+  "totalFirstLoadGzip": 12986,
+  "firstLoadBudget": 110000,
+  "files": {
+    "index.html": {
+      "bytes": 24662,
+      "gzipNodeL9": 7332,
+      "sha256": "423b541c506a1c77503f9dcb872300a4794ffec9c42b2f15e5b1bfa327d7bd8f"
+    },
+    "app-shell-v260a1.js": {
+      "bytes": 1978,
+      "gzipNodeL9": 1163,
+      "sha256": "516cfd277ea103e32b73a9fd47fac2c04fb4200ff1748d2d1a503fada4bc0e38"
+    },
+    "core-v260a1.js": {
+      "bytes": 11154,
+      "gzipNodeL9": 4491,
+      "sha256": "01760d07d72dc79a72cb5c01cecade17716877c617771e65cbf7a8ae11285e43"
+    },
+    "dashboard-v260a1.js": {
+      "bytes": 25695,
+      "gzipNodeL9": 9078,
+      "sha256": "c7522ed106037d12949322007cb4e2e2e122712c37b80ba55cf4b5b8a0d38f5f"
+    },
+    "social-v260a2.js": {
+      "bytes": 4311,
+      "gzipNodeL9": 1861,
+      "sha256": "c0cf64648cd9da1a2015acaa01b1747aed2380a97e96be35892e1d85a58986cc"
+    },
+    "identity-v260a3.js": {
+      "bytes": 6116,
+      "gzipNodeL9": 2429,
+      "sha256": "f369e903e0f36ad7e5857a78ed1229404e069f4ca414396adec2689ed767f7f3"
+    },
+    "rls-policy-v260a4.js": {
+      "bytes": 3642,
+      "gzipNodeL9": 1116,
+      "sha256": "07e773b439fb0958a6e9d34e2c051f206792a975d05a8dba682b027b9ec8a4f3"
+    },
+    "backend-emulator-v260a5.js": {
+      "bytes": 4881,
+      "gzipNodeL9": 1899,
+      "sha256": "96ff6eeea6ee353bac0e4c629868e595fec2df5469a0e0bbbadbf0a9e133421c"
+    },
+    "authenticated-sync-v260a6.js": {
+      "bytes": 3377,
+      "gzipNodeL9": 1480,
+      "sha256": "d6670e6d057bdc60719b3828ad52df85231415fa61d11115c3f07bb7b77b5b1d"
+    },
+    "backend-schema-v260a4.sql": {
+      "bytes": 7418,
+      "gzipNodeL9": 1321,
+      "sha256": "832daeb8bb1c01a34e3bfdfd97ca82c85b561a907563e417712c38c4703e071c"
+    },
+    "sw.js": {
+      "bytes": 1602,
+      "gzipNodeL9": 766,
+      "sha256": "f9ebd602193dd4e9be1ed5b3943bb546955df90850c1efca07ff07ad164737a7"
+    },
+    "preview.html": {
+      "bytes": 87311,
+      "gzipNodeL9": 27028,
+      "sha256": "b35129d017d9ec041cc92c16aef610aefcc8fcfeafdd29e67a89fef2c9414fdf"
+    }
+  },
+  "rollback": {
+    "version": "v24.1-alpha.3",
+    "sha256": "f83ebe111588aaddb58d1584e91da93547a009825de4f12d7e9aa58c1c208a62"
+  },
+  "evidence": {
+    "I": true,
+    "L": true,
+    "B": true,
+    "P": false,
+    "D": "UNKNOWN",
+    "U": 0
+  }
+}
