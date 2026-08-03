@@ -1,0 +1,113 @@
+{
+  "version": "v26.0-alpha.8",
+  "status": "release-candidate",
+  "released": "2026-08-03",
+  "schemaVersion": 6,
+  "generatedAt": "2026-08-03T10:53:47.856Z",
+  "generatedBy": "build_v26_0_alpha_8.js",
+  "firstLoadAssets": [
+    "index.html",
+    "app-shell-v260a1.js",
+    "core-v260a1.js"
+  ],
+  "lazyAssets": [
+    "dashboard-v260a1.js",
+    "social-v260a2.js",
+    "identity-v260a3.js",
+    "rls-policy-v260a4.js",
+    "backend-emulator-v260a5.js",
+    "authenticated-sync-v260a6.js",
+    "retry-policy-v260a7.js",
+    "circle-lab-v260a8.js"
+  ],
+  "contractAssets": [
+    "backend-schema-v260a4.sql"
+  ],
+  "standalonePreview": "preview.html",
+  "totalFirstLoadGzip": 13111,
+  "firstLoadBudget": 110000,
+  "files": {
+    "index.html": {
+      "bytes": 25077,
+      "gzipNodeL9": 7456,
+      "sha256": "4b6c20b2fabf73581de661edb366f8fc36d78a5cd68d087c330499b30ef683d7"
+    },
+    "app-shell-v260a1.js": {
+      "bytes": 1978,
+      "gzipNodeL9": 1164,
+      "sha256": "a3f965fcafb8bf4b5b32e4dd25c167145f6e3c571a163a1c659de8a8f07d9623"
+    },
+    "core-v260a1.js": {
+      "bytes": 11154,
+      "gzipNodeL9": 4491,
+      "sha256": "01760d07d72dc79a72cb5c01cecade17716877c617771e65cbf7a8ae11285e43"
+    },
+    "dashboard-v260a1.js": {
+      "bytes": 31055,
+      "gzipNodeL9": 10488,
+      "sha256": "fc347d4dd5a8383bb4c1ea741299c18ce490484a704e7159e2486983cc5d6ac9"
+    },
+    "social-v260a2.js": {
+      "bytes": 4772,
+      "gzipNodeL9": 2010,
+      "sha256": "2ea807c2c3aa3464930f20d26d6ead601a229c6682527e01aad786922bc37df7"
+    },
+    "identity-v260a3.js": {
+      "bytes": 6116,
+      "gzipNodeL9": 2429,
+      "sha256": "f369e903e0f36ad7e5857a78ed1229404e069f4ca414396adec2689ed767f7f3"
+    },
+    "rls-policy-v260a4.js": {
+      "bytes": 3642,
+      "gzipNodeL9": 1116,
+      "sha256": "07e773b439fb0958a6e9d34e2c051f206792a975d05a8dba682b027b9ec8a4f3"
+    },
+    "backend-emulator-v260a5.js": {
+      "bytes": 4881,
+      "gzipNodeL9": 1899,
+      "sha256": "96ff6eeea6ee353bac0e4c629868e595fec2df5469a0e0bbbadbf0a9e133421c"
+    },
+    "authenticated-sync-v260a6.js": {
+      "bytes": 3457,
+      "gzipNodeL9": 1530,
+      "sha256": "de09b1a0cc4b6f810358b75165a0e047095bd93ec93d2e2fbb591872aa264826"
+    },
+    "retry-policy-v260a7.js": {
+      "bytes": 4884,
+      "gzipNodeL9": 1877,
+      "sha256": "9411a965cc2100edd568423d8bd3c95ddeb5eaeb9e3a54e37b8ed5a7ab369106"
+    },
+    "circle-lab-v260a8.js": {
+      "bytes": 6378,
+      "gzipNodeL9": 2518,
+      "sha256": "4cc77f253d02e2689bc9f8485c9ba3e92feb2d4d4a33dc0b8ca0c1b6d7c9c831"
+    },
+    "backend-schema-v260a4.sql": {
+      "bytes": 7418,
+      "gzipNodeL9": 1321,
+      "sha256": "832daeb8bb1c01a34e3bfdfd97ca82c85b561a907563e417712c38c4703e071c"
+    },
+    "sw.js": {
+      "bytes": 1656,
+      "gzipNodeL9": 786,
+      "sha256": "eec897fc3b1247fedaa06427b247520269947c091a13c6b355da8f7bece614ec"
+    },
+    "preview.html": {
+      "bytes": 105112,
+      "gzipNodeL9": 31876,
+      "sha256": "c896b7e38f409e45b380e9c0a2a1e96a8f9dc0e5caecd14c703ec6f03e0691c8"
+    }
+  },
+  "rollback": {
+    "version": "v24.1-alpha.3",
+    "sha256": "f83ebe111588aaddb58d1584e91da93547a009825de4f12d7e9aa58c1c208a62"
+  },
+  "evidence": {
+    "I": true,
+    "L": true,
+    "B": true,
+    "P": false,
+    "D": "UNKNOWN",
+    "U": 0
+  }
+}
