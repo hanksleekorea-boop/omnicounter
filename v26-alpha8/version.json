@@ -1,6 +1,6 @@
 {
   "version": "v26.0-alpha.8",
-  "status": "release-candidate",
+  "status": "public-alpha",
   "released": "2026-08-03",
   "schemaVersion": 6,
   "generatedAt": "2026-08-03T10:53:47.856Z",
@@ -106,7 +106,7 @@
     "I": true,
     "L": true,
     "B": true,
-    "P": false,
+    "P": true,
     "D": "UNKNOWN",
     "U": 0
   }
