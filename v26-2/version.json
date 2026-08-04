@@ -3,7 +3,7 @@
   "status": "release-ready",
   "released": null,
   "schemaVersion": 6,
-  "generatedAt": "2026-08-04T21:49:11.462808Z",
+  "generatedAt": "2026-08-04T21:52:10.538276Z",
   "generatedBy": "prepare_v26_2_0_public.py",
   "inheritedFrom": "v26.1.0",
   "firstLoadAssets": [
@@ -147,9 +147,9 @@
       "sha256": "6096142a392b2cbaa52e5451ff72fe361a04ae7239b7b7022c85fda2cc8fe9b9"
     },
     "README.md": {
-      "bytes": 1351,
-      "gzipNodeL9": 863,
-      "sha256": "06d6bd5fd42736cb98534fa2c5fe0a6c5b9d1355a464270c95bc3edd02c35350"
+      "bytes": 1920,
+      "gzipNodeL9": 1131,
+      "sha256": "73ab63e8eefb77cfe851526513e5186e1d52f037c65fb9afd66ce088d6b0d841"
     },
     "schema6-deployment-v260a10.mjs": {
       "bytes": 5739,
