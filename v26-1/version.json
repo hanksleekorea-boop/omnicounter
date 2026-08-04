@@ -1,0 +1,383 @@
+{
+  "version": "v26.1.0",
+  "status": "release-ready",
+  "released": null,
+  "schemaVersion": 6,
+  "generatedAt": "2026-08-04T18:54:22.420724Z",
+  "generatedBy": "prepare_v26_1_0_public.py",
+  "inheritedFrom": "v26.0-alpha.20",
+  "firstLoadAssets": [
+    "index.html",
+    "service-v2610.css",
+    "service-v2610.js",
+    "app-shell-v260a1.js",
+    "core-v260a1.js"
+  ],
+  "lazyAssets": [
+    "dashboard-v260a1.js",
+    "social-v260a2.js",
+    "identity-v260a3.js",
+    "rls-policy-v260a4.js",
+    "backend-emulator-v260a5.js",
+    "authenticated-sync-v260a6.js",
+    "retry-policy-v260a7.js",
+    "circle-lab-v260a8.js"
+  ],
+  "contractAssets": [
+    "backend-schema-v260a4.sql",
+    "backend-config-v260a9.mjs",
+    "remote-rls-probe-v260a9.mjs",
+    "backend.env.example",
+    "README.md",
+    "schema6-deployment-v260a10.mjs",
+    "schema6-readback-v260a10.sql",
+    "SCHEMA6_RUNBOOK.md",
+    "safety-api-v260a11.mjs",
+    "SAFETY_API_RUNBOOK.md",
+    "remote-network-scenarios-v260a12.mjs",
+    "REMOTE_NETWORK_RUNBOOK.md",
+    "android-platform-contract-v260a13.mjs",
+    "AndroidManifest-v260a13.xml",
+    "wedoit_widget_info.xml",
+    "WeDoItAndroidRuntime-v260a13.kt",
+    "ANDROID_NATIVE_RUNBOOK.md",
+    "health-integration-contract-v260a14.mjs",
+    "HEALTH_INTEGRATION_RUNBOOK.md",
+    "remote-stage-orchestrator-v260a15.mjs",
+    "REMOTE_STAGE_RUNBOOK.md",
+    "health-sync-integrity-v260a16.mjs",
+    "HEALTH_SYNC_INTEGRITY_RUNBOOK.md",
+    "remote-safety-probe-v260a17.mjs",
+    "REMOTE_SAFETY_PROBE_RUNBOOK.md"
+  ],
+  "standalonePreview": "preview.html",
+  "totalFirstLoadGzip": 29273,
+  "firstLoadBudget": 110000,
+  "files": {
+    "index.html": {
+      "bytes": 50208,
+      "gzipNodeL9": 14645,
+      "sha256": "513086e0b223cd081ca48b4606c07149a2963e4a3e1e6c0619a570a5bd9f9f42"
+    },
+    "404.html": {
+      "bytes": 50208,
+      "gzipNodeL9": 14645,
+      "sha256": "513086e0b223cd081ca48b4606c07149a2963e4a3e1e6c0619a570a5bd9f9f42"
+    },
+    "preview.html": {
+      "bytes": 158084,
+      "gzipNodeL9": 45788,
+      "sha256": "dfe72359f525999b8c8b8b6d00479ccec57724a25f3e6728a97ec0db8c525a24"
+    },
+    "app-shell-v260a1.js": {
+      "bytes": 1972,
+      "gzipNodeL9": 1158,
+      "sha256": "a78245bac56e141dd1be19389e620ba11c8d47f81df4f37528495685dcc71a13"
+    },
+    "core-v260a1.js": {
+      "bytes": 11154,
+      "gzipNodeL9": 4491,
+      "sha256": "01760d07d72dc79a72cb5c01cecade17716877c617771e65cbf7a8ae11285e43"
+    },
+    "dashboard-v260a1.js": {
+      "bytes": 31055,
+      "gzipNodeL9": 10488,
+      "sha256": "fc347d4dd5a8383bb4c1ea741299c18ce490484a704e7159e2486983cc5d6ac9"
+    },
+    "social-v260a2.js": {
+      "bytes": 4772,
+      "gzipNodeL9": 2010,
+      "sha256": "2ea807c2c3aa3464930f20d26d6ead601a229c6682527e01aad786922bc37df7"
+    },
+    "identity-v260a3.js": {
+      "bytes": 6116,
+      "gzipNodeL9": 2429,
+      "sha256": "f369e903e0f36ad7e5857a78ed1229404e069f4ca414396adec2689ed767f7f3"
+    },
+    "rls-policy-v260a4.js": {
+      "bytes": 3642,
+      "gzipNodeL9": 1116,
+      "sha256": "07e773b439fb0958a6e9d34e2c051f206792a975d05a8dba682b027b9ec8a4f3"
+    },
+    "backend-emulator-v260a5.js": {
+      "bytes": 4881,
+      "gzipNodeL9": 1899,
+      "sha256": "96ff6eeea6ee353bac0e4c629868e595fec2df5469a0e0bbbadbf0a9e133421c"
+    },
+    "authenticated-sync-v260a6.js": {
+      "bytes": 3457,
+      "gzipNodeL9": 1530,
+      "sha256": "de09b1a0cc4b6f810358b75165a0e047095bd93ec93d2e2fbb591872aa264826"
+    },
+    "retry-policy-v260a7.js": {
+      "bytes": 4884,
+      "gzipNodeL9": 1877,
+      "sha256": "9411a965cc2100edd568423d8bd3c95ddeb5eaeb9e3a54e37b8ed5a7ab369106"
+    },
+    "circle-lab-v260a8.js": {
+      "bytes": 6378,
+      "gzipNodeL9": 2518,
+      "sha256": "4cc77f253d02e2689bc9f8485c9ba3e92feb2d4d4a33dc0b8ca0c1b6d7c9c831"
+    },
+    "backend-schema-v260a4.sql": {
+      "bytes": 7418,
+      "gzipNodeL9": 1321,
+      "sha256": "832daeb8bb1c01a34e3bfdfd97ca82c85b561a907563e417712c38c4703e071c"
+    },
+    "sw.js": {
+      "bytes": 1707,
+      "gzipNodeL9": 799,
+      "sha256": "895ac221329a97f3dc8046523a4e65580a7a015f36e8a97a1b292de5c572df04"
+    },
+    "backend-config-v260a9.mjs": {
+      "bytes": 3109,
+      "gzipNodeL9": 1175,
+      "sha256": "b9e2ec9e8d2e9b9b8f396e50c1bec47a685dc69a2f7efce2f93bc08ae7f4e3ff"
+    },
+    "remote-rls-probe-v260a9.mjs": {
+      "bytes": 3695,
+      "gzipNodeL9": 1269,
+      "sha256": "afd06e3cc8d02451dcf6747a632b5336e50bf5f500d3e1e6ce7c04e4ae644ab9"
+    },
+    "backend.env.example": {
+      "bytes": 564,
+      "gzipNodeL9": 384,
+      "sha256": "6096142a392b2cbaa52e5451ff72fe361a04ae7239b7b7022c85fda2cc8fe9b9"
+    },
+    "README.md": {
+      "bytes": 1351,
+      "gzipNodeL9": 863,
+      "sha256": "06d6bd5fd42736cb98534fa2c5fe0a6c5b9d1355a464270c95bc3edd02c35350"
+    },
+    "schema6-deployment-v260a10.mjs": {
+      "bytes": 5739,
+      "gzipNodeL9": 2034,
+      "sha256": "f5c52a34c07e066fc47b56eff2aa019137db693bd0b35fef5dd0437e77cc0d76"
+    },
+    "schema6-readback-v260a10.sql": {
+      "bytes": 2484,
+      "gzipNodeL9": 654,
+      "sha256": "ba845cb74e9120a322134006b09b4319b2113cd068ca3c47fce641efcda6fc4a"
+    },
+    "SCHEMA6_RUNBOOK.md": {
+      "bytes": 1592,
+      "gzipNodeL9": 994,
+      "sha256": "cbd2951768f552649ac160ab2ad29abf7640145f69b857eba3d0226d7859a591"
+    },
+    "safety-api-v260a11.mjs": {
+      "bytes": 5528,
+      "gzipNodeL9": 1852,
+      "sha256": "8083265e20551c108ad88ca2df3993dd37136764c0df4457bb11740e7c8180c6"
+    },
+    "SAFETY_API_RUNBOOK.md": {
+      "bytes": 1594,
+      "gzipNodeL9": 966,
+      "sha256": "628d45ae21ea698866505238de13ad1ced55f0690562b298b8885fbcfcad4e52"
+    },
+    "remote-network-scenarios-v260a12.mjs": {
+      "bytes": 8403,
+      "gzipNodeL9": 2800,
+      "sha256": "0464a9a1a7fe7e55cd085111a3b3e7cfc78a6f965c5caa9c42a4fb778b0c665a"
+    },
+    "REMOTE_NETWORK_RUNBOOK.md": {
+      "bytes": 1409,
+      "gzipNodeL9": 935,
+      "sha256": "00f24ac71c1221bc0ab28c18fe08dcc109ca235db0588cdda4a3c8706e9a47c9"
+    },
+    "android-platform-contract-v260a13.mjs": {
+      "bytes": 10494,
+      "gzipNodeL9": 3186,
+      "sha256": "9c56f7787505a2a565b0f864d5e96b70bf9bb10a99d24213712df77367ff382c"
+    },
+    "AndroidManifest-v260a13.xml": {
+      "bytes": 1257,
+      "gzipNodeL9": 543,
+      "sha256": "140973af615f4f98e08935159ff5efb64e02e637c14b8e19189df4092613ca06"
+    },
+    "wedoit_widget_info.xml": {
+      "bytes": 367,
+      "gzipNodeL9": 246,
+      "sha256": "5707b9e55d8ff753864dc84b79987b5c880bcfcdb76a23c9dfc47f4ce32622ec"
+    },
+    "WeDoItAndroidRuntime-v260a13.kt": {
+      "bytes": 2940,
+      "gzipNodeL9": 1192,
+      "sha256": "9f54b805ceb9f74f15dbe7b2c005a5d75b1a14ece9e1371d22d21994157be194"
+    },
+    "ANDROID_NATIVE_RUNBOOK.md": {
+      "bytes": 2733,
+      "gzipNodeL9": 1580,
+      "sha256": "a78a4eb3e60d9c20e9ad1cf970e4c0a70b00efd3eb2d3e3adf104aa5443e606f"
+    },
+    "health-integration-contract-v260a14.mjs": {
+      "bytes": 9074,
+      "gzipNodeL9": 2827,
+      "sha256": "ec859cfc39296c049b45d43f722aa29c5c2b886508dc8879f6a1c55f34404d2b"
+    },
+    "HEALTH_INTEGRATION_RUNBOOK.md": {
+      "bytes": 2354,
+      "gzipNodeL9": 1303,
+      "sha256": "5c654e153633e93917f081753d605431fd5b7ea243b0c2ca4e83478392a9289c"
+    },
+    "remote-stage-orchestrator-v260a15.mjs": {
+      "bytes": 5957,
+      "gzipNodeL9": 1980,
+      "sha256": "99f25bab2b25d45e04ffcd4760548062b766f6d6e3aa9a23e76ed3d767c10546"
+    },
+    "REMOTE_STAGE_RUNBOOK.md": {
+      "bytes": 930,
+      "gzipNodeL9": 662,
+      "sha256": "4bbc1d4a687184dc983d8fdeeae844b390ecb268bf828d40d0f47cdbe6c78a57"
+    },
+    "health-sync-integrity-v260a16.mjs": {
+      "bytes": 4891,
+      "gzipNodeL9": 1867,
+      "sha256": "31028c0c421460551ba8fce766c0b2e4b004a8e8ce0a6bad46c3c455c263fd85"
+    },
+    "HEALTH_SYNC_INTEGRITY_RUNBOOK.md": {
+      "bytes": 756,
+      "gzipNodeL9": 525,
+      "sha256": "30dd0869a1360ed9bad6ca21a5c2d5df485887ba02bf4fb20cd43a467b3d1f2c"
+    },
+    "remote-safety-probe-v260a17.mjs": {
+      "bytes": 3735,
+      "gzipNodeL9": 1325,
+      "sha256": "83dba45cb79397acce26c70c58385a974d9d1ea34d9ca2676dd492d2373c8438"
+    },
+    "REMOTE_SAFETY_PROBE_RUNBOOK.md": {
+      "bytes": 879,
+      "gzipNodeL9": 667,
+      "sha256": "c065df58a73305bcc4f01de4f1cc88f4b0585692845bf56e4501031a3e8c56a3"
+    },
+    "qr.png": {
+      "bytes": 8216,
+      "gzipNodeL9": 2017,
+      "sha256": "6a6116adb873a01e96112f09c700427d39bec68c743917f22f54ddba6657e0f5"
+    },
+    "service-v2610.css": {
+      "bytes": 17344,
+      "gzipNodeL9": 4652,
+      "sha256": "8e397d044503fd3d9e7032e8f2a031817f13be80cbc4a83e9cae6457681c9d7d"
+    },
+    "service-v2610.js": {
+      "bytes": 10525,
+      "gzipNodeL9": 4327,
+      "sha256": "7d3b2baf354a1f70fe01646d1db9fab682cf60f84e35cd2b4155d0b2a84627dc"
+    }
+  },
+  "rollback": {
+    "version": "v26.0-alpha.20",
+    "path": "20_SRC/v26.0-alpha.20_candidate",
+    "indexSha256": "8f54b9b58bf53cf51fb4f58228768316875a6c3cdea2ad1ae3e096101fe59dfb"
+  },
+  "publicBaseline": {
+    "version": "v26.0-alpha.20",
+    "path": "30_DEPLOY/v26-alpha20",
+    "indexSha256": "1c5ed2bc891b578c7d30eb92fc286b4c9cf1f146bc51b502f1231071107bf79e"
+  },
+  "evidence": {
+    "I": true,
+    "L": true,
+    "B": true,
+    "K": true,
+    "P": false,
+    "D": "UNKNOWN",
+    "U": 0
+  },
+  "boundary": {
+    "actualDatabase": false,
+    "actualBackend": false,
+    "remoteAccount": false,
+    "actualModerationDelivery": false,
+    "remoteNetworkContract": false,
+    "automaticRollback": false,
+    "automaticNetwork": false,
+    "androidNativeBuild": false,
+    "androidEmulator": false,
+    "androidPhysicalDevice": false,
+    "androidNotificationDelivered": false,
+    "androidWidgetRendered": false,
+    "androidRebootRecovered": false,
+    "webIsNativeEvidence": false,
+    "actualHealthConnect": false,
+    "actualWearHealthServices": false,
+    "actualHealthKit": false,
+    "healthPhysicalDevice": false,
+    "automaticHealthSync": false,
+    "healthToSocial": false,
+    "medicalAdvice": false,
+    "remoteStageAutomaticChain": false,
+    "remoteStageExecuted": false,
+    "actualHealthSync": false,
+    "automaticHealthDelete": false,
+    "crossSourceAutoMerge": false,
+    "actualSafetyDelivery": false,
+    "dedicatedSafetyFixtureOnly": true,
+    "automaticSafetyNetwork": false
+  },
+  "pc": {
+    "strategy": "A-responsive-single-html",
+    "breakpoint": 1024,
+    "estimate": {
+      "rawBytes": 5200,
+      "gzipBytes": 2000,
+      "logicToString": "1:1"
+    },
+    "actual": {
+      "rawBytes": 5639,
+      "firstLoadGzipBytes": 1921,
+      "pc2RawBytes": 5849,
+      "pc2FirstLoadGzipBytes": 1564,
+      "pc3RawBytes": 2860,
+      "pc3FirstLoadGzipBytes": 695,
+      "qrBytes": 2006,
+      "totalDesktopIncrementBytes": 6186
+    },
+    "train": {
+      "pc1": "release-ready",
+      "pc2": "release-ready",
+      "pc3": "release-ready"
+    },
+    "mobileContract": "unchanged-below-1024",
+    "handoff": {
+      "target": "https://hanksleekorea-boop.github.io/omnicounter/v26-1/",
+      "qrSha256": "6a6116adb873a01e96112f09c700427d39bec68c743917f22f54ddba6657e0f5",
+      "shortcutHelp": "reachable"
+    }
+  },
+  "serviceDesign": {
+    "strategy": "portal-grade-action-first-progressive-disclosure",
+    "qualityTarget": "mature-consumer-portal",
+    "referenceSet": 10,
+    "navigation": [
+      "today",
+      "goals",
+      "together",
+      "insights",
+      "me"
+    ],
+    "starterActions": 3,
+    "diagnostics": "collapsed-under-me",
+    "iconSystem": "inline-monoline-svg",
+    "estimate": {
+      "rawBytes": 18000,
+      "gzipBytes": 6000,
+      "logicToString": "1:1"
+    },
+    "actual": {
+      "rawBytes": 31356,
+      "gzipBytes": 9745
+    },
+    "mobileMinimumWidth": 320,
+    "desktopBreakpoint": 1024,
+    "status": "release-ready"
+  },
+  "release": {
+    "status": "prepared",
+    "url": "https://hanksleekorea-boop.github.io/omnicounter/v26-1/",
+    "qrUrl": "https://hanksleekorea-boop.github.io/omnicounter/v26-1/qr.png",
+    "downloadUrl": "https://hanksleekorea-boop.github.io/omnicounter/v26-1/WeDoIt_v26.1.0_public_2026-08-05.zip",
+    "previousPublic": "https://hanksleekorea-boop.github.io/omnicounter/v26-alpha20/",
+    "publicEvidence": false
+  }
+}
